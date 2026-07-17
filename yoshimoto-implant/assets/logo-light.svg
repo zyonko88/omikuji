@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 486 118" role="img" aria-label="吉本歯科医院 インプラントクリニック YOSHIMOTO DENTAL CLINIC">
+  <!-- フッター（濃色背景）用の白抜きバージョン。エンブレムはテラコッタのまま。 -->
+  <g>
+    <path d="M92 50 H40 A26 26 0 1 0 56 74" fill="none" stroke="#D9694F" stroke-width="9.5" stroke-linecap="round"/>
+    <circle cx="80" cy="28" r="7" fill="#D9694F"/>
+  </g>
+  <text x="4" y="108" font-family="'Cormorant Garamond','Noto Serif JP',serif" font-size="11" letter-spacing="1.4" fill="#E7A98F">YOSHIMOTO DENTAL CLINIC</text>
+  <text x="150" y="52" font-family="'Noto Sans JP',sans-serif" font-size="37" font-weight="700" letter-spacing="4" fill="#FFFFFF">吉本歯科医院</text>
+  <text x="152" y="98" font-family="'Noto Sans JP',sans-serif" font-size="30" font-weight="500" letter-spacing="3" fill="#F1E7E2">インプラントクリニック</text>
+</svg>

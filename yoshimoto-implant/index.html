@@ -113,15 +113,16 @@
       差し替えれば全体の配色が切り替わります。
    ============================================================= */
 :root{
-  --brand:#0F3D3A;        /* メインカラー（深緑・信頼と落ち着き） */
-  --brand-deep:#0A2C2A;   /* 濃色 */
-  --brand-soft:#EAF1EE;   /* 淡い背景 */
-  --gold:#C9A96A;         /* アクセント（ゴールド・高級感） */
-  --gold-deep:#A9853F;
-  --ink:#20302E;          /* 本文文字 */
-  --sub:#5C6B68;          /* 補足文字 */
-  --line:#E4E0D6;         /* 罫線 */
-  --bg:#FBF9F4;           /* 背景（アイボリー） */
+  --brand:#B5432E;        /* メインカラー（吉本歯科医院ブランド：テラコッタ） */
+  --brand-deep:#8A3120;   /* 濃色（ホバー・グラデーション） */
+  --brand-darkest:#2C1A13;/* 最濃色（ヒーロー・フッター背景／木を思わせる深いブラウン） */
+  --brand-soft:#F7ECE7;   /* 淡い背景（テラコッタの薄色） */
+  --gold:#C2A264;         /* サブアクセント（落ち着いた真鍮・高級感） */
+  --gold-deep:#9C7A38;
+  --ink:#2B2320;          /* 本文文字（ウォームチャコール） */
+  --sub:#6E635E;          /* 補足文字 */
+  --line:#E9E1D9;         /* 罫線 */
+  --bg:#FBF7F3;           /* 背景（ウォームアイボリー） */
   --card:#FFFFFF;
   --shadow:0 18px 50px rgba(15,61,58,.10);
   --radius:18px;
@@ -146,7 +147,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.4;letter-spacing
 /* ---- ボタン ---- */
 .btn{display:inline-flex;align-items:center;gap:.55em;justify-content:center;
   padding:16px 30px;border-radius:999px;font-weight:700;font-family:var(--sans);
-  transition:transform .2s ease, box-shadow .2s ease, background .2s;cursor:pointer;border:0;font-size:15px}
+  transition:transform .2s ease, box-shadow .2s ease, background .2s;cursor:pointer;border:0;font-size:15px;white-space:nowrap}
 .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#3a2c11;
   box-shadow:0 12px 26px rgba(169,133,63,.32)}
 .btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(169,133,63,.42)}
@@ -159,26 +160,26 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.4;letter-spacing
 header.site{position:sticky;top:0;z-index:50;background:rgba(251,249,244,.92);
   backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid var(--line)}
 .hd{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 22px;max-width:var(--maxw);margin-inline:auto}
-.logo{color:var(--brand);height:42px;display:flex;align-items:center}
-.logo svg{height:42px;width:auto}
-.nav{display:flex;gap:26px;align-items:center}
+.logo{color:var(--brand);height:54px;display:flex;align-items:center}
+.logo img{height:54px;width:auto}
+.nav{display:flex;gap:20px;align-items:center}
 .nav a{font-size:14px;font-weight:500;color:var(--ink);white-space:nowrap}
 .nav a:hover{color:var(--brand)}
 .hd-cta{display:flex;align-items:center;gap:14px}
-.hd-tel{font-family:var(--deco);font-size:23px;font-weight:600;color:var(--brand);line-height:1}
+.hd-tel{font-family:var(--deco);font-size:22px;font-weight:600;color:var(--brand);line-height:1.05;white-space:nowrap}
 .hd-tel small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.1em;color:var(--sub);font-weight:500}
 @media(max-width:940px){.nav{display:none}.hd-tel{display:none}}
 
 /* ---- ヒーロー ---- */
 .hero{position:relative;color:#fff;overflow:hidden;
   background:
-    linear-gradient(180deg,rgba(10,44,42,.72),rgba(10,44,42,.82)),
-    radial-gradient(120% 120% at 80% 0,#155049 0,#0A2C2A 60%);
+    linear-gradient(180deg,rgba(44,26,19,.74),rgba(44,26,19,.86)),
+    radial-gradient(120% 120% at 80% 0,#8A3120 0,#2C1A13 62%);
 }
 .hero .photo-bg{position:absolute;inset:0;opacity:.35;
   background:
-    linear-gradient(120deg,#0f3d3a55,#0a2c2a99),
-    repeating-linear-gradient(115deg,#12403c 0 22px,#0e3835 22px 44px);}
+    linear-gradient(120deg,#8a312055,#2c1a1399),
+    repeating-linear-gradient(115deg,#3a2118 0 22px,#341d15 22px 44px);}
 .hero-inner{position:relative;max-width:var(--maxw);margin-inline:auto;padding:76px 22px 90px}
 .hero .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);
   font-size:13px;letter-spacing:.18em;margin-bottom:22px;font-family:var(--deco);font-weight:600}
@@ -345,7 +346,7 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(251,249,244,.92);
 @media(max-width:560px){.form-card .row2{grid-template-columns:1fr}}
 
 /* ---- フッター ---- */
-footer.site{background:var(--brand-deep);color:#cfe0db;padding:52px 0 120px;font-size:13.5px}
+footer.site{background:var(--brand-darkest);color:#e6d8d1;padding:52px 0 120px;font-size:13.5px}
 footer .f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px}
 footer .logo{color:#fff;margin-bottom:14px}
 footer h4{color:#fff;font-family:var(--serif);font-size:14px;margin:0 0 14px;letter-spacing:.05em}
@@ -383,8 +384,7 @@ footer .fine{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,
 <header class="site">
   <div class="hd">
     <a class="logo" href="#top" aria-label="吉本歯科医院 トップへ">
-      <!-- PLACEHOLDER：公式ロゴに差し替え（assets/logo.svg を置き換え） -->
-      <img src="assets/logo.svg" alt="吉本歯科医院 インプラントセンター" style="height:42px">
+      <img src="assets/logo.svg" alt="吉本歯科医院 インプラントクリニック" style="height:54px">
     </a>
     <nav class="nav" aria-label="グローバルナビ">
       <a href="#pack">初診パック</a>
@@ -736,7 +736,7 @@ footer .fine{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,
   <div class="wrap">
     <div class="f-grid">
       <div>
-        <div class="logo"><img src="assets/logo.svg" alt="吉本歯科医院 インプラントセンター" style="height:44px"></div>
+        <div class="logo"><img src="assets/logo-light.svg" alt="吉本歯科医院 インプラントクリニック" style="height:54px"></div>
         <p style="margin:0 0 6px">医療法人社団 吉翔会 吉本歯科医院<br>インプラントセンター</p>
         <p style="margin:0">〒761-0113 香川県高松市屋島西町1968-9<br>パワーシティ屋島西側</p>
         <p style="margin:12px 0 0"><a href="tel:0878181118" style="font-family:var(--deco);font-size:22px;color:var(--gold)">087-818-1118</a></p>
