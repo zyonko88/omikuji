@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" role="img" aria-label="吉本歯科医院 インプラントセンター">
+  <!-- PLACEHOLDER LOGO — replace with the official 吉本歯科医院 logo when supplied.
+       Colors use CSS currentColor so the mark inherits the brand palette. -->
+  <g fill="none" stroke="currentColor" stroke-width="2.4">
+    <!-- tooth-inspired emblem -->
+    <path d="M20 14c-8 0-13 6-13 15 0 8 3 13 5 21 1 4 2 9 5 9 4 0 3-11 8-11s4 11 8 11c3 0 4-5 5-9 2-8 5-13 5-21 0-9-5-15-13-15-3 0-4 2-8 2s-5-2-8-2z"/>
+  </g>
+  <g fill="currentColor">
+    <text x="60" y="34" font-family="'Noto Serif JP',serif" font-size="26" font-weight="700" letter-spacing="2">吉本歯科医院</text>
+    <text x="61" y="56" font-family="'Cormorant Garamond','Noto Serif JP',serif" font-size="13" letter-spacing="3" opacity="0.72">YOSHIMOTO DENTAL · IMPLANT CENTER</text>
+  </g>
+</svg>

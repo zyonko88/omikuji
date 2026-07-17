@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# AI / 生成検索クローラーの明示的許可（AEO対策）
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://www.8181118.com/implant/sitemap.xml
