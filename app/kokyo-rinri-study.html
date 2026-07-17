@@ -755,13 +755,15 @@ function mock(){
   app.innerHTML=`<header class="top"><div class="brand">模試モード<small>MOCK TEST</small></div><span class="chip">合格ライン 12/15</span></header>
   <div class="card">
     <p style="margin:0;font-weight:800">全8週からランダムに15問</p>
-    <p class="sub" style="margin:6px 0 0">本番と同じ「初見の順番」で解く練習。8割(12問)を安定して超えられたら仕上がりOK。</p>
+    <p class="sub" style="margin:6px 0 0">本番の配点比(倫理75点:公共25点)に合わせて、倫理分野(第1〜6週)から11問・公共分野(第7〜8週)から4問を出題。8割(12問)を安定して超えられたら仕上がりOK。</p>
     <button class="btn" id="st">模試をはじめる 🎯</button>
   </div>
   <h2 class="sec">これまでの記録</h2>
   <div class="card">${hist.length?`<div class="pillrow">${hist.map(m=>`<span class="pill ${m.s/m.n>=0.8?"on":""}">${m.s}/${m.n}</span>`).join("")}</div><p class="sub" style="margin:6px 0 0">緑=8割クリア。直近3回連続で緑なら本番も狙える。</p>`:`<p class="sub" style="margin:0">まだ記録がありません。第1週のレッスンを終えたら、力試しに1回受けてみよう。</p>`}</div>`;
   $("#st").onclick=()=>{
-    const pool=shuffled(DATA.flatMap(u=>u.quiz.map(q=>({...q,src:u})))).slice(0,15);
+    // 本番の配点比(倫理75:公共25)に合わせ、倫理11問+公共4問
+    const pick=(us,n)=>shuffled(us.flatMap(u=>u.quiz.map(q=>({...q,src:u})))).slice(0,n);
+    const pool=shuffled(pick(DATA.filter(u=>u.week<=6),11).concat(pick(DATA.filter(u=>u.week>=7),4)));
     quizRun(null,pool,true);
   };
 }
