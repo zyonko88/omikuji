@@ -1,0 +1,772 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2か月で仕上げる 公共・倫理</title>
+<style>
+:root{
+  --bg:#F6F4EE; --card:#FFFFFF; --ink:#23262C; --sub:#6B6F78; --line:#E3E0D6;
+  --acc:#33549C; --acc-bg:#33549C; --acc-fg:#FFFFFF; --acc-soft:#EDF1FA;
+  --shu:#CC5636; --shu-soft:#FBEFEA; --ok:#2E7D4F; --ok-soft:#EAF4EE; --ng:#C0392B; --ng-soft:#FAEDEA;
+  --gold:#B98A2E; --dia:#F1EFE7;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#14171E; --card:#1E222B; --ink:#E7E5DE; --sub:#9AA0AB; --line:#2C313C;
+    --acc:#9AB0E8; --acc-bg:#3D5CA6; --acc-fg:#FFFFFF; --acc-soft:#232B3E;
+    --shu:#E07A5A; --shu-soft:#39281F; --ok:#6FBF8F; --ok-soft:#1E2F25; --ng:#E08578; --ng-soft:#362020;
+    --gold:#D4A94F; --dia:#191D26;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14171E; --card:#1E222B; --ink:#E7E5DE; --sub:#9AA0AB; --line:#2C313C;
+  --acc:#9AB0E8; --acc-bg:#3D5CA6; --acc-fg:#FFFFFF; --acc-soft:#232B3E;
+  --shu:#E07A5A; --shu-soft:#39281F; --ok:#6FBF8F; --ok-soft:#1E2F25; --ng:#E08578; --ng-soft:#362020;
+  --gold:#D4A94F; --dia:#191D26;
+}
+:root[data-theme="light"]{
+  --bg:#F6F4EE; --card:#FFFFFF; --ink:#23262C; --sub:#6B6F78; --line:#E3E0D6;
+  --acc:#33549C; --acc-bg:#33549C; --acc-fg:#FFFFFF; --acc-soft:#EDF1FA;
+  --shu:#CC5636; --shu-soft:#FBEFEA; --ok:#2E7D4F; --ok-soft:#EAF4EE; --ng:#C0392B; --ng-soft:#FAEDEA;
+  --gold:#B98A2E; --dia:#F1EFE7;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Noto Sans CJK JP",system-ui,sans-serif;
+  font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:16px 16px 96px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 16px}
+header.top .brand{font-weight:800;font-size:18px;letter-spacing:-.01em}
+header.top .brand small{display:block;font-size:11px;font-weight:600;color:var(--sub);letter-spacing:.12em}
+.chip{font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-soft);border-radius:999px;padding:4px 12px;white-space:nowrap}
+h2.sec{font-size:14px;font-weight:800;letter-spacing:.14em;color:var(--sub);margin:28px 0 10px;text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:10px 0}
+.card.tap{cursor:pointer;transition:transform .08s ease}
+.card.tap:active{transform:scale(.985)}
+.row{display:flex;align-items:center;gap:12px}
+.grow{flex:1;min-width:0}
+.wknum{width:44px;height:44px;border-radius:12px;background:var(--acc-soft);color:var(--acc);font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;text-align:center;line-height:1.2}
+.ttl{font-weight:800;font-size:16px}
+.sub{color:var(--sub);font-size:13px}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--acc-bg);border-radius:99px;transition:width .3s ease}
+.bar i.full{background:var(--ok)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:12px;
+  background:var(--acc-bg);color:var(--acc-fg);font-weight:800;font-size:16px;padding:14px 20px;cursor:pointer;
+  font-family:inherit;width:100%;margin-top:12px}
+.btn.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
+.btn.small{width:auto;padding:8px 16px;font-size:14px;margin-top:0}
+.btn:active{opacity:.85}
+.btn:focus-visible,.choice:focus-visible,.card.tap:focus-visible,.tabbar button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+/* bottom tab bar */
+.tabbar{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);
+  display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:50}
+.tabbar button{background:none;border:none;font-family:inherit;color:var(--sub);font-size:11px;font-weight:700;
+  display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:6px 10px;border-radius:10px;min-width:60px}
+.tabbar button .ic{font-size:20px;line-height:1}
+.tabbar button.on{color:var(--acc);background:var(--acc-soft)}
+/* progress ring */
+.ring{width:132px;height:132px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;position:relative}
+.ring .in{width:104px;height:104px;border-radius:50%;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .pct{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.ring .lbl{font-size:11px;color:var(--sub);font-weight:700}
+/* lesson view */
+.back{background:none;border:none;color:var(--acc);font-weight:800;font-size:15px;font-family:inherit;cursor:pointer;padding:8px 8px 8px 0;margin-bottom:4px}
+.tagline{background:var(--shu-soft);color:var(--shu);border-radius:12px;padding:12px 16px;font-weight:800;font-size:16px;margin:12px 0;line-height:1.6}
+.tagline::before{content:"これだけ! ";font-size:12px;letter-spacing:.1em;display:block;opacity:.8}
+.dia{background:var(--dia);border:1px solid var(--line);border-radius:14px;padding:18px 14px;margin:14px 0;overflow-x:auto}
+.dia h5{margin:0 0 12px;font-size:12px;letter-spacing:.12em;color:var(--sub);font-weight:800;text-align:center}
+.pts{list-style:none;margin:14px 0;padding:0}
+.pts li{padding:10px 12px;margin:8px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;font-size:15px}
+.pts li.ex{border-left:4px solid var(--shu);background:var(--shu-soft)}
+.pts li.ex::before{content:"よく出る ";color:var(--shu);font-weight:800;font-size:12px;letter-spacing:.08em}
+.pts li b{color:var(--acc)}
+.lnav{display:flex;gap:10px;margin-top:16px}
+.lnav .btn{margin-top:0}
+.donebtn{margin-top:10px}
+.donebtn.done{background:var(--ok)}
+/* diagram primitives */
+.fl{display:flex;align-items:stretch;justify-content:center;gap:6px;flex-wrap:wrap}
+.fl span{background:var(--card);border:1.5px solid var(--acc);color:var(--ink);border-radius:10px;padding:8px 12px;font-size:14px;font-weight:700;text-align:center;display:flex;align-items:center;justify-content:center;min-width:64px}
+.fl span.hot{background:var(--acc-bg);color:var(--acc-fg);border-color:var(--acc-bg)}
+.fl span.bad{border-color:var(--ng);color:var(--ng)}
+.fl i{display:flex;align-items:center;color:var(--sub);font-style:normal;font-weight:800;font-size:16px}
+.fl.col{flex-direction:column;align-items:center}
+.fl.col i{transform:rotate(90deg)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vs>div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+.vs h6{margin:0 0 6px;font-size:14px;font-weight:800;color:var(--acc);text-align:center}
+.vs>div:last-child h6{color:var(--shu)}
+.vs p{margin:4px 0;font-size:13.5px}
+.vs .who{text-align:center;font-size:12px;font-weight:700;color:var(--sub)}
+table.cmp{border-collapse:collapse;width:100%;font-size:13.5px;min-width:420px}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;background:var(--card);vertical-align:top}
+table.cmp th{background:var(--acc-soft);color:var(--acc);font-size:12.5px;white-space:nowrap}
+table.cmp td b{color:var(--shu)}
+.pyr{display:flex;flex-direction:column-reverse;align-items:center;gap:5px}
+.pyr div{background:var(--acc-bg);color:var(--acc-fg);border-radius:8px;text-align:center;font-size:13px;font-weight:700;padding:7px 4px}
+.pyr div.top{background:var(--shu)}
+.tl{position:relative;padding-left:18px;border-left:3px solid var(--acc)}
+.tl div{position:relative;margin:0 0 12px;font-size:14px}
+.tl div::before{content:"";position:absolute;left:-25px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--acc)}
+.tl div b{display:block;font-size:14.5px}
+.tl div small{color:var(--sub)}
+/* quiz */
+.qnum{font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--sub)}
+.qtext{font-size:17px;font-weight:800;margin:8px 0 16px;line-height:1.7;text-wrap:balance}
+.choice{display:block;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:12px;
+  padding:14px 16px;margin:8px 0;font-size:15.5px;font-family:inherit;color:var(--ink);cursor:pointer;line-height:1.6}
+.choice:not(:disabled):active{border-color:var(--acc)}
+.choice.correct{border-color:var(--ok);background:var(--ok-soft);font-weight:700}
+.choice.wrong{border-color:var(--ng);background:var(--ng-soft)}
+.choice:disabled{cursor:default;opacity:.92}
+.expl{border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14.5px;background:var(--ok-soft);border:1px solid var(--ok);display:none}
+.expl.bad{background:var(--ng-soft);border-color:var(--ng)}
+.expl b{display:block;font-size:13px;letter-spacing:.08em}
+.score{ text-align:center;padding:24px 0}
+.score .big{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums}
+.score .big small{font-size:20px;color:var(--sub)}
+.score .msg{font-weight:800;font-size:17px;margin-top:6px}
+/* flashcards */
+.fcard{background:var(--card);border:1px solid var(--line);border-radius:16px;min-height:200px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:24px;text-align:center;cursor:pointer;margin:12px 0}
+.fcard .side{font-size:11px;letter-spacing:.14em;font-weight:800;color:var(--sub);margin-bottom:10px}
+.fcard .txt{font-size:19px;font-weight:800;line-height:1.7;text-wrap:balance}
+.fcard.ans{border-color:var(--acc)}
+.fcard.ans .txt{color:var(--acc)}
+.fnav{display:flex;gap:10px}
+.fnav .btn{margin-top:0}
+.hint{color:var(--sub);font-size:13px;text-align:center;margin:6px 0}
+.note{font-size:12.5px;color:var(--sub);margin-top:24px;line-height:1.7}
+.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.pill{font-size:12.5px;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--sub)}
+.pill.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.callout{background:var(--acc-soft);border-radius:12px;padding:14px 16px;font-size:14.5px;margin:12px 0}
+.callout b{color:var(--acc)}
+@media (max-width:480px){ .vs{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){ *{transition:none !important} }
+</style>
+
+<div class="wrap" id="app"></div>
+<nav class="tabbar" id="tabbar">
+  <button data-tab="home"><span class="ic">🏠</span>ホーム</button>
+  <button data-tab="learn"><span class="ic">📖</span>まなぶ</button>
+  <button data-tab="quiz"><span class="ic">✏️</span>クイズ</button>
+  <button data-tab="cards"><span class="ic">🎴</span>カード</button>
+  <button data-tab="mock"><span class="ic">🎯</span>模試</button>
+</nav>
+
+<script>
+const DATA=[
+/* ============ WEEK 1 ============ */
+{id:"w1",week:1,title:"自分を知る",sub:"公共の扉① 青年期の心理",
+lessons:[
+{t:"青年期ってなに?",tag:"青年期 = 子どもから大人へ変わる「途中」の時期。迷うのが当たり前。",
+dia:`<h5>人生の中の青年期</h5><div class="fl"><span>子ども</span><i>→</i><span class="hot">青年期<br>(だいたい12〜20代)</span><i>→</i><span>大人</span></div>`,
+pts:[
+"体が大人に変わることを<b>第二次性徴</b>という。ここから青年期が始まる。",
+{ex:1,h:"ルソーは青年期を「<b>第二の誕生</b>」と呼んだ。1回目は体の誕生、2回目は心(自分らしさ)の誕生。"},
+{ex:1,h:"レヴィンは、子どもと大人のどちらでもない青年を「<b>マージナル・マン(境界人)</b>」と呼んだ。"},
+"大人の責任を少し待ってもらい、いろいろ試せる準備期間を<b>モラトリアム</b>という(エリクソンの言葉)。"
+]},
+{t:"エリクソンとアイデンティティ",tag:"青年期の宿題は「自分は何者か」の答えを見つけること = アイデンティティの確立。",
+dia:`<h5>エリクソンの考え</h5><div class="fl col"><span>「自分は何者だろう?」と悩む</span><i>→</i><span class="hot">アイデンティティ(自我同一性)の確立<br>=「これが自分だ」と言える状態</span></div><p class="hint">見つからないままだと…「アイデンティティの拡散(混乱)」</p>`,
+pts:[
+{ex:1,h:"<b>エリクソン</b>は、人生を8つの段階に分け、青年期の課題を「<b>アイデンティティの確立</b>」とした。"},
+"アイデンティティ = 「自分はこういう人間だ」という確かな感覚のこと。",
+"うまくいかない状態が<b>アイデンティティの拡散</b>。何がしたいか分からず混乱する。",
+"悩むこと自体は失敗じゃない。試す時間(モラトリアム)が用意されているのが青年期。"
+]},
+{t:"マズローの欲求5段階",tag:"人間の欲求はピラミッド。下が満たされると、上の欲求が出てくる。",
+dia:`<h5>マズローの欲求階層(下から上へ)</h5><div class="pyr"><div style="width:100%">① 生理的欲求(食べる・眠る)</div><div style="width:86%">② 安全の欲求(安心して暮らす)</div><div style="width:72%">③ 所属と愛の欲求(仲間がほしい)</div><div style="width:58%">④ 承認の欲求(認められたい)</div><div class="top" style="width:44%">⑤ 自己実現の欲求</div></div>`,
+pts:[
+{ex:1,h:"いちばん上(最高次)は「<b>自己実現の欲求</b>」= 自分の可能性を発揮したいという欲求。"},
+"①〜④のような「足りないものを埋める」欲求を<b>欠乏欲求</b>、⑤を<b>成長欲求</b>と呼ぶ。",
+"順番がポイント。おなかがすいて危険な状態では、認められたい欲求どころではない。"
+]},
+{t:"葛藤(かっとう)の3タイプ",tag:"「どっちにしよう…」と心が引っぱられて動けない状態が葛藤。レヴィンが3つに分けた。",
+dia:`<h5>レヴィンの葛藤3タイプ</h5><table class="cmp"><tr><th>タイプ</th><th>形</th><th>例</th></tr><tr><td><b>接近—接近</b></td><td>したい ⇔ したい</td><td>ゲームもしたいし、遊びにも行きたい</td></tr><tr><td><b>回避—回避</b></td><td>イヤ ⇔ イヤ</td><td>勉強はイヤだが、落ちるのもイヤ</td></tr><tr><td><b>接近—回避</b></td><td>したい ⇔ でもイヤ</td><td>ケーキは食べたい、でも太りたくない</td></tr></table>`,
+pts:[
+"2つ以上の欲求がぶつかって選べない状態を<b>葛藤(コンフリクト)</b>という。",
+{ex:1,h:"例文を読んで「どのタイプか」を選ばせる問題がよく出る。<b>したい/イヤ</b>の組合せだけ見ればOK。"},
+"「したい+でもイヤ」が混ざるのが<b>接近—回避型</b>。いちばん出題されやすい。"
+]},
+{t:"防衛機制 — 心の自動ガード",tag:"欲求がかなわないとき、心が無意識に自分を守るしくみ = 防衛機制(フロイト)。",
+dia:`<h5>主な防衛機制(名前と例をセットで覚える)</h5><table class="cmp"><tr><th>名前</th><th>どんな動き?</th><th>例</th></tr><tr><td><b>抑圧</b></td><td>イヤな気持ちを心の奥に押しこめる</td><td>つらい記憶を思い出せなくなる</td></tr><tr><td><b>合理化</b></td><td>それっぽい理由で自分を正当化</td><td>「あのブドウはすっぱいはず」</td></tr><tr><td><b>同一視</b></td><td>あこがれの人と自分を重ねる</td><td>推しの服装をまねして満足</td></tr><tr><td><b>投影</b></td><td>自分の気持ちを相手のせいにする</td><td>自分が嫌いなのに「向こうが嫌ってる」</td></tr><tr><td><b>反動形成</b></td><td>本心と逆の行動をとる</td><td>好きな子にわざと冷たくする</td></tr><tr><td><b>逃避</b></td><td>現実から逃げる</td><td>テスト前なのに部屋の掃除を始める</td></tr><tr><td><b>退行</b></td><td>子どもの状態にもどる</td><td>弟が生まれた子が赤ちゃん返り</td></tr><tr><td><b>昇華</b></td><td>かなわない欲求を価値ある活動へ</td><td>失恋のエネルギーで部活に打ちこむ</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>昇華</b>=「スポーツや芸術など、社会に認められる活動で発散」。8つの中でいちばんよく出る。"},
+{ex:1,h:"<b>合理化</b>のキーワードは「すっぱいブドウ」。イソップ童話のキツネの話が元ネタ。"},
+"問題は「例→名前」を選ばせる形式。表の例をそのまま覚えれば解ける。"
+]}],
+quiz:[
+{q:"青年期を「第二の誕生」と表現した思想家はだれ?",c:["ルソー","エリクソン","レヴィン","フロイト"],a:0,e:"ルソーは著書の中で、心が生まれ変わる青年期を「第二の誕生」と呼んだ。"},
+{q:"子どもと大人のどちらにも属しきれない青年を「マージナル・マン(境界人)」と呼んだのは?",c:["レヴィン","マズロー","ルソー","エリクソン"],a:0,e:"境界人=レヴィン。エリクソンはアイデンティティ、と人名セットで覚える。"},
+{q:"エリクソンが青年期の発達課題としたものは?",c:["アイデンティティの確立","自己実現の達成","第二次性徴の完成","防衛機制の獲得"],a:0,e:"「自分は何者か」に答えを出すこと=アイデンティティ(自我同一性)の確立。"},
+{q:"「モラトリアム」の意味として正しいものは?",c:["大人の責任が猶予され、いろいろ試せる準備期間","大人になることを完全に拒否すること","子どもに戻りたいという欲求","働かずに暮らすこと"],a:0,e:"モラトリアム=猶予期間。役割をあれこれ試してよい時期のこと。"},
+{q:"マズローの欲求階層で、いちばん上(最高次)にあるのは?",c:["自己実現の欲求","承認の欲求","安全の欲求","所属と愛の欲求"],a:0,e:"最高次=自己実現。「自分の可能性を発揮したい」という成長欲求。"},
+{q:"手に入らなかったものを「どうせ大したことない」と理由をつけて納得する防衛機制は?",c:["合理化","抑圧","昇華","退行"],a:0,e:"「すっぱいブドウ」の合理化。もっともらしい理由で自分を正当化する。"},
+{q:"満たされない欲求をスポーツや芸術などで発散する防衛機制は?",c:["昇華","逃避","投影","同一視"],a:0,e:"社会的に価値ある活動へ向けかえるのが昇華。防衛機制で最頻出。"},
+{q:"「ケーキを食べたい。でも太りたくない」— この葛藤のタイプは?",c:["接近—回避型","接近—接近型","回避—回避型","欲求不満型"],a:0,e:"「したい」と「イヤ」が同じ対象で混ざる=接近—回避型。"}],
+cards:[["青年期を「第二の誕生」と呼んだ人は?","ルソー"],["「境界人(マージナル・マン)」と呼んだ人は?","レヴィン"],["青年期の発達課題は?(エリクソン)","アイデンティティの確立"],["社会的責任が猶予される期間を何という?","モラトリアム"],["マズローの最高次の欲求は?","自己実現の欲求"],["「すっぱいブドウ」に代表される防衛機制は?","合理化"],["欲求をスポーツ・芸術で発散する防衛機制は?","昇華"],["本心と逆の行動をとる防衛機制は?","反動形成"]]},
+
+/* ============ WEEK 2 ============ */
+{id:"w2",week:2,title:"考える道具",sub:"公共の扉② 倫理の考え方",
+lessons:[
+{t:"結果で見る? 動機で見る?",tag:"「良い行い」の判断は2大流派。結果重視=功利主義、動機重視=義務論。全問題の土台になる考え方。",
+dia:`<h5>2大流派のちがい</h5><div class="vs"><div><h6>結果で判断(功利主義)</h6><p class="who">代表:ベンサム・ミル</p><p>みんなの幸福が増えるなら、その行いは良い。</p><p>合言葉:「<b>最大多数の最大幸福</b>」</p></div><div><h6>動機で判断(義務論)</h6><p class="who">代表:カント</p><p>結果がどうでも、正しいことをしようとする意志が大事。</p><p>合言葉:「善意志」「〜すべし」</p></div></div>`,
+pts:[
+{ex:1,h:"会話文問題で「Aさんは結果を重視して…」とあれば<b>功利主義</b>、「動機を重視して…」なら<b>カント(義務論)</b>。"},
+"功利主義:幸福の合計が最大になる選択が正しい。",
+"義務論:人をだます・道具あつかいするのは、結果が良くてもダメ。",
+"この2つのメガネを持っておくと、初めて見る問題文でも読み解ける。"
+]},
+{t:"トロッコ問題 — 思考実験",tag:"「5人を助けるために1人を犠牲にしてよい?」正解を出す問題ではなく、考え方の違いをあぶり出す道具。",
+dia:`<h5>トロッコ問題の構図</h5><div class="fl col"><span>暴走トロッコが5人に向かっている</span><i>→</i><span>レバーを引けば進路が変わる</span><i>→</i><span class="bad">ただし別の線路の1人が犠牲に…</span></div><div class="vs" style="margin-top:12px"><div><h6>功利主義なら</h6><p>5人>1人。引くべき、となりやすい。</p></div><div><h6>義務論なら</h6><p>人を手段として犠牲にする行為自体が許されない、となりやすい。</p></div></div>`,
+pts:[
+"あえて答えが割れる場面を作って考えを比べる方法を<b>思考実験</b>という。",
+{ex:1,h:"共通テストは「この人の発言はどの立場?」と聞いてくる。<b>数の比較をしていたら功利主義</b>、<b>行為そのものの正しさを言っていたら義務論</b>。"},
+"どちらが正解、という問題ではない。立場の見分けだけできればよい。"
+]},
+{t:"公正に分ける — ロールズとセン",tag:"ロールズ:「自分がだれになるか分からない」と考えて、いちばん不利な人に厚くする。",
+dia:`<h5>ロールズの「無知のヴェール」</h5><div class="fl col"><span>自分の性別・才能・家庭を<br>ぜんぶ忘れたと仮定する(=無知のヴェール)</span><i>→</i><span>「最悪、自分がいちばん不利な人かも」</span><i>→</i><span class="hot">いちばん不遇な人が最も救われるルールを選ぶ<br>(=格差原理)</span></div>`,
+pts:[
+{ex:1,h:"<b>ロールズ</b>:無知のヴェール →「<b>公正としての正義</b>」。格差は、いちばん不遇な人の利益になるときだけOK(<b>格差原理</b>)。"},
+{ex:1,h:"<b>セン</b>:お金やモノの量ではなく、「その人が実際に何をできるか」=<b>潜在能力(ケイパビリティ)</b>を平等にすべき。"},
+"ロールズ=分け方のルール、セン=一人ひとりのできること、と区別。"
+]},
+{t:"囚人のジレンマ",tag:"全員が自分の得だけを考えると、全員が損する結果になることがある。",
+dia:`<h5>囚人のジレンマ(2人の共犯者)</h5><table class="cmp" style="min-width:340px"><tr><th></th><th>Bだまる</th><th>Bうらぎる</th></tr><tr><th>Aだまる</th><td>2人とも軽い刑 😊</td><td>Aだけ重い刑</td></tr><tr><th>Aうらぎる</th><td>Bだけ重い刑</td><td><b>2人とも重い刑 😢</b></td></tr></table><p class="hint">自分の損得だけ考えると2人とも「うらぎる」→ 最悪の結果に</p>`,
+pts:[
+{ex:1,h:"ポイントは「<b>個人にとって合理的な選択が、全体では最悪の結果を生む</b>」こと。この一文を選べれば正解できる。"},
+"環境問題(みんなが好きに排出→地球全体が損)などに応用される。",
+"解決のカギは協力・ルール・信頼。"
+]}],
+quiz:[
+{q:"「最大多数の最大幸福」を道徳の基準としたのは?",c:["ベンサム","カント","ロールズ","ソクラテス"],a:0,e:"結果=幸福の量で判断する功利主義。創始者がベンサム。"},
+{q:"結果ではなく、義務にもとづく動機(善意志)を重視した思想家は?",c:["カント","ベンサム","ミル","セン"],a:0,e:"動機重視=カントの義務論。善意志だけが無条件に善い。"},
+{q:"「無知のヴェール」という仮定を使って公正なルールを考えたのは?",c:["ロールズ","セン","ルソー","デューイ"],a:0,e:"自分の立場を忘れて選ぶ→公正としての正義。ロールズ。"},
+{q:"ロールズの「格差原理」の内容として正しいものは?",c:["格差は、最も不遇な人の利益になる場合にのみ許される","格差は、どんな場合でも許されない","格差は、努力の差なのですべて正当である","格差は、多数決で決めれば許される"],a:0,e:"格差ゼロではなく「いちばん不利な人が最も得する形ならOK」がロールズ。"},
+{q:"財の量ではなく「実際に何ができるか」= 潜在能力の平等を重視したのは?",c:["セン","ロールズ","ベンサム","マズロー"],a:0,e:"潜在能力(ケイパビリティ)=セン。ロールズとの区別が頻出。"},
+{q:"囚人のジレンマが示すこととして最も適当なものは?",c:["個人の合理的な選択が、全体では望ましくない結果を生むことがある","協力は常に損になるので、裏切るのが正しい","人間は必ず協力を選ぶ生き物である","結果より動機が大切である"],a:0,e:"「個人の合理性≠全体の最適」。この一文がそのまま正解になる。"},
+{q:"「他人に危害を加えない限り、個人の自由は制限されない」という原理を唱えたのは?",c:["ミル","カント","ホッブズ","ベンサム"],a:0,e:"他者危害原理=ミル。自由論のキーワード。"},
+{q:"会話文で「5人助かるなら1人の犠牲もやむを得ない」と発言する人の立場は?",c:["功利主義","義務論","実存主義","経験論"],a:0,e:"人数=幸福の量を比べているので功利主義の発想。"}],
+cards:[["「最大多数の最大幸福」はだれの言葉?","ベンサム(功利主義)"],["動機・善意志を重視する立場は?","義務論(カント)"],["「無知のヴェール」はだれの考え?","ロールズ"],["格差が許される条件は?(ロールズ)","最も不遇な人の利益になるとき(格差原理)"],["「潜在能力(ケイパビリティ)」はだれ?","セン"],["囚人のジレンマの教訓は?","個人の合理的選択が全体の不利益を生むことがある"],["他者危害原理はだれ?","ミル"]]},
+
+/* ============ WEEK 3 ============ */
+{id:"w3",week:3,title:"源流思想",sub:"ギリシア・仏教・中国・キリスト教",
+lessons:[
+{t:"ソクラテス — 無知の知",tag:"「知らないと自覚している分、私は賢い」。対話で相手に気づかせる人。",
+dia:`<h5>ソクラテスのスタイル</h5><div class="fl col"><span>「自分は何も知らない」と自覚する<br>=<b>無知の知</b></span><i>→</i><span>対話で質問を重ねる<br>=<b>問答法(産婆術)</b></span><i>→</i><span class="hot">相手が自分で真理に気づく</span></div>`,
+pts:[
+{ex:1,h:"キーワードは<b>無知の知・問答法(産婆術)・「善く生きる」</b>。この3点セットが出る。"},
+"魂(プシュケー)をより良くすること=<b>魂への配慮</b>を最重要とした。",
+"徳(アレテー)とは何かを知れば正しく行える=<b>知徳合一</b>。",
+"死刑判決にも国法に従い、逃げずに毒杯を飲んだ。「ただ生きるのではなく、善く生きる」。"
+]},
+{t:"プラトン — イデア論",tag:"本当に実在するのは、目に見えない完全な「イデア」。この世はその影。",
+dia:`<h5>洞窟の比喩(イメージ)</h5><div class="fl col"><span class="bad">洞窟の中:壁に映る影だけ見ている囚人<br>=わたしたち(見えている世界)</span><i>→</i><span>ふり返って外へ出る=哲学</span><i>→</i><span class="hot">太陽の下の本物の世界<br>=イデアの世界(善のイデアが最高)</span></div>`,
+pts:[
+{ex:1,h:"<b>イデア</b>=完全で永遠の本物。現実の世界はイデアの<b>影(模倣)</b>にすぎない、という二世界論。"},
+"イデアの世界へのあこがれを<b>エロース</b>という。",
+"魂は理性・気概・欲望の3部分(<b>魂の三分説</b>)。それぞれの徳が知恵・勇気・節制で、そろうと<b>正義</b>(四元徳)。",
+{ex:1,h:"理想の政治=哲学者が統治する<b>哲人政治</b>。学園<b>アカデメイア</b>を創設。"}
+]},
+{t:"アリストテレス — 現実主義",tag:"プラトンの弟子だけど反対派。「本質は目の前の事物の中にある」。",
+dia:`<h5>師弟の対立</h5><div class="vs"><div><h6>プラトン(師)</h6><p>本物(イデア)は<b>あの世(天上)</b>にある</p><p>理想主義</p></div><div><h6>アリストテレス(弟子)</h6><p>本質(形相)は<b>個々の事物の中</b>にある</p><p>現実主義</p></div></div>`,
+pts:[
+"すべての事物=<b>形相(エイドス)</b>+<b>質料(ヒュレー)</b>。設計図と材料のイメージ。",
+{ex:1,h:"徳は2種類:<b>知性的徳</b>(学んで身につく)と<b>倫理的徳(習性的徳)</b>(良い行いの<b>習慣</b>で身につく)。"},
+{ex:1,h:"倫理的徳の基準は<b>中庸(メソテース)</b>=やりすぎと足りなさすぎの中間。例:無謀と臆病の中間が勇気。"},
+"「人間は<b>ポリス的動物</b>」— 人間は共同体の中でこそ生きられる。正義を<b>配分的正義</b>(働きに応じて)と<b>調整的正義</b>(全員に等しく)に分けた。"
+]},
+{t:"ヘレニズム — 心の平安さがし",tag:"エピクロス派もストア派も、目指すゴールは「乱されない心」。",
+dia:`<h5>2つの学派</h5><div class="vs"><div><h6>エピクロス派</h6><p class="who">エピクロス</p><p>快楽主義(ただし贅沢ではなく<b>心の平静</b>)</p><p>理想=<b>アタラクシア</b></p><p>「<b>隠れて生きよ</b>」</p></div><div><h6>ストア派</h6><p class="who">ゼノン</p><p>禁欲主義。情念(パトス)に動かされない</p><p>理想=<b>アパテイア</b></p><p>「<b>自然に従って生きよ</b>」</p></div></div>`,
+pts:[
+{ex:1,h:"<b>エピクロス=アタラクシア=隠れて生きよ</b> / <b>ストア(ゼノン)=アパテイア=自然に従え</b>。この対応の入れ替え問題が定番。"},
+"エピクロスの快楽=ドンチャン騒ぎではなく、静かで安定した心のこと。ここがひっかけポイント。"
+]},
+{t:"仏教 — ブッダの教え",tag:"苦しみの原因は執着。真理を正しく見て、こだわりを手放せば安らぎ(涅槃)に至る。",
+dia:`<h5>ブッダの論理</h5><div class="fl col"><span class="bad">人生は苦(生老病死=四苦)</span><i>→</i><span>原因は執着(煩悩)。すべては<b>縁起</b><br>=つながり合って変化している</span><i>→</i><span>極端を避ける<b>中道</b>+<b>八正道</b>の実践</span><i>→</i><span class="hot">涅槃(ニルヴァーナ)=安らぎ</span></div>`,
+pts:[
+{ex:1,h:"四法印:<b>諸行無常</b>(すべて変化する)・<b>諸法無我</b>(不変の実体は<b>ない</b>)・<b>一切皆苦</b>・<b>涅槃寂静</b>。"},
+{ex:1,h:"ひっかけ注意!「諸法無我=永遠不変の実体が<b>ある</b>」と書き換えるのが定番の誤り選択肢。"},
+"<b>中道</b>=快楽にも苦行にもかたよらない道。具体的な実践が<b>八正道</b>。",
+"生きとし生けるものへのいつくしみ=<b>慈悲</b>。ブッダは生まれによる身分差別(ヴァルナ)を否定した。"
+]},
+{t:"中国思想 — 儒家と道家",tag:"孔子の「仁と礼」を、孟子は性善説へ、荀子は性悪説へ。老荘は「ムリするな、自然のまま」。",
+dia:`<h5>中国思想の見取り図</h5><table class="cmp"><tr><th>思想家</th><th>キーワード</th><th>ひとこと</th></tr><tr><td><b>孔子</b></td><td>仁と礼</td><td>思いやり(仁)を形(礼)にあらわす</td></tr><tr><td><b>孟子</b></td><td>性善説・四端</td><td>人はみな善の芽(四端)を持って生まれる</td></tr><tr><td><b>荀子</b></td><td>性悪説・礼治</td><td>人の性は悪。礼で矯正する</td></tr><tr><td><b>朱子(朱熹)</b></td><td>性即理</td><td>理を窮めて修養(持敬・格物致知)</td></tr><tr><td><b>王陽明</b></td><td>心即理・知行合一</td><td>知ることと行うことは一体</td></tr><tr><td><b>老子</b></td><td>無為自然</td><td>作為を捨て、道(タオ)に従う。柔弱謙下</td></tr><tr><td><b>荘子</b></td><td>万物斉同</td><td>区別や優劣はすべて人間の思いこみ</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>孟子=性善説・四端</b>、<b>荀子=性悪説・礼</b>。逆にした選択肢が定番のひっかけ。"},
+"四端=惻隠(あわれみ)・羞悪・辞譲・是非の4つの心の芽。育つと仁・義・礼・智になる。",
+{ex:1,h:"<b>無為自然=老子</b>、<b>万物斉同=荘子</b>。あわせて道家(老荘思想)。"},
+"孟子は民意にそむく君主の交代を認めた(<b>易姓革命</b>)。"
+]},
+{t:"キリスト教とイスラーム",tag:"イエスの核心は「無差別の愛(アガペー)」。イスラームの核心は「六信五行」。",
+dia:`<h5>三大宗教ざっくり比較</h5><table class="cmp"><tr><th></th><th>キリスト教</th><th>イスラーム</th><th>仏教</th></tr><tr><td>開いた人</td><td>イエス</td><td>ムハンマド</td><td>ブッダ</td></tr><tr><td>神</td><td>唯一神(父なる神)</td><td>唯一神アッラー</td><td>神ではなく真理(法)</td></tr><tr><td>キーワード</td><td><b>アガペー・隣人愛</b></td><td><b>六信五行</b>・クルアーン</td><td>縁起・慈悲</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>アガペー</b>=神の無差別・無償の愛。「敵をも愛せ」という<b>隣人愛</b>とセット。"},
+"パウロが「信仰・希望・愛」を説き、キリスト教を各地へ広めた。アウグスティヌスは教父、トマス・アクィナスはスコラ哲学の大成者。",
+{ex:1,h:"イスラーム:<b>六信</b>(神・天使・啓典・預言者・来世・天命を信じる)+<b>五行</b>(信仰告白・礼拝・断食・喜捨・巡礼)。偶像崇拝は厳禁。"},
+"エロース(ギリシア:理想へのあこがれ)とアガペー(キリスト教:神の無償の愛)の対比も出る。"
+]}],
+quiz:[
+{q:"「自分が何も知らないと自覚している」ことを何という?(ソクラテス)",c:["無知の知","知は力なり","タブラ・ラサ","万物斉同"],a:0,e:"無知の知=ソクラテスの出発点。問答法とセットで覚える。"},
+{q:"完全で永遠の本物「イデア」がこの世界とは別に実在すると考えたのは?",c:["プラトン","アリストテレス","エピクロス","ゼノン"],a:0,e:"イデア論=プラトン。現実世界はイデアの影。"},
+{q:"「徳はやりすぎと足りなさすぎの中間にある」とする考え方は?",c:["中庸(メソテース)","中道","問答法","弁証法"],a:0,e:"中庸=アリストテレス。仏教の「中道」と混同させる問題に注意。"},
+{q:"エピクロスが理想とした、乱されない心の平静を何という?",c:["アタラクシア","アパテイア","アガペー","エロース"],a:0,e:"エピクロス=アタラクシア。ストア派のアパテイアと区別。"},
+{q:"四法印のうち「諸法無我」の意味として正しいものは?",c:["あらゆるものに永遠不変の実体はない","あらゆるものは苦しみである","すべては移り変わる","安らぎの境地は静かである"],a:0,e:"無我=不変の実体がない。「実体がある」と逆にする誤り選択肢が定番。"},
+{q:"人はみな善の芽(四端)を持って生まれるとした思想家は?",c:["孟子","荀子","孔子","韓非子"],a:0,e:"性善説・四端=孟子。性悪説の荀子と入れ替えに注意。"},
+{q:"「無為自然」を説き、道(タオ)に従って生きることを唱えたのは?",c:["老子","荘子","朱子","王陽明"],a:0,e:"無為自然=老子。荘子は万物斉同。"},
+{q:"イスラームの信仰と実践をまとめた言葉は?",c:["六信五行","八正道","四元徳","三位一体"],a:0,e:"六信五行=イスラーム。八正道は仏教なので混同しない。"}],
+cards:[["無知の知・問答法といえば?","ソクラテス"],["イデア論・哲人政治といえば?","プラトン"],["中庸・「ポリス的動物」といえば?","アリストテレス"],["アタラクシアを理想としたのは?","エピクロス"],["アパテイアを理想とした学派は?","ストア派(ゼノン)"],["四法印を4つ言うと?","諸行無常・諸法無我・一切皆苦・涅槃寂静"],["性善説はだれ? 性悪説はだれ?","性善説=孟子/性悪説=荀子"],["アガペーとは?","神の無差別・無償の愛(キリスト教)"],["六信五行はどの宗教?","イスラーム"]]},
+
+/* ============ WEEK 4 ============ */
+{id:"w4",week:4,title:"日本思想",sub:"古代から近代まで",
+lessons:[
+{t:"古代の心と仏教の受容",tag:"日本人の理想は「うそいつわりのない清らかな心」。仏教はそこに重なって根づいた。",
+dia:`<h5>日本思想のはじまり</h5><div class="tl"><div><b>古代</b>うそのない心=<b>清明心(清き明き心)</b>を尊ぶ。八百万の神(アニミズム)<small>けがれは「祓い・禊(みそぎ)」で清める</small></div><div><b>飛鳥</b>聖徳太子「<b>和を以て貴しとなす</b>」(十七条憲法)。人はみな凡夫と自覚<small>仏教を政治にとり入れる</small></div><div><b>平安</b>最澄(天台宗)・空海(真言宗)<small>空海は密教。修行でこの身のまま仏に=即身成仏</small></div></div>`,
+pts:[
+{ex:1,h:"古代日本の理想=<b>清明心</b>。「正直で隠しごとのない心」。"},
+{ex:1,h:"聖徳太子=<b>「和を以て貴しとなす」・凡夫の自覚</b>。"},
+"最澄=天台宗(比叡山)、空海=真言宗(高野山)・即身成仏。セットで覚える。",
+"神と仏をいっしょにまつる<b>神仏習合</b>も日本の特徴。"
+]},
+{t:"鎌倉仏教 — 6人の開祖",tag:"「だれでも・ひとつの行で救われる」への大転換。6人×キーワードの表がそのまま出る。",
+dia:`<h5>鎌倉仏教まとめ(最重要表)</h5><table class="cmp"><tr><th>開祖</th><th>宗派</th><th>キーワード</th></tr><tr><td><b>法然</b></td><td>浄土宗</td><td><b>専修念仏</b>。ひたすら「南無阿弥陀仏」</td></tr><tr><td><b>親鸞</b></td><td>浄土真宗</td><td><b>悪人正機</b>・絶対他力。「悪人こそ救いの対象」</td></tr><tr><td><b>一遍</b></td><td>時宗</td><td><b>踊念仏</b>で全国へ</td></tr><tr><td><b>栄西</b></td><td>臨済宗(禅)</td><td>公案(問答)を考え抜く坐禅</td></tr><tr><td><b>道元</b></td><td>曹洞宗(禅)</td><td><b>只管打坐</b>=ひたすら坐る。修行=悟り(修証一等)</td></tr><tr><td><b>日蓮</b></td><td>日蓮宗</td><td><b>題目</b>「南無妙法蓮華経」。法華経が最高</td></tr></table>`,
+pts:[
+{ex:1,h:"最頻出は<b>親鸞の悪人正機</b>=「自力で修行できない悪人(凡夫)こそ、阿弥陀仏の救いの本命」。"},
+{ex:1,h:"ひっかけの型:「法然が悪人正機を説いた」「道元が題目を唱えた」など<b>人物とキーワードの入れ替え</b>。表の対応だけで解ける。"},
+"念仏系(法然・親鸞・一遍)=阿弥陀仏にすがる<b>他力</b>/禅系(栄西・道元)=坐禅で自ら悟る<b>自力</b>、と大きく2つに分けて整理。"
+]},
+{t:"江戸の儒学",tag:"「あとから作られた解釈ではなく、孔子・孟子の原典に戻れ」という古学の流れが日本オリジナル。",
+dia:`<h5>江戸儒学の系譜</h5><table class="cmp"><tr><th>人物</th><th>学派</th><th>キーワード</th></tr><tr><td><b>林羅山</b></td><td>朱子学</td><td><b>上下定分の理</b>=身分秩序は天の理</td></tr><tr><td><b>中江藤樹</b></td><td>陽明学</td><td><b>孝</b>を万物の根本に。「近江聖人」</td></tr><tr><td><b>山鹿素行</b></td><td>古学</td><td>聖人の原典へ戻れ。士道</td></tr><tr><td><b>伊藤仁斎</b></td><td>古義学</td><td><b>誠</b>・仁愛。『論語』は「最上至極宇宙第一の書」</td></tr><tr><td><b>荻生徂徠</b></td><td>古文辞学</td><td><b>経世済民</b>=学問は世を治め民を救うため</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>林羅山=上下定分の理</b>(朱子学で身分秩序を正当化)。"},
+{ex:1,h:"<b>伊藤仁斎=誠・仁愛</b>、<b>荻生徂徠=経世済民</b>。古学系3人(素行・仁斎・徂徠)は「原典回帰」の仲間。"},
+"朱子学=幕府公認の「理」の学問 → それに反発して古学が生まれた、という流れで覚える。"
+]},
+{t:"国学と民衆の思想",tag:"「中国流の理屈(漢意)を捨てて、日本人本来の素直な心(真心)へ帰れ」— 本居宣長。",
+dia:`<h5>国学と民衆思想</h5><table class="cmp"><tr><th>人物</th><th>キーワード</th></tr><tr><td><b>賀茂真淵</b></td><td>『万葉集』研究。<b>高く直き心・ますらをぶり</b>(男性的でおおらか)</td></tr><tr><td><b>本居宣長</b></td><td><b>漢意(からごころ)批判・真心・もののあはれ</b>。『古事記伝』『源氏物語』研究。たをやめぶり</td></tr><tr><td><b>石田梅岩</b></td><td>石門心学。<b>商人の利益は正当</b>(「商人の買利は士の禄に同じ」)</td></tr><tr><td><b>安藤昌益</b></td><td><b>万人直耕の自然世</b>を理想。武士が耕さず食べる社会(法世)を批判</td></tr><tr><td><b>二宮尊徳</b></td><td><b>報徳</b>思想。分度・推譲</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>本居宣長=漢意を捨てて真心へ・もののあはれ</b>。国学の完成者。"},
+"もののあはれ=物事にふれて自然にわき上がる、しみじみとした感情。『源氏物語』の本質とした。",
+{ex:1,h:"<b>安藤昌益=万人直耕</b>。全員が耕す平等社会(自然世)を理想とした、江戸の異色思想家。"}
+]},
+{t:"近代日本の思想家",tag:"西洋に学びつつ「日本人としてどう生きるか」を問うた人たち。人物×キーワードで覚える。",
+dia:`<h5>近代日本 人物図鑑</h5><table class="cmp"><tr><th>人物</th><th>キーワード</th></tr><tr><td><b>福沢諭吉</b></td><td><b>独立自尊・実学</b>・天賦人権。「天は人の上に人を造らず…」</td></tr><tr><td><b>中江兆民</b></td><td><b>東洋のルソー</b>。ルソーを翻訳し自由民権運動に影響</td></tr><tr><td><b>内村鑑三</b></td><td><b>二つのJ</b>(イエスJesusと日本Japan)。無教会主義</td></tr><tr><td><b>夏目漱石</b></td><td><b>自己本位</b>→晩年は<b>則天去私</b></td></tr><tr><td><b>西田幾多郎</b></td><td><b>純粋経験</b>(主客未分)。『善の研究』</td></tr><tr><td><b>和辻哲郎</b></td><td>人間=<b>間柄的存在</b>。『風土』</td></tr><tr><td><b>平塚らいてう</b></td><td>「元始、女性は実に太陽であった」。青鞜社</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>西田幾多郎=純粋経験</b>(見る自分と見られる物が分かれる前の経験)、<b>和辻哲郎=間柄的存在</b>(人間は人と人との関係の中の存在)。この2人が最頻出。"},
+{ex:1,h:"<b>内村鑑三=二つのJ</b>。教会に頼らない無教会主義。"},
+"福沢=独立自尊・実学、兆民=東洋のルソー。明治啓蒙のツートップ。"
+]}],
+quiz:[
+{q:"「和を以て貴しとなす」を十七条憲法に記したのは?",c:["聖徳太子","空海","最澄","法然"],a:0,e:"聖徳太子。人はみな凡夫という自覚とセットで出る。"},
+{q:"ひたすら念仏を唱える「専修念仏」を説いたのは?",c:["法然","親鸞","道元","日蓮"],a:0,e:"専修念仏=法然(浄土宗)。親鸞は悪人正機。"},
+{q:"「悪人こそが阿弥陀仏の救いの対象」という悪人正機を説いたのは?",c:["親鸞","法然","一遍","栄西"],a:0,e:"悪人正機=親鸞(浄土真宗)。最頻出の入れ替え問題。"},
+{q:"「只管打坐」= ひたすら坐禅することを説いた曹洞宗の開祖は?",c:["道元","栄西","日蓮","空海"],a:0,e:"只管打坐=道元。栄西は臨済宗(公案)。"},
+{q:"「もののあはれ」を文学の本質とし、漢意を批判した国学者は?",c:["本居宣長","賀茂真淵","荻生徂徠","伊藤仁斎"],a:0,e:"本居宣長=真心・もののあはれ・『古事記伝』。"},
+{q:"「上下定分の理」で身分秩序を正当化した朱子学者は?",c:["林羅山","中江藤樹","山鹿素行","石田梅岩"],a:0,e:"林羅山。中江藤樹は陽明学(孝)。"},
+{q:"「独立自尊」を唱え、実学を重視した明治の思想家は?",c:["福沢諭吉","中江兆民","内村鑑三","夏目漱石"],a:0,e:"福沢諭吉。中江兆民は「東洋のルソー」。"},
+{q:"人間を「間柄的存在」ととらえたのは?",c:["和辻哲郎","西田幾多郎","内村鑑三","平塚らいてう"],a:0,e:"間柄的存在=和辻哲郎。西田幾多郎は純粋経験。"}],
+cards:[["古代日本人の理想の心は?","清明心(清き明き心)"],["専修念仏はだれ?","法然(浄土宗)"],["悪人正機はだれ?","親鸞(浄土真宗)"],["只管打坐はだれ?","道元(曹洞宗)"],["題目「南無妙法蓮華経」はだれ?","日蓮"],["「もののあはれ」「真心」はだれ?","本居宣長"],["「経世済民」はだれ?","荻生徂徠"],["「純粋経験」はだれ?","西田幾多郎"],["「間柄的存在」はだれ?","和辻哲郎"],["「二つのJ」はだれ?","内村鑑三"]]},
+/* ============ WEEK 5 ============ */
+{id:"w5",week:5,title:"西洋近代①",sub:"ルネサンス〜功利主義",
+lessons:[
+{t:"ルネサンスと宗教改革",tag:"「人間らしさ」の復活と、「教会よりも聖書と信仰」への転換。近代の入口。",
+dia:`<h5>近代のはじまり</h5><table class="cmp"><tr><th>人物</th><th>キーワード</th></tr><tr><td><b>ピコ・デラ・ミランドラ</b></td><td>人間の尊厳=<b>自由意志</b>。自分のあり方を自分で選べる</td></tr><tr><td><b>ルター</b></td><td><b>信仰義認</b>(信仰のみで救われる)・<b>万人司祭</b>・聖書中心</td></tr><tr><td><b>カルヴァン</b></td><td><b>予定説</b>(救いは神が決定済み)→ 職業に励むことが信仰の証</td></tr><tr><td><b>モンテーニュ</b></td><td>モラリスト。「<b>ク・セ・ジュ?</b>(私は何を知るか)」と謙虚に自省</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>カルヴァンの予定説</b>→働いて得た利益の肯定→のちに社会学者<b>ウェーバー</b>が「資本主義の精神を生んだ」と分析。この流れが出る。"},
+"ルター:教会や聖職者を通さなくても、信仰だけで神とつながれる(万人司祭)。",
+"職業は神から与えられた使命=<b>職業召命観</b>。"
+]},
+{t:"経験論と合理論",tag:"知識のみなもとは経験か理性か。ベーコンとデカルトの対決。",
+dia:`<h5>知識はどこから?</h5><div class="vs"><div><h6>経験論(イギリス)</h6><p class="who">ベーコン</p><p>観察・実験から法則へ=<b>帰納法</b></p><p>「<b>知は力なり</b>」</p><p>思いこみ=<b>イドラ</b>を取り除け</p></div><div><h6>合理論(大陸)</h6><p class="who">デカルト</p><p>確実な原理から推理=<b>演繹法</b></p><p>「<b>我思う、ゆえに我あり</b>」</p><p>すべてを疑う=<b>方法的懐疑</b></p></div></div><p class="hint">イドラ4種:種族(人間共通の錯覚)・洞窟(個人のくせ)・市場(言葉)・劇場(権威のうのみ)</p>`,
+pts:[
+{ex:1,h:"<b>ベーコン=経験論=帰納法=イドラ</b> / <b>デカルト=合理論=演繹法=方法的懐疑</b>。左右の組合せを崩す問題が定番。"},
+"デカルト:全部疑っても「疑っている自分」だけは疑えない →「我思う、ゆえに我あり」が哲学の第一原理。",
+"精神と物体を分ける<b>物心二元論</b>もデカルト。"
+]},
+{t:"カント — 動機がすべて",tag:"「〜すべし」と無条件に命じる心の声(定言命法)に従うことが道徳。人を手段だけにするな。",
+dia:`<h5>カントの命法2種類</h5><div class="vs"><div><h6>定言命法 ○道徳</h6><p>「(無条件に)〜せよ」</p><p>例:うそをつくな。理由なしで正しい</p></div><div><h6>仮言命法 ×道徳ではない</h6><p>「もし〜したいなら、〜せよ」</p><p>例:信用されたいなら、うそをつくな(=打算)</p></div></div>`,
+pts:[
+{ex:1,h:"<b>善意志</b>=義務を義務として行おうとする意志。カントはこれだけが「無条件に善い」とした。"},
+{ex:1,h:"「人格をたんに<b>手段としてのみ扱わず、常に同時に目的として扱え</b>」。お互いを目的として尊重し合う社会=<b>目的の王国</b>。"},
+"認識について「対象が認識に従う」と発想を逆転=<b>コペルニクス的転回</b>。",
+"『永遠平和のために』で国際平和機構を構想 → のちの国際連盟のヒントに。"
+]},
+{t:"ヘーゲル — 弁証法",tag:"対立とぶつかり合いこそ成長のエンジン。正→反→合で、世界も歴史も発展する。",
+dia:`<h5>弁証法のしくみ</h5><div class="fl"><span>正(テーゼ)<br>ある主張</span><i>⇄</i><span class="bad">反(アンチテーゼ)<br>対立する主張</span></div><div class="fl col"><i>→</i><span class="hot">合(ジンテーゼ)<br>両方を生かして一段上へ(止揚・アウフヘーベン)</span></div><h5 style="margin-top:16px">人倫の3段階</h5><div class="fl"><span>家族<br>(愛で結びつく)</span><i>→</i><span>市民社会<br>(欲望の体系・バラバラ)</span><i>→</i><span class="hot">国家<br>(人倫の完成)</span></div>`,
+pts:[
+{ex:1,h:"<b>弁証法</b>=正・反・合。対立を捨てずに生かして高める=<b>止揚(アウフヘーベン)</b>。"},
+{ex:1,h:"<b>人倫</b>=家族→市民社会→国家の3段階で、<b>国家が人倫の完成</b>。市民社会は「欲望の体系」。"},
+"歴史とは<b>自由</b>の意識が広がっていく過程、と考えた。",
+"カント(個人の内面の道徳)に対し、ヘーゲルは制度・共同体の中で自由が実現すると考えた。"
+]},
+{t:"功利主義 — ベンサムとミル",tag:"幸福の合計で判断。ベンサムは「量」、ミルは「質」。",
+dia:`<h5>ベンサム vs ミル</h5><div class="vs"><div><h6>ベンサム(量)</h6><p>快楽は計算できる=<b>快楽計算</b></p><p>「<b>最大多数の最大幸福</b>」</p><p>人を動かすのは<b>外的制裁</b>(罰など)</p></div><div><h6>ミル(質)</h6><p>快楽には質の差がある=<b>質的功利主義</b></p><p>「満足した豚より、不満足な人間がよい」</p><p><b>内的制裁</b>(良心)を重視・<b>他者危害原理</b></p></div></div>`,
+pts:[
+{ex:1,h:"<b>ベンサム=量・快楽計算・外的制裁</b> / <b>ミル=質・良心(内的制裁)・他者危害原理</b>。"},
+"ミルの他者危害原理:他人に危害を加えない限り、個人の自由に干渉してはならない。",
+"「満足した豚より不満足な人間、満足した愚か者より不満足なソクラテスがよい」= 精神的快楽の質の高さ。"
+]}],
+quiz:[
+{q:"「知は力なり」と言い、観察から法則を導く帰納法を唱えたのは?",c:["ベーコン","デカルト","カント","ヘーゲル"],a:0,e:"ベーコン=経験論・帰納法・イドラ。"},
+{q:"「我思う、ゆえに我あり」を哲学の第一原理としたのは?",c:["デカルト","ベーコン","パスカル","ロック"],a:0,e:"方法的懐疑の末に残った確実な真理。デカルト=合理論・演繹法。"},
+{q:"「(無条件に)〜せよ」と命じる道徳法則の形をカントは何と呼んだ?",c:["定言命法","仮言命法","自然法","黄金律"],a:0,e:"無条件=定言命法。「もし〜なら」の仮言命法は道徳にならない。"},
+{q:"正・反・合の弁証法で世界の発展を説明したのは?",c:["ヘーゲル","カント","デカルト","ミル"],a:0,e:"弁証法・止揚・人倫=ヘーゲル。"},
+{q:"「救われるかどうかは神があらかじめ決めている」という予定説を唱えたのは?",c:["カルヴァン","ルター","ピコ","モンテーニュ"],a:0,e:"予定説=カルヴァン。職業労働の肯定→資本主義の精神へ。"},
+{q:"快楽に質の違いを認め、質的功利主義を唱えたのは?",c:["ミル","ベンサム","アダム・スミス","デューイ"],a:0,e:"質=ミル、量=ベンサム。"},
+{q:"ヘーゲルが「人倫の完成」とした段階は?",c:["国家","家族","市民社会","個人"],a:0,e:"家族→市民社会(欲望の体系)→国家で完成。"},
+{q:"ベーコンのいう「イドラ」とは?",c:["正しい認識をさまたげる思いこみ・偏見","神の似姿","実験の道具","快楽の計算式"],a:0,e:"イドラ=偶像=思いこみ。種族・洞窟・市場・劇場の4種類。"}],
+cards:[["帰納法・「知は力なり」はだれ?","ベーコン(経験論)"],["演繹法・方法的懐疑はだれ?","デカルト(合理論)"],["無条件の命令「定言命法」はだれ?","カント"],["カントが無条件に善いとしたものは?","善意志"],["正・反・合の思考法を何という?","弁証法(ヘーゲル)"],["人倫の3段階は?","家族→市民社会→国家"],["予定説はだれ?","カルヴァン"],["量の功利主義/質の功利主義は?","量=ベンサム/質=ミル"]]},
+
+/* ============ WEEK 6 ============ */
+{id:"w6",week:6,title:"西洋近代②",sub:"実存主義と現代思想",
+lessons:[
+{t:"実存主義① キルケゴールとニーチェ",tag:"「みんなと同じ」をやめて、この私の生き方を選びとる思想。",
+dia:`<h5>キルケゴールの実存3段階</h5><div class="fl"><span>美的実存<br>快楽を追う</span><i>→</i><span>倫理的実存<br>良心的に生きる</span><i>→</i><span class="hot">宗教的実存<br>神の前に単独者として立つ</span></div><p class="hint">どの段階でも人は絶望する→決断でジャンプ</p>`,
+pts:[
+{ex:1,h:"<b>キルケゴール</b>:実存主義の先駆者。「あれか、これか」の主体的決断。<b>単独者</b>として神の前に立つ。"},
+{ex:1,h:"<b>ニーチェ</b>:「<b>神は死んだ</b>」— よりどころを失った時代(ニヒリズム)を直視せよ。"},
+"ニーチェ:キリスト教道徳=弱者の恨み(<b>ルサンチマン</b>)から生まれた奴隷道徳と批判。",
+"新しい価値を自ら創る理想の人間=<b>超人</b>。同じ人生が無限にくり返されても(<b>永劫回帰</b>)「これでよし」と肯定して生きよ(運命愛)。"
+]},
+{t:"実存主義② 20世紀の3人",tag:"ヤスパース=壁にぶつかって気づく。ハイデガー=死を自覚して生きる。サルトル=生き方は自分で作る。",
+dia:`<h5>20世紀実存主義</h5><table class="cmp"><tr><th>人物</th><th>キーワード</th><th>ひとこと</th></tr><tr><td><b>ヤスパース</b></td><td><b>限界状況</b></td><td>死・苦しみなど越えられない壁で、超越者に気づく。実存的交わり</td></tr><tr><td><b>ハイデガー</b></td><td><b>死への存在</b></td><td>死を自覚してこそ本来の自分に。日常に流される人=ダス・マン(ひと)</td></tr><tr><td><b>サルトル</b></td><td><b>実存は本質に先立つ</b></td><td>人間に決まった設計図はない。自由ゆえに全責任=「自由の刑」</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>サルトル「実存は本質に先立つ」</b>。逆(本質が実存に先立つ)にしたひっかけが定番中の定番。"},
+"サルトル:選ぶ自由から逃げられない=<b>自由の刑</b>。社会参加=<b>アンガージュマン</b>。",
+{ex:1,h:"<b>ヤスパース=限界状況</b>、<b>ハイデガー=死への存在・ダス・マン</b>。人物とキーワードの対応で解ける。"}
+]},
+{t:"プラグマティズムと社会主義",tag:"アメリカ生まれ「役に立つかで考える」。マルクス「社会のしくみが人間を苦しめている」。",
+dia:`<h5>2つの流れ</h5><div class="vs"><div><h6>プラグマティズム(米)</h6><p><b>パース</b>:創始者</p><p><b>ジェームズ</b>:役に立つものが真理(有用性)</p><p><b>デューイ</b>:知性は問題解決の道具=<b>道具主義</b>。創造的知性・問題解決学習</p></div><div><h6>マルクス(社会主義)</h6><p>資本主義では労働が苦役になる=<b>労働の疎外</b></p><p>経済のしくみ(土台)が社会を決める=<b>唯物史観</b></p><p>人間の本質は労働にある(類的存在)</p></div></div>`,
+pts:[
+{ex:1,h:"<b>デューイ=道具主義</b>(知性は生活を改善する道具)。教育の「問題解決学習」でも有名。"},
+{ex:1,h:"<b>マルクス=労働の疎外・唯物史観</b>。本来よろこびである労働が、資本主義では他人のための苦役になる。"},
+"ジェームズ:真理かどうかは実際の効果・有用性で決まる。"
+]},
+{t:"現代思想① 正義と他者",tag:"ロールズ・センは週2の復習。+「他者」「対話」「活動」の3人を追加。",
+dia:`<h5>現代の思想家たち</h5><table class="cmp"><tr><th>人物</th><th>キーワード</th><th>ひとこと</th></tr><tr><td><b>ロールズ</b></td><td>公正としての正義</td><td>無知のヴェール→格差原理(復習!)</td></tr><tr><td><b>セン</b></td><td>潜在能力</td><td>「何ができるか」の平等(復習!)</td></tr><tr><td><b>レヴィナス</b></td><td><b>他者の顔</b></td><td>他者は私の理解を超えた存在。顔が「殺すな」と呼びかける</td></tr><tr><td><b>ハーバーマス</b></td><td><b>対話的理性</b></td><td>力ではなく対話と合意で社会を作る(コミュニケーション的合理性)</td></tr><tr><td><b>アーレント</b></td><td><b>活動</b></td><td>人間の営み=労働・仕事・活動。対話し合う「活動」こそ公共性の源</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>ハーバーマス=対話的理性・合意形成</b>。会話文問題の「みんなで話し合って決めるべき」はほぼこれ。"},
+{ex:1,h:"<b>アーレント</b>:人間の活動力を<b>労働(生存のため)・仕事(モノ作り)・活動(人と関わる)</b>の3つに分け、<b>活動</b>を最重視。"},
+"レヴィナス:他者は自分の思い通りにならない、無限に応答責任を負う相手。"
+]},
+{t:"現代思想② 理性を疑う",tag:"「進歩のはずの理性が戦争や管理社会を生んだのでは?」という反省の思想。",
+dia:`<h5>理性への反省</h5><table class="cmp"><tr><th>人物</th><th>キーワード</th><th>ひとこと</th></tr><tr><td><b>ホルクハイマー<br>アドルノ</b></td><td><b>道具的理性</b>批判</td><td>理性が支配の道具に(フランクフルト学派)。『啓蒙の弁証法』</td></tr><tr><td><b>フロム</b></td><td>自由からの逃走</td><td>自由の重さに耐えられず権威に従う大衆心理</td></tr><tr><td><b>レヴィ=ストロース</b></td><td><b>構造主義・野生の思考</b></td><td>未開社会にも精密な思考。西洋中心主義を批判</td></tr><tr><td><b>フーコー</b></td><td><b>規律権力</b></td><td>学校・病院・監獄が人を内側から従わせる(パノプティコン)</td></tr><tr><td><b>クーン</b></td><td>パラダイム</td><td>科学の常識は革命的に転換する(パラダイム・シフト)</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>アドルノら=道具的理性批判</b>:目的を問わず効率だけ求める理性が、野蛮(戦争・支配)を生んだ。"},
+{ex:1,h:"<b>レヴィ=ストロース=構造主義</b>:「未開」社会の思考(野生の思考)も西洋科学に劣らない。"},
+"フーコー:権力は上からの命令だけでなく、監視を意識させて自発的に従わせる形で働く。"
+]}],
+quiz:[
+{q:"「神は死んだ」と宣言し、超人の理想を説いたのは?",c:["ニーチェ","キルケゴール","サルトル","ハイデガー"],a:0,e:"ニーチェ。ルサンチマン・永劫回帰・力への意志もセット。"},
+{q:"「実存は本質に先立つ」と述べたのは?",c:["サルトル","ハイデガー","ヤスパース","デューイ"],a:0,e:"サルトル。語順を逆にしたひっかけに注意。"},
+{q:"死・苦しみなど、乗り越えられない壁を「限界状況」と呼んだのは?",c:["ヤスパース","ニーチェ","フロム","フーコー"],a:0,e:"限界状況=ヤスパース。そこで超越者と出会う。"},
+{q:"人間を「死への存在」ととらえたのは?",c:["ハイデガー","サルトル","キルケゴール","マルクス"],a:0,e:"ハイデガー。死の自覚が本来の生き方を取り戻させる。"},
+{q:"知性を問題解決の「道具」と考えたプラグマティズムの思想家は?",c:["デューイ","パース","ジェームズ","ロールズ"],a:0,e:"道具主義=デューイ。創造的知性・問題解決学習。"},
+{q:"資本主義のもとで労働が苦役になることを「労働の疎外」と呼んだのは?",c:["マルクス","フロム","アドルノ","ミル"],a:0,e:"マルクス。唯物史観とセットで覚える。"},
+{q:"「他者の顔」が倫理の出発点だとしたのは?",c:["レヴィナス","ハーバーマス","アーレント","セン"],a:0,e:"レヴィナス。他者=理解を超えた存在への責任。"},
+{q:"力ではなく対話と合意による社会統合(対話的理性)を唱えたのは?",c:["ハーバーマス","フーコー","クーン","ヘーゲル"],a:0,e:"ハーバーマス。会話文問題の「話し合いで合意」はこれ。"}],
+cards:[["「神は死んだ」はだれ?","ニーチェ"],["神の前の「単独者」はだれ?","キルケゴール"],["「限界状況」はだれ?","ヤスパース"],["「死への存在」はだれ?","ハイデガー"],["「実存は本質に先立つ」はだれ?","サルトル"],["「道具主義」はだれ?","デューイ"],["「労働の疎外」はだれ?","マルクス"],["「他者の顔」はだれ?","レヴィナス"],["「対話的理性」はだれ?","ハーバーマス"],["労働・仕事・活動の区別はだれ?","アーレント"]]},
+
+/* ============ WEEK 7 ============ */
+{id:"w7",week:7,title:"公共:政治",sub:"社会契約・人権・憲法・統治",
+lessons:[
+{t:"社会契約説 — 3人比較",tag:"「国家は人々の契約で作られた」。3人の違いを表で丸ごと覚える。超頻出。",
+dia:`<h5>社会契約説3人(最重要表)</h5><table class="cmp"><tr><th></th><th>ホッブズ</th><th>ロック</th><th>ルソー</th></tr><tr><td>自然状態</td><td><b>万人の万人に対する闘争</b></td><td>おおむね平和(でも不安定)</td><td>自由・平等で平和</td></tr><tr><td>契約の中身</td><td>自然権を主権者に<b>全部ゆずる</b></td><td>権利保護を政府に<b>信託</b></td><td>共同体に全員で結集</td></tr><tr><td>キーワード</td><td>『リヴァイアサン』</td><td><b>抵抗権(革命権)</b>・間接民主制</td><td><b>一般意志</b>・直接民主制</td></tr><tr><td>影響</td><td>結果的に絶対王政を擁護</td><td>アメリカ独立宣言</td><td>フランス革命</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>ホッブズ=闘争→全部ゆずる</b> / <b>ロック=信託+抵抗権</b> / <b>ルソー=一般意志+直接民主制</b>。この3行で大半の問題が解ける。"},
+{ex:1,h:"一般意志=公共の利益をめざす意志。<b>個人の利益の合計(全体意志)とは別物</b>。ここを混ぜる誤り選択肢が定番。"},
+"モンテスキュー『法の精神』=<b>三権分立</b>。契約説3人と混ぜて出ることもある。"
+]},
+{t:"人権の歴史 — 年表で流れをつかむ",tag:"「王を縛る」から始まり、「自由権」→「社会権」へ広がった。",
+dia:`<h5>人権のあゆみ</h5><div class="tl"><div><b>1215 マグナ・カルタ(英)</b><small>王の権力を貴族が制限</small></div><div><b>1689 権利章典(英)</b><small>名誉革命の成果。議会の同意ルール</small></div><div><b>1776 アメリカ独立宣言</b><small>天賦人権・ロックの影響</small></div><div><b>1789 フランス人権宣言</b><small>自由・平等・国民主権</small></div><div><b>1919 ワイマール憲法(独)</b><small>世界で初めて<b>社会権(生存権)</b>を規定</small></div><div><b>1948 世界人権宣言</b><small>人権保障の国際化(法的拘束力なし)→66年の国際人権規約で条約化</small></div></div>`,
+pts:[
+{ex:1,h:"<b>ワイマール憲法=世界初の社会権</b>。年表の並べ替え問題でもこれが軸になる。"},
+"自由権=「国家から自由になる」権利(18〜19世紀)/社会権=「国家に人間らしい生活を求める」権利(20世紀)。",
+{ex:1,h:"<b>法の支配</b>=王も政府も法の下(内容の正しさ重視)。形式だけ整えばよいとする<b>法治主義</b>(かつてのドイツ)との違いに注意。"}
+]},
+{t:"日本国憲法の基本",tag:"三大原理=国民主権・基本的人権の尊重・平和主義。改正のハードルは高い。",
+dia:`<h5>憲法改正の手続き</h5><div class="fl col"><span>各議院の<b>総議員の3分の2以上</b>の賛成で国会が発議</span><i>→</i><span><b>国民投票で過半数</b>の賛成</span><i>→</i><span class="hot">天皇が国民の名で公布</span></div>`,
+pts:[
+{ex:1,h:"改正の数字:<b>総議員の3分の2</b>+<b>国民投票の過半数</b>。「出席議員の…」に変えるひっかけあり。"},
+"人権は「公共の福祉」による調整を受けることがある(無制限ではない)。",
+{ex:1,h:"<b>新しい人権</b>(憲法に明記なし):プライバシーの権利・知る権利・環境権・自己決定権。13条の幸福追求権が根拠。"},
+"平和主義=9条。戦争放棄・戦力不保持・交戦権の否認。"
+]},
+{t:"三権分立のしくみ",tag:"国会・内閣・裁判所が互いにチェックし合い、権力の暴走を防ぐ。",
+dia:`<h5>三権のチェック関係</h5><div class="fl"><span class="hot">国会(立法)<br>国権の最高機関</span><i>⇄</i><span>内閣(行政)</span></div><div class="fl" style="margin-top:8px"><span>裁判所(司法)<br>違憲審査権</span><i>⇄</i><span>国会・内閣を審査</span></div><p class="hint">国会→内閣:首相の指名・不信任決議/内閣→国会:衆議院の解散/裁判所→両方:違憲審査</p>`,
+pts:[
+{ex:1,h:"<b>国会=国権の最高機関・唯一の立法機関</b>。内閣は国会の信任で成り立つ=<b>議院内閣制</b>。"},
+{ex:1,h:"<b>違憲審査権はすべての裁判所</b>が持つが、最終判断は最高裁=「<b>憲法の番人</b>」。"},
+"衆議院の優越:予算・条約・首相指名・法律案の再可決(出席議員の3分の2)。",
+"裁判員制度:重大な刑事裁判の第一審に国民が参加。"
+]},
+{t:"選挙と地方自治",tag:"小選挙区は二大政党向き・死票多い。比例代表は少数派も反映・小党分立。",
+dia:`<h5>選挙制度の比較</h5><div class="vs"><div><h6>小選挙区制</h6><p>1選挙区から<b>1人</b>当選</p><p>大政党に有利・政権が安定</p><p>欠点:<b>死票が多い</b></p></div><div><h6>比例代表制</h6><p>得票率に応じて議席配分</p><p>少数意見も反映</p><p>欠点:小党分立で不安定に</p></div></div>`,
+pts:[
+{ex:1,h:"<b>小選挙区=死票が多い・大政党有利</b>/<b>比例代表=少数派も反映・小党分立</b>。長所と短所の入れ替えが定番。"},
+"一票の格差:選挙区ごとの議員1人あたり有権者数の差。法の下の平等(14条)の問題。",
+{ex:1,h:"地方自治は「<b>民主主義の学校</b>」(ブライス)。住民には条例の制定改廃請求・議会の解散請求・首長のリコールなど<b>直接請求権</b>がある。"}
+]}],
+quiz:[
+{q:"自然状態を「万人の万人に対する闘争」と考えたのは?",c:["ホッブズ","ロック","ルソー","モンテスキュー"],a:0,e:"ホッブズ『リヴァイアサン』。自然権を主権者にゆずって平和を確保。"},
+{q:"政府が権利を侵害したら人民は政府を変えられる「抵抗権」を認めたのは?",c:["ロック","ホッブズ","ルソー","カント"],a:0,e:"ロック。信託+抵抗権→アメリカ独立宣言に影響。"},
+{q:"公共の利益をめざす「一般意志」にもとづく政治を説いたのは?",c:["ルソー","ロック","ホッブズ","ベンサム"],a:0,e:"ルソー。一般意志は個人の利益の合計(全体意志)とは別物。"},
+{q:"世界で初めて社会権(生存権)を規定した憲法は?",c:["ワイマール憲法","マグナ・カルタ","フランス人権宣言","権利章典"],a:0,e:"1919年ワイマール憲法(ドイツ)。20世紀=社会権の時代。"},
+{q:"日本国憲法の改正に必要な手続きは?",c:["各議院の総議員の3分の2以上の賛成で発議し、国民投票で過半数の賛成","各議院の出席議員の過半数の賛成のみ","内閣の閣議決定のみ","最高裁判所の承認と天皇の裁可"],a:0,e:"総議員の3分の2+国民投票の過半数。数字のひっかけに注意。"},
+{q:"次のうち「新しい人権」に含まれないものは?",c:["選挙権","プライバシーの権利","環境権","知る権利"],a:0,e:"選挙権は憲法に明記された権利。新しい人権は明記のないもの。"},
+{q:"「国権の最高機関であって、国の唯一の立法機関」とされるのは?",c:["国会","内閣","最高裁判所","内閣府"],a:0,e:"憲法41条の国会の地位。頻出の条文キーワード。"},
+{q:"小選挙区制の特徴として正しいものは?",c:["死票が多くなりやすく、大政党に有利","少数意見が反映されやすい","小党分立になりやすい","得票率に応じて議席が配分される"],a:0,e:"1区1人だから2位以下の票は全部死票。大政党有利。"}],
+cards:[["「万人の万人に対する闘争」はだれ?","ホッブズ"],["抵抗権(革命権)を認めたのは?","ロック"],["「一般意志」はだれ?","ルソー"],["三権分立『法の精神』はだれ?","モンテスキュー"],["世界初の社会権規定の憲法は?","ワイマール憲法(1919)"],["憲法改正に必要な数字は?","総議員の2/3で発議+国民投票で過半数"],["新しい人権を4つ言うと?","プライバシー・知る権利・環境権・自己決定権"],["「民主主義の学校」とは?","地方自治(ブライス)"]]},
+
+/* ============ WEEK 8 ============ */
+{id:"w8",week:8,title:"経済と現代課題",sub:"市場・生命倫理・環境・情報",
+lessons:[
+{t:"市場経済のしくみ",tag:"価格は需要と供給で決まる。でも市場が失敗する場面もある。",
+dia:`<h5>需要と供給</h5><div class="fl col"><span>ほしい人が多い(需要>供給)</span><i>→</i><span class="hot">価格が上がる</span></div><div class="fl col" style="margin-top:8px"><span>売りたい人が多い(供給>需要)</span><i>→</i><span class="hot">価格が下がる</span></div><p class="hint">グラフでは需要曲線=右下がり/供給曲線=右上がり。交点が均衡価格</p>`,
+pts:[
+{ex:1,h:"<b>アダム・スミス</b>:各自が利益を追求しても「<b>見えざる手</b>」で社会全体がうまくいく(『国富論』)。"},
+{ex:1,h:"<b>市場の失敗</b>:独占・寡占、公害などの<b>外部不経済</b>、公共財の供給不足。政府の出番になる。"},
+"<b>ケインズ</b>:不況のときは政府が<b>有効需要</b>を作り出すべき(公共事業など)。「小さな政府」を唱えたフリードマンらと対比される。"
+]},
+{t:"財政・金融・社会保障",tag:"政府はお金の面から生活を支える。数字より「役割の名前」を覚える。",
+dia:`<h5>お金をめぐる3つのしくみ</h5><table class="cmp"><tr><th>しくみ</th><th>担い手</th><th>ポイント</th></tr><tr><td>財政</td><td>政府</td><td>3機能=<b>資源配分・所得再分配・景気安定化</b></td></tr><tr><td>金融政策</td><td>日本銀行</td><td>不況→金利を下げ、お金を増やす(買いオペ)</td></tr><tr><td>社会保障</td><td>国・自治体</td><td>4本柱=<b>社会保険・公的扶助・社会福祉・公衆衛生</b></td></tr></table>`,
+pts:[
+{ex:1,h:"財政の3機能と社会保障の4本柱は、名前を選ばせる問題がそのまま出る。"},
+"累進課税(所得が多いほど税率が高い)=所得再分配のしくみ。",
+"労働三権=団結権・団体交渉権・団体行動権(争議権)。"
+]},
+{t:"生命倫理",tag:"医療の進歩が生んだ「どこまでやっていい?」の問い。カタカナ用語が頻出。",
+dia:`<h5>生命倫理のキーワード</h5><table class="cmp"><tr><th>用語</th><th>意味</th></tr><tr><td><b>インフォームド・コンセント</b></td><td>十分な説明を受けたうえでの同意</td></tr><tr><td><b>SOL(生命の尊厳)</b></td><td>命そのものが尊い。延命を重視</td></tr><tr><td><b>QOL(生命の質)</b></td><td>その人らしい生活の質を重視</td></tr><tr><td><b>パターナリズム</b></td><td>本人のためと称して専門家が決めてしまうこと(批判の対象)</td></tr><tr><td><b>リヴィング・ウィル</b></td><td>終末期医療について事前に意思表示しておくこと</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>SOL vs QOL</b>の対立、<b>インフォームド・コンセント vs パターナリズム</b>の対立。この2組の対比で問題が作られる。"},
+"臓器移植法:脳死者からの移植が可能。本人の意思が不明でも家族の承諾で可能(改正後)。",
+"出生前診断・ゲノム編集=「命の選別につながらないか」という論点。"
+]},
+{t:"環境倫理",tag:"「今の人間」だけでなく「未来の世代」と「自然そのもの」への責任を考える。",
+dia:`<h5>環境倫理の3つの考え方</h5><div class="fl col"><span><b>世代間倫理</b><br>未来の世代への責任(ヨナス)</span><i>+</i><span><b>自然の生存権</b><br>人間以外の生き物にも価値</span><i>+</i><span><b>地球有限主義</b><br>地球の資源・環境には限りがある</span></div>`,
+pts:[
+{ex:1,h:"<b>ヨナス=未来世代への責任(世代間倫理)</b>。「まだ生まれていない人は同意も抗議もできない」からこそ責任を負う。"},
+"持続可能な開発=「将来の世代のニーズを損なわずに、現在のニーズを満たす」(1987年ブルントラント委員会)。",
+{ex:1,h:"国際的枠組み:<b>京都議定書(1997)→パリ協定(2015)</b>。パリ協定は途上国もふくむ全参加国が削減目標を持つ。<b>SDGs</b>=2030年までの17の持続可能な開発目標。"}
+]},
+{t:"情報社会と国際社会",tag:"情報は便利さと危うさのセット。国際社会は「人間の安全保障」へ。",
+dia:`<h5>情報社会のリスク</h5><table class="cmp"><tr><th>用語</th><th>意味</th></tr><tr><td><b>フィルターバブル</b></td><td>好みの情報だけに囲まれ、視野がせまくなる</td></tr><tr><td><b>エコーチェンバー</b></td><td>同意見の人とだけ響き合い、考えが極端になる</td></tr><tr><td><b>デジタル・デバイド</b></td><td>情報機器を使える人と使えない人の格差</td></tr><tr><td><b>メディア・リテラシー</b></td><td>情報をうのみにせず、批判的に読み解く力</td></tr></table>`,
+pts:[
+{ex:1,h:"<b>フィルターバブル</b>(検索や SNS が好みに合わせて表示→気づかず偏る)は近年の頻出用語。"},
+"国連:総会・安全保障理事会(5常任理事国に拒否権)など。",
+{ex:1,h:"<b>人間の安全保障</b>=国家ではなく<b>一人ひとりの人間</b>の生存・生活・尊厳を守るという考え方(センらが提唱に関与)。"}
+]}],
+quiz:[
+{q:"「見えざる手」によって市場がうまく調整されると考えたのは?",c:["アダム・スミス","ケインズ","マルクス","フリードマン"],a:0,e:"アダム・スミス『国富論』。自由放任の根拠。"},
+{q:"不況時には政府が有効需要を作り出すべきだと主張したのは?",c:["ケインズ","アダム・スミス","リカード","ウェーバー"],a:0,e:"ケインズ。公共事業などで需要を作る=大きな政府。"},
+{q:"「市場の失敗」の例として適当でないものは?",c:["競争によって商品の価格が下がること","公害などの外部不経済","独占・寡占","公共財が十分供給されないこと"],a:0,e:"競争で価格が下がるのは市場が正常に働いている証拠。"},
+{q:"「十分な説明を受けたうえでの同意」を意味する言葉は?",c:["インフォームド・コンセント","パターナリズム","リヴィング・ウィル","セカンド・オピニオン"],a:0,e:"IC=説明と同意。専門家が勝手に決めるパターナリズムの反対。"},
+{q:"延命そのものより「その人らしい生活の質」を重視する考え方は?",c:["QOL","SOL","IC","ADR"],a:0,e:"QOL=生命の質。SOL=生命の尊厳(延命重視)との対比。"},
+{q:"「未来の世代への責任」を説いた世代間倫理の思想家は?",c:["ヨナス","セン","クーン","フロム"],a:0,e:"ヨナス。未来世代は同意できないからこそ現世代が責任を負う。"},
+{q:"2015年に採択され、すべての参加国が温室効果ガス削減目標を持つ枠組みは?",c:["パリ協定","京都議定書","ラムサール条約","ワシントン条約"],a:0,e:"パリ協定。先進国のみに義務があった京都議定書との違いが出る。"},
+{q:"検索やSNSが好みに合った情報ばかり表示し、視野がせまくなる現象は?",c:["フィルターバブル","デジタル・デバイド","トレーサビリティ","クラウディング・アウト"],a:0,e:"フィルターバブル。エコーチェンバーとセットで覚える。"}],
+cards:[["「見えざる手」はだれ?","アダム・スミス"],["有効需要の創出はだれ?","ケインズ"],["財政の3機能は?","資源配分・所得再分配・景気安定化"],["社会保障の4本柱は?","社会保険・公的扶助・社会福祉・公衆衛生"],["説明を受けたうえでの同意を何という?","インフォームド・コンセント"],["SOLとQOLの違いは?","SOL=命の尊さ(延命重視)/QOL=生活の質"],["世代間倫理はだれ?","ヨナス"],["好みの情報に囲まれて偏る現象は?","フィルターバブル"]]}
+];
+
+/* ================= app logic ================= */
+const $=s=>document.querySelector(s);
+const app=$("#app");
+const KEY="pk-rinri-v1";
+let P=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{read:{},best:{},mock:[]}}catch(e){return{read:{},best:{},mock:[]}}}
+function save(){localStorage.setItem(KEY,JSON.stringify(P))}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+
+const totalLessons=DATA.reduce((n,u)=>n+u.lessons.length,0);
+const totalQuiz=DATA.reduce((n,u)=>n+u.quiz.length,0);
+function readCount(u){return u?u.lessons.filter((_,i)=>P.read[u.id+"-"+i]).length:Object.keys(P.read).length}
+function overallPct(){
+  const r=Object.keys(P.read).length/totalLessons;
+  const q=DATA.reduce((n,u)=>n+(P.best[u.id]||0),0)/totalQuiz;
+  return Math.round((r*.5+q*.5)*100);
+}
+function ptHtml(p){return typeof p==="string"?`<li>${p}</li>`:`<li class="ex">${p.h}</li>`}
+function setTab(t){document.querySelectorAll(".tabbar button").forEach(b=>b.classList.toggle("on",b.dataset.tab===t))}
+function toTop(){window.scrollTo(0,0)}
+
+/* ---------- home ---------- */
+function home(){
+  setTab("home");toTop();
+  const pct=overallPct();
+  // next thing to do
+  let next=null;
+  for(const u of DATA){const i=u.lessons.findIndex((_,i)=>!P.read[u.id+"-"+i]);if(i>=0){next={u,i};break}}
+  const ring=`<div class="ring" style="background:conic-gradient(var(--acc-bg) ${pct*3.6}deg, var(--line) 0deg)"><div class="in"><div class="pct">${pct}<small>%</small></div><div class="lbl">仕上がり度</div></div></div>`;
+  app.innerHTML=`
+  <header class="top"><div class="brand">公共・倫理 2か月特訓<small>KYOTSU TEST TRAINER</small></div><span class="chip">目標 8割</span></header>
+  <div class="card" style="text-align:center">${ring}
+    <p class="sub" style="margin:12px 0 0">仕上がり度 = レッスン既読 50% + クイズ正解率 50%</p>
+    ${next?`<button class="btn" id="go-next">きょうの学習をはじめる → 第${next.u.week}週「${next.u.lessons[next.i].t}」</button>`:`<button class="btn" id="go-mock">全レッスン完了! 模試で仕上げる</button>`}
+  </div>
+  <h2 class="sec">8週間の地図</h2>
+  ${DATA.map(u=>{const r=readCount(u),n=u.lessons.length,b=P.best[u.id]||0;
+    return `<div class="card tap" tabindex="0" role="button" data-u="${u.id}"><div class="row"><div class="wknum">第${u.week}週</div><div class="grow"><div class="ttl">${u.title}</div><div class="sub">${u.sub} ・ レッスン${r}/${n} ・ クイズ最高${b}/${u.quiz.length}</div><div class="bar"><i class="${r===n&&b===u.quiz.length?"full":""}" style="width:${Math.round((r/n)*100)}%"></i></div></div></div></div>`}).join("")}
+  <h2 class="sec">使い方</h2>
+  <div class="card">
+    <p style="margin:0 0 8px;font-weight:800">1日3ステップ × 15分でOK</p>
+    <div class="fl"><span>📖 まなぶ<br><small>今週の1レッスン</small></span><i>→</i><span>✏️ クイズ<br><small>その週の8問</small></span><i>→</i><span>🎴 カード<br><small>前の週を復習</small></span></div>
+    <div class="callout" style="margin-top:14px"><b>2か月プラン:</b>第1〜6週で「まなぶ」を一周 → 第7〜8週は毎日<b>模試</b>+まちがえた週のカードで復習。模試で安定して8割(12/15問)取れたら仕上がり。</div>
+    <p class="sub" style="margin:8px 0 0">コツ:このアプリの問題は「人物 × キーワード」の対応がほとんど。文章を全部読めなくても、太字のことばの組合せを覚えれば解ける。</p>
+  </div>
+  <p class="note">このアプリは共通テストの出題傾向をもとに独自に作成したオリジナル教材です(実際の試験問題の転載ではありません)。進捗はこの端末のブラウザにのみ保存されます。</p>`;
+  document.querySelectorAll("[data-u]").forEach(el=>{const f=()=>unit(el.dataset.u);el.onclick=f;el.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
+  const g=$("#go-next");if(g)g.onclick=()=>lesson(next.u.id,next.i);
+  const m=$("#go-mock");if(m)m.onclick=mock;
+}
+
+/* ---------- learn ---------- */
+function learn(){
+  setTab("learn");toTop();
+  app.innerHTML=`<header class="top"><div class="brand">まなぶ<small>LESSONS</small></div></header>`+
+  DATA.map(u=>`<div class="card tap" tabindex="0" role="button" data-u="${u.id}"><div class="row"><div class="wknum">第${u.week}週</div><div class="grow"><div class="ttl">${u.title}</div><div class="sub">${u.sub}</div></div><div class="sub">${readCount(u)}/${u.lessons.length}</div></div></div>`).join("");
+  document.querySelectorAll("[data-u]").forEach(el=>{const f=()=>unit(el.dataset.u);el.onclick=f;el.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
+}
+function unit(id){
+  toTop();setTab("learn");
+  const u=DATA.find(x=>x.id===id);
+  app.innerHTML=`<button class="back" id="bk">← もどる</button>
+  <header class="top"><div class="brand">第${u.week}週 ${u.title}<small>${u.sub}</small></div></header>
+  ${u.lessons.map((l,i)=>{const done=P.read[u.id+"-"+i];
+    return `<div class="card tap" tabindex="0" role="button" data-i="${i}"><div class="row"><div class="wknum">${done?"✓":i+1}</div><div class="grow"><div class="ttl">${l.t}</div><div class="sub">${done?"読了":"未読"}</div></div></div></div>`}).join("")}
+  <button class="btn ghost" id="uq">この週のクイズへ ✏️</button>`;
+  $("#bk").onclick=learn;
+  $("#uq").onclick=()=>quizRun(u.id);
+  document.querySelectorAll("[data-i]").forEach(el=>{const f=()=>lesson(u.id,+el.dataset.i);el.onclick=f;el.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
+}
+function lesson(uid,i){
+  toTop();setTab("learn");
+  const u=DATA.find(x=>x.id===uid),l=u.lessons[i],k=uid+"-"+i;
+  app.innerHTML=`<button class="back" id="bk">← 第${u.week}週にもどる</button>
+  <div class="qnum">第${u.week}週 ${u.title} ・ ${i+1}/${u.lessons.length}</div>
+  <h1 style="font-size:22px;margin:6px 0;text-wrap:balance">${l.t}</h1>
+  <div class="tagline">${l.tag}</div>
+  <div class="dia">${l.dia}</div>
+  <ul class="pts">${l.pts.map(ptHtml).join("")}</ul>
+  <button class="btn donebtn ${P.read[k]?"done":""}" id="dn">${P.read[k]?"✓ 覚えた!(タップで取り消し)":"覚えた! にする"}</button>
+  <div class="lnav">
+    ${i>0?`<button class="btn ghost" id="pv">← 前へ</button>`:""}
+    ${i<u.lessons.length-1?`<button class="btn" id="nx">次のレッスン →</button>`:`<button class="btn" id="nx">この週のクイズへ ✏️</button>`}
+  </div>`;
+  $("#bk").onclick=()=>unit(uid);
+  $("#dn").onclick=()=>{if(P.read[k])delete P.read[k];else P.read[k]=1;save();lesson(uid,i)};
+  const pv=$("#pv");if(pv)pv.onclick=()=>lesson(uid,i-1);
+  $("#nx").onclick=()=>{if(!P.read[k]){P.read[k]=1;save()}i<u.lessons.length-1?lesson(uid,i+1):quizRun(uid)};
+}
+
+/* ---------- quiz ---------- */
+function quizMenu(){
+  setTab("quiz");toTop();
+  app.innerHTML=`<header class="top"><div class="brand">クイズ<small>WEEKLY QUIZ</small></div></header>`+
+  DATA.map(u=>{const b=P.best[u.id]||0;
+    return `<div class="card tap" tabindex="0" role="button" data-u="${u.id}"><div class="row"><div class="wknum">第${u.week}週</div><div class="grow"><div class="ttl">${u.title}</div><div class="sub">最高記録 ${b}/${u.quiz.length} ${b===u.quiz.length?"👑":""}</div><div class="bar"><i class="${b===u.quiz.length?"full":""}" style="width:${Math.round(b/u.quiz.length*100)}%"></i></div></div></div></div>`}).join("");
+  document.querySelectorAll("[data-u]").forEach(el=>{const f=()=>quizRun(el.dataset.u);el.onclick=f;el.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
+}
+function shuffled(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function quizRun(uid,pool,isMock){
+  setTab(isMock?"mock":"quiz");
+  const u=uid?DATA.find(x=>x.id===uid):null;
+  const qs=pool||u.quiz.map(q=>({...q,src:u}));
+  let idx=0,score=0;
+  function step(){
+    toTop();
+    const q=qs[idx];
+    // shuffle choices, remember correct
+    const order=shuffled(q.c.map((c,i)=>({c,i})));
+    app.innerHTML=`<button class="back" id="bk">← やめる</button>
+    <div class="qnum">${isMock?"模試":"第"+u.week+"週 "+u.title} ・ 問${idx+1}/${qs.length} ・ 正解${score}</div>
+    <div class="qtext">${q.q}</div>
+    ${order.map(o=>`<button class="choice" data-i="${o.i}">${o.c}</button>`).join("")}
+    <div class="expl" id="ex"></div>
+    <button class="btn" id="nx" style="display:none">${idx<qs.length-1?"次の問題 →":"結果を見る"}</button>`;
+    $("#bk").onclick=isMock?mock:quizMenu;
+    document.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{
+      const ok=+b.dataset.i===q.a;
+      if(ok)score++;
+      document.querySelectorAll(".choice").forEach(x=>{x.disabled=true;if(+x.dataset.i===q.a)x.classList.add("correct");});
+      if(!ok)b.classList.add("wrong");
+      const ex=$("#ex");ex.style.display="block";ex.className="expl"+(ok?"":" bad");
+      ex.innerHTML=`<b>${ok?"⭕ 正解!":"❌ ざんねん"}</b>${q.e}${isMock&&q.src?`<div class="sub" style="margin-top:4px">出典単元:第${q.src.week}週 ${q.src.title}</div>`:""}`;
+      $("#nx").style.display="block";
+    });
+    $("#nx").onclick=()=>{idx++;idx<qs.length?step():finish()};
+  }
+  function finish(){
+    toTop();
+    const n=qs.length,pct=Math.round(score/n*100),pass=pct>=80;
+    if(!isMock){if(score>(P.best[uid]||0))P.best[uid]=score;save()}
+    else{P.mock.push({s:score,n});if(P.mock.length>30)P.mock.shift();save()}
+    app.innerHTML=`<div class="score">
+      <div class="big">${score}<small> / ${n}</small></div>
+      <div class="msg" style="color:${pass?"var(--ok)":"var(--shu)"}">${pass?"🎉 8割クリア! この調子!":"あと少し! まちがえた所のレッスンを見直そう"}</div>
+      <p class="sub">${pct}% ・ 目標ライン80%</p>
+      <button class="btn" id="rt">もう一度</button>
+      <button class="btn ghost" id="bk2">${isMock?"模試メニューへ":"クイズ一覧へ"}</button>
+    </div>`;
+    $("#rt").onclick=()=>quizRun(uid,pool&&shuffled(pool),isMock);
+    $("#bk2").onclick=isMock?mock:quizMenu;
+  }
+  step();
+}
+
+/* ---------- flashcards ---------- */
+function cardsMenu(){
+  setTab("cards");toTop();
+  app.innerHTML=`<header class="top"><div class="brand">暗記カード<small>FLASH CARDS</small></div></header>
+  <p class="hint">タップで答え。スキマ時間に何周でも。</p>`+
+  DATA.map(u=>`<div class="card tap" tabindex="0" role="button" data-u="${u.id}"><div class="row"><div class="wknum">第${u.week}週</div><div class="grow"><div class="ttl">${u.title}</div><div class="sub">${u.cards.length}枚</div></div></div></div>`).join("");
+  document.querySelectorAll("[data-u]").forEach(el=>{const f=()=>cardsRun(el.dataset.u);el.onclick=f;el.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}}});
+}
+function cardsRun(uid){
+  setTab("cards");
+  const u=DATA.find(x=>x.id===uid);
+  let deck=shuffled(u.cards),i=0,show=false;
+  function step(){
+    toTop();
+    const c=deck[i];
+    app.innerHTML=`<button class="back" id="bk">← カード一覧</button>
+    <div class="qnum">第${u.week}週 ${u.title} ・ ${i+1}/${deck.length}枚</div>
+    <div class="fcard ${show?"ans":""}" id="fc" tabindex="0" role="button"><div><div class="side">${show?"こたえ":"もんだい(タップでこたえ)"}</div><div class="txt">${show?c[1]:c[0]}</div></div></div>
+    <div class="fnav">
+      <button class="btn ghost" id="pv" ${i===0?"disabled":""}>← 前</button>
+      <button class="btn" id="nx">${i<deck.length-1?"次のカード →":"シャッフルしてもう一周"}</button>
+    </div>`;
+    $("#bk").onclick=cardsMenu;
+    const fc=$("#fc");const flip=()=>{show=!show;step()};
+    fc.onclick=flip;fc.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip()}};
+    $("#pv").onclick=()=>{if(i>0){i--;show=false;step()}};
+    $("#nx").onclick=()=>{if(i<deck.length-1){i++;show=false;step()}else{deck=shuffled(u.cards);i=0;show=false;step()}};
+  }
+  step();
+}
+
+/* ---------- mock ---------- */
+function mock(){
+  setTab("mock");toTop();
+  const hist=P.mock.slice(-8);
+  app.innerHTML=`<header class="top"><div class="brand">模試モード<small>MOCK TEST</small></div><span class="chip">合格ライン 12/15</span></header>
+  <div class="card">
+    <p style="margin:0;font-weight:800">全8週からランダムに15問</p>
+    <p class="sub" style="margin:6px 0 0">本番と同じ「初見の順番」で解く練習。8割(12問)を安定して超えられたら仕上がりOK。</p>
+    <button class="btn" id="st">模試をはじめる 🎯</button>
+  </div>
+  <h2 class="sec">これまでの記録</h2>
+  <div class="card">${hist.length?`<div class="pillrow">${hist.map(m=>`<span class="pill ${m.s/m.n>=0.8?"on":""}">${m.s}/${m.n}</span>`).join("")}</div><p class="sub" style="margin:6px 0 0">緑=8割クリア。直近3回連続で緑なら本番も狙える。</p>`:`<p class="sub" style="margin:0">まだ記録がありません。第1週のレッスンを終えたら、力試しに1回受けてみよう。</p>`}</div>`;
+  $("#st").onclick=()=>{
+    const pool=shuffled(DATA.flatMap(u=>u.quiz.map(q=>({...q,src:u})))).slice(0,15);
+    quizRun(null,pool,true);
+  };
+}
+
+/* ---------- boot ---------- */
+document.querySelectorAll(".tabbar button").forEach(b=>b.onclick=()=>({home,learn,quiz:quizMenu,cards:cardsMenu,mock})[b.dataset.tab]());
+home();
+</script>
