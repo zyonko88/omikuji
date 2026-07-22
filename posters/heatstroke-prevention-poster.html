@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>熱中症予防ポスター | 吉本歯科医院</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { width: 210mm; height: 297mm; }
+  body {
+    font-family: "IPAPGothic", "Noto Sans CJK JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    color: #222;
+    background: #fffdf7;
+    padding: 8mm 9mm;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== ヘッダー ===== */
+  .header {
+    background: linear-gradient(135deg, #d32f2f, #f57c00);
+    color: #fff;
+    border-radius: 4mm;
+    padding: 4mm 6mm;
+    text-align: center;
+    position: relative;
+  }
+  .header .clinic { font-size: 11pt; letter-spacing: 2px; opacity: .95; }
+  .header h1 { font-size: 30pt; letter-spacing: 4px; line-height: 1.15; margin: 1mm 0; }
+  .header .sub { font-size: 9.5pt; opacity: .95; }
+
+  .section { margin-top: 3.2mm; }
+  .sec-title {
+    display: flex; align-items: center; gap: 2mm;
+    font-size: 12.5pt; font-weight: bold; color: #b71c1c;
+    border-bottom: 1mm solid #f57c00;
+    padding-bottom: 1mm; margin-bottom: 2mm;
+  }
+  .sec-title .num {
+    background: #b71c1c; color: #fff; border-radius: 50%;
+    width: 6.5mm; height: 6.5mm; display: inline-flex;
+    align-items: center; justify-content: center; font-size: 10.5pt; flex: none;
+  }
+
+  /* ===== 危険条件 ===== */
+  .danger-box {
+    display: flex; gap: 3mm; align-items: stretch;
+  }
+  .danger-item {
+    flex: 1; background: #fff3e0; border: 0.6mm solid #f57c00; border-radius: 3mm;
+    text-align: center; padding: 2.5mm 2mm;
+  }
+  .danger-item .big { font-size: 17pt; font-weight: bold; color: #d32f2f; }
+  .danger-item .small { font-size: 8.5pt; margin-top: 0.5mm; }
+  .danger-note {
+    font-size: 8.5pt; background: #ffebee; border-radius: 2mm;
+    padding: 1.5mm 2.5mm; margin-top: 2mm; line-height: 1.5;
+  }
+
+  /* ===== 予防5ポイント ===== */
+  .points { display: flex; gap: 2.2mm; }
+  .point {
+    flex: 1; background: #e8f5e9; border-radius: 3mm; padding: 2mm 1.5mm;
+    text-align: center; border-top: 1.2mm solid #2e7d32;
+  }
+  .point .icon { font-size: 15pt; }
+  .point .t { font-size: 9.5pt; font-weight: bold; color: #1b5e20; margin: 0.8mm 0 0.5mm; }
+  .point .d { font-size: 7.6pt; line-height: 1.45; text-align: left; }
+
+  /* ===== 症状 ===== */
+  .sympt { display: flex; gap: 2.5mm; }
+  .sy {
+    flex: 1; border-radius: 3mm; padding: 2mm 2.5mm; color: #222;
+  }
+  .sy h3 { font-size: 10pt; margin-bottom: 1mm; }
+  .sy ul { font-size: 8.2pt; line-height: 1.5; padding-left: 4mm; }
+  .sy.g1 { background: #fff9c4; border: 0.5mm solid #fbc02d; }
+  .sy.g2 { background: #ffe0b2; border: 0.5mm solid #f57c00; }
+  .sy.g3 { background: #ffcdd2; border: 0.5mm solid #d32f2f; }
+  .sy.g3 h3, .sy.g3 .kyukyu { color: #b71c1c; }
+  .kyukyu { font-size: 8.6pt; font-weight: bold; margin-top: 1mm; }
+
+  /* ===== 応急処置フロー ===== */
+  .flow { display: flex; align-items: stretch; gap: 1.5mm; }
+  .step {
+    flex: 1; background: #e3f2fd; border: 0.5mm solid #1565c0; border-radius: 2.5mm;
+    padding: 1.8mm 1.5mm; text-align: center;
+  }
+  .step .n { font-size: 8pt; font-weight: bold; color: #fff; background: #1565c0; border-radius: 2mm; display: inline-block; padding: 0 2mm; }
+  .step .t { font-size: 8.8pt; font-weight: bold; margin: 0.8mm 0 0.4mm; color: #0d47a1; }
+  .step .d { font-size: 7.4pt; line-height: 1.4; }
+  .arrow { align-self: center; font-size: 11pt; color: #1565c0; font-weight: bold; flex: none; }
+  .flow-warn {
+    margin-top: 2mm; background: #b71c1c; color: #fff; border-radius: 2.5mm;
+    font-size: 10.5pt; font-weight: bold; text-align: center; padding: 2mm;
+    letter-spacing: 1px;
+  }
+
+  /* ===== 緊急連絡体制 ===== */
+  .contact table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  .contact th, .contact td { border: 0.4mm solid #90a4ae; padding: 1.8mm 2.5mm; text-align: left; }
+  .contact th { background: #eceff1; width: 42mm; font-weight: bold; white-space: nowrap; }
+  .contact td { color: #607d8b; }
+
+  .footer {
+    margin-top: auto; padding-top: 2mm;
+    font-size: 7.5pt; color: #666; text-align: center; line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="clinic">吉本歯科医院　安全衛生掲示</div>
+    <h1>STOP！熱中症</h1>
+    <div class="sub">〜 厚生労働省「職場における熱中症対策」に基づく院内予防ポスター 〜</div>
+  </div>
+
+  <!-- 1. 危険な条件 -->
+  <div class="section">
+    <div class="sec-title"><span class="num">1</span>この条件は危険！「暑さ指数(WBGT)」に注意</div>
+    <div class="danger-box">
+      <div class="danger-item">
+        <div class="big">WBGT 28℃以上</div>
+        <div class="small">暑さ指数（気温・湿度・輻射熱を考慮）</div>
+      </div>
+      <div class="danger-item">
+        <div class="big">気温 31℃以上</div>
+        <div class="small">院内・屋外を問わず要警戒</div>
+      </div>
+      <div class="danger-item">
+        <div class="big">湿度が高い日</div>
+        <div class="small">汗が蒸発せず体温が下がりにくい</div>
+      </div>
+    </div>
+    <div class="danger-note">
+      ⚠ 2025年6月施行の改正労働安全衛生規則により、上記環境で<b>連続1時間以上または1日4時間以上</b>の作業を行う場合、
+      事業者には「早期発見の体制整備」「重篤化防止の手順作成」「関係者への周知」が<b>義務</b>付けられています。
+    </div>
+  </div>
+
+  <!-- 2. 予防のポイント -->
+  <div class="section">
+    <div class="sec-title"><span class="num">2</span>予防の5つのポイント（一人ひとりが実践！）</div>
+    <div class="points">
+      <div class="point">
+        <div class="icon">🥤</div>
+        <div class="t">水分・塩分</div>
+        <div class="d">のどが渇く前に、20〜30分ごとにコップ1〜2杯。汗をかいたら塩分も一緒に。</div>
+      </div>
+      <div class="point">
+        <div class="icon">🛋️</div>
+        <div class="t">こまめな休憩</div>
+        <div class="d">涼しい休憩スペースで定期的に休む。無理・我慢は禁物。</div>
+      </div>
+      <div class="point">
+        <div class="icon">🌡️</div>
+        <div class="t">室温・換気</div>
+        <div class="d">エアコン・換気で診療室や技工・消毒室の温湿度を管理。WBGTを確認。</div>
+      </div>
+      <div class="point">
+        <div class="icon">😴</div>
+        <div class="t">体調管理</div>
+        <div class="d">睡眠不足・朝食抜き・前日の深酒・二日酔いは発症リスク大。毎朝の体調チェック。</div>
+      </div>
+      <div class="point">
+        <div class="icon">👕</div>
+        <div class="t">服装・順化</div>
+        <div class="d">通気性のよい服装を。暑さに慣れるまで（約1〜2週間）は特に注意。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 症状 -->
+  <div class="section">
+    <div class="sec-title"><span class="num">3</span>熱中症のサインを見逃さない</div>
+    <div class="sympt">
+      <div class="sy g1">
+        <h3>Ⅰ度（軽症）</h3>
+        <ul>
+          <li>めまい・立ちくらみ</li>
+          <li>筋肉痛・こむら返り</li>
+          <li>大量の発汗</li>
+        </ul>
+      </div>
+      <div class="sy g2">
+        <h3>Ⅱ度（中等症）</h3>
+        <ul>
+          <li>頭痛・吐き気・嘔吐</li>
+          <li>強いだるさ・脱力感</li>
+          <li>集中力・判断力の低下</li>
+        </ul>
+      </div>
+      <div class="sy g3">
+        <h3>Ⅲ度（重症）</h3>
+        <ul>
+          <li>意識がない・呼びかけに反応しない</li>
+          <li>けいれん・まっすぐ歩けない</li>
+          <li>体が熱い（高体温）</li>
+        </ul>
+        <div class="kyukyu">→ ためらわず119番！</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 応急処置 -->
+  <div class="section">
+    <div class="sec-title"><span class="num">4</span>具合の悪い人を見つけたら（応急処置の手順）</div>
+    <div class="flow">
+      <div class="step">
+        <div class="n">STEP 1</div>
+        <div class="t">声かけ・確認</div>
+        <div class="d">意識はあるか、返事はできるか確認</div>
+      </div>
+      <div class="arrow">▶</div>
+      <div class="step">
+        <div class="n">STEP 2</div>
+        <div class="t">涼しい場所へ</div>
+        <div class="d">冷房の効いた部屋・日陰へ移動し衣服をゆるめる</div>
+      </div>
+      <div class="arrow">▶</div>
+      <div class="step">
+        <div class="n">STEP 3</div>
+        <div class="t">体を冷やす</div>
+        <div class="d">首・わきの下・足の付け根を保冷剤等で冷却</div>
+      </div>
+      <div class="arrow">▶</div>
+      <div class="step">
+        <div class="n">STEP 4</div>
+        <div class="t">水分・塩分補給</div>
+        <div class="d">自力で飲める場合のみ、経口補水液など</div>
+      </div>
+      <div class="arrow">▶</div>
+      <div class="step">
+        <div class="n">STEP 5</div>
+        <div class="t">医療機関へ</div>
+        <div class="d">意識がない・飲めない・改善しない → 救急車</div>
+      </div>
+    </div>
+    <div class="flow-warn">🚨 意識がない・自力で水を飲めないときは、ただちに119番！　回復するまで絶対に一人にしない！</div>
+  </div>
+
+  <!-- 5. 緊急連絡体制 -->
+  <div class="section contact">
+    <div class="sec-title"><span class="num">5</span>当院の緊急連絡体制（あらかじめ記入して掲示）</div>
+    <table>
+      <tr><th>熱中症対策責任者</th><td>（氏名を記入）</td></tr>
+      <tr><th>緊急時の院内連絡先</th><td>（院長・責任者の連絡先を記入）</td></tr>
+      <tr><th>救急搬送先の医療機関</th><td>（病院名・住所・電話番号を記入）</td></tr>
+      <tr><th>救急要請</th><td><b style="color:#b71c1c;">119番</b>（当院所在地・目印を伝える）</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    出典：厚生労働省「職場における熱中症対策」／「STOP！熱中症 クールワークキャンペーン」／改正労働安全衛生規則（2025年6月1日施行）に準拠　　吉本歯科医院
+  </div>
+
+</body>
+</html>
