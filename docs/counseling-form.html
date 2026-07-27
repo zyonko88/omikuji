@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>カウンセリング申込書</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 12mm 13mm 10mm 13mm;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "IPAGothic", "IPAPGothic", sans-serif;
+    color: #1a1a1a;
+    font-size: 10.5pt;
+    line-height: 1.55;
+  }
+  .page {
+    height: 275mm;               /* 297 - 12 - 10 = 275mm content height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+  /* stack fills the page and distributes its blocks evenly so no gap piles
+     up at the bottom */
+  .stack {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* ---- title / header ---- */
+  h1.title {
+    text-align: center;
+    font-size: 15pt;
+    letter-spacing: 0.28em;
+    margin: 0 0 3mm 0;
+    padding-bottom: 1.5mm;
+    border-bottom: 2px solid #222;
+    font-weight: bold;
+  }
+  .rec-date { text-align: right; font-size: 9pt; margin: -1mm 0 2mm 0; }
+  .header-box {
+    border: 1px solid #444;
+    padding: 2mm 3mm;
+    margin-bottom: 2mm;
+  }
+  .header-box .furi { font-size: 8pt; color: #333; margin-bottom: 0.5mm; }
+  .header-box .row { display: flex; align-items: baseline; gap: 4mm; }
+  .header-box .row + .row { margin-top: 1.5mm; }
+  .fill { border-bottom: 1px solid #555; display: inline-block; }
+  .grow { flex: 1; }
+
+  /* ---- questions ---- */
+  .q {
+    margin: 0;
+  }
+  .q-title {
+    font-weight: bold;
+    font-size: 11pt;
+    background: #ececec;
+    border-left: 4px solid #555;
+    padding: 1.4mm 2.5mm;
+    margin-bottom: 1.8mm;
+  }
+  .q-body { padding: 0 1mm; }
+  .opt { margin: 0.7mm 0; }
+  .cols-2 { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6mm; }
+  .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; column-gap: 4mm; }
+  .inline { display: flex; flex-wrap: wrap; gap: 1mm 6mm; }
+  .sub { font-size: 8.6pt; color: #333; margin: 0.8mm 0 0.2mm; }
+  .note { font-size: 8.8pt; }
+  .cb { white-space: nowrap; }
+
+  /* writing lines */
+  .wline { border-bottom: 1px solid #888; height: 8mm; }
+  .wline.tall { height: 11mm; }
+
+  /* page-turn footer */
+  .turn {
+    text-align: center;
+    font-size: 9.5pt;
+    letter-spacing: 0.2em;
+    color: #333;
+    padding-top: 1mm;
+  }
+
+  /* consent */
+  .consent {
+    border: 1.5px solid #444;
+    padding: 3mm;
+    font-size: 9.4pt;
+    line-height: 1.7;
+  }
+  .consent .lead { font-weight: bold; margin-bottom: 1.5mm; }
+  .thanks {
+    text-align: center;
+    font-size: 10.5pt;
+    letter-spacing: 0.2em;
+    font-weight: bold;
+    padding-top: 1mm;
+  }
+  .header-wrap { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<!-- =============== PAGE 1 =============== -->
+<section class="page">
+  <div class="stack">
+    <div class="header-wrap">
+      <h1 class="title">カウンセリング申込書</h1>
+      <div class="rec-date">記入日：　　　　年　　月　　日</div>
+
+    <div class="header-box">
+      <div class="furi">ふりがな</div>
+      <div class="row">
+        <span>患者様名：</span>
+        <span class="fill grow">&nbsp;</span>
+      </div>
+      <div class="row">
+        <span>ご連絡先：</span>
+        <span class="fill" style="width:52mm;">&nbsp;</span>
+        <span>生年月日：大・昭・平　　年　　月　　日</span>
+      </div>
+    </div>
+    </div><!-- /header-wrap -->
+
+    <div class="q">
+      <div class="q-title">Q1. インプラント治療をお考えの理由をお聞かせください。</div>
+      <div class="q-body">
+        <div class="opt">（　）抜けた歯がある。</div>
+        <div class="opt">（　）抜けそうな（抜く必要のある）歯がある。</div>
+        <div class="opt">（　）お使いの入れ歯やブリッジなどに不具合がある。</div>
+        <div class="opt">（　）その他：具体的にお書きください。</div>
+        <div class="wline"></div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q2. インプラント治療で解消したい項目すべてにチェックを付けてください。</div>
+      <div class="q-body">
+        <div class="opt">（　）モノがきちんと噛めるようになりたい。</div>
+        <div class="opt">（　）見た目をよくしたい。</div>
+        <div class="opt">（　）しゃべりづらさを解消したい。</div>
+        <div class="opt">（　）入れ歯やブリッジのお手入れから解放されたい。</div>
+        <div class="opt">（　）その他：具体的にお書きください。</div>
+        <div class="wline"></div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q3. インプラントの相談経験についてお聞きします。</div>
+      <div class="q-body">
+        <div class="opt">（　）今回が初めて</div>
+        <div class="opt">（　）他医院で相談をしたことがある。</div>
+        <div class="sub">それはいつ頃ですか？</div>
+        <div class="inline"><span class="cb">（　）１ヶ月以内</span><span class="cb">（　）半年以内</span><span class="cb">（　）１年以上前</span></div>
+        <div class="sub">治療を開始されなかった理由</div>
+        <div class="cols-2">
+          <div class="opt cb">（　）ドクターに不安があった</div>
+          <div class="opt cb">（　）治療方針が分かりにくかった</div>
+          <div class="opt cb">（　）医院の設備が良くない</div>
+          <div class="opt cb">（　）治療費が高い</div>
+          <div class="opt cb">（　）骨の状態で無理だと言われた</div>
+          <div class="opt cb">（　）健康上の理由で断られた</div>
+        </div>
+        <div class="opt">（　）その他：具体的にお書きください。</div>
+        <div class="wline"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="turn">＊ ＊ ＊ 2枚目へお進みください。＊ ＊ ＊</div>
+</section>
+
+<!-- =============== PAGE 2 =============== -->
+<section class="page">
+  <div class="stack">
+    <div class="q">
+      <div class="q-title">Q4. インプラントの治療経験についてお聞きします。</div>
+      <div class="q-body">
+        <div class="opt">（　）今回が初めて</div>
+        <div class="opt">（　）他医院で治療をしたことがある</div>
+        <div class="sub">それはいつ頃ですか？</div>
+        <div class="inline"><span class="cb">（　）１年以内</span><span class="cb">（　）３年以内</span><span class="cb">（　）５年以内</span><span class="cb">（　）５年以上前</span></div>
+        <div class="sub">治療された部位はおわかりになりますか？</div>
+        <div class="opt">上顎：（　）左奥　（　）左横　（　）前歯　（　）右横　（　）右奥</div>
+        <div class="opt">下顎：（　）左奥　（　）左横　（　）前歯　（　）右横　（　）右奥</div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q5. インプラント治療について、特に不安な点やお聞きになりたい点にチェックを付けてください。</div>
+      <div class="q-body">
+        <div class="cols-2">
+          <div class="opt cb">（　）治療全体の流れ</div>
+          <div class="opt cb">（　）インプラント埋入について</div>
+          <div class="opt cb">（　）痛みについて</div>
+          <div class="opt cb">（　）人工歯について</div>
+          <div class="opt cb">（　）治療費について</div>
+          <div class="opt cb">（　）治療後のメンテナンスについて</div>
+          <div class="opt cb">（　）治療期間について</div>
+        </div>
+        <div class="opt">（　）その他：具体的にお書きください。</div>
+        <div class="wline"></div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q6. インプラント治療に対するお考えをお聞かせください。</div>
+      <div class="q-body">
+        <div class="inline"><span class="cb">（　）治療を受けたい</span><span class="cb">（　）カウンセリングを受けて検討したい</span><span class="cb">（　）他医院とも比較したい</span></div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q7. 現在の健康状態をお聞かせください。</div>
+      <div class="q-body">
+        <div class="opt">（　）良好</div>
+        <div class="opt">（　）現在、お薬を常用している。：具体的にお書きください。</div>
+        <div class="wline"></div>
+        <div class="opt">（　）現在、治療を受けている。：具体的にお書きください。</div>
+        <div class="wline"></div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q8. 薬を飲んで副作用はありませんか？</div>
+      <div class="q-body">
+        <div class="opt">（　）ない</div>
+        <div class="inline"><span class="cb">（　）かぶれやすい</span><span class="cb">（　）胃が痛くなる</span><span class="cb">（　）発疹が出る</span><span class="cb">（　）かゆくなる</span></div>
+        <div class="sub">あった場合はいつ頃からですか？</div>
+        <div class="inline"><span class="cb">（　）１年以内</span><span class="cb">（　）３年以内</span><span class="cb">（　）５年以内</span><span class="cb">（　）５年以上前</span></div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q9. タバコについて</div>
+      <div class="q-body">
+        <div class="inline"><span class="cb">（　）吸う／1日（　　）本</span><span class="cb">（　）吸わない</span><span class="cb">（　）喫煙歴なし</span></div>
+        <div class="opt">（　）（　　）年前まで吸っていた　1日（　　）本（　　）年間</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="turn">＊ ＊ ＊ 3枚目へお進みください。＊ ＊ ＊</div>
+</section>
+
+<!-- =============== PAGE 3 =============== -->
+<section class="page">
+  <div class="stack">
+    <div class="q">
+      <div class="q-title">Q10. アレルギーや特異体質はありませんか？</div>
+      <div class="q-body">
+        <div class="opt">（　）ない</div>
+        <div class="inline"><span class="cb">（　）かぶれやすい</span><span class="cb">（　）喘息がある</span><span class="cb">（　）蕁麻疹がでる</span><span class="cb">（　）鼻がつまる</span></div>
+        <div class="inline"><span class="cb">（　）金属アレルギー</span><span class="cb">（　）薬アレルギー</span></div>
+        <div class="opt">（　）その他：具体的にお書きください。</div>
+        <div class="wline"></div>
+        <div class="sub">あった場合はいつ頃からですか？</div>
+        <div class="inline"><span class="cb">（　）１年以内</span><span class="cb">（　）３年以内</span><span class="cb">（　）５年以内</span><span class="cb">（　）５年以上前</span></div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q11. 内科的な病気はありませんか？</div>
+      <div class="q-body">
+        <div class="opt">（　）ない</div>
+        <div class="opt">（　）腎臓　　（　）心臓　　（　）高血圧【上　　　mg・下　　　mg】</div>
+        <div class="opt">（　）骨粗鬆症　（　）リウマチ　（　）肝炎　（　）脳の病気</div>
+        <div class="opt">（　）甲状腺疾患　（　）糖尿【空腹時　　mg/dl】【ヘモグロビンA1c　　%】</div>
+        <div class="opt">（　）精神疾患　（　）低血圧【上　　mg・下　　mg】</div>
+        <div class="opt">（　）緑内障　（　）その他</div>
+        <div class="sub">あった場合はいつ頃からですか？</div>
+        <div class="inline"><span class="cb">（　）１年以内</span><span class="cb">（　）３年以内</span><span class="cb">（　）５年以内</span><span class="cb">（　）５年以上前</span></div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q12. 緑内障がある方にお聞きします。緑内障の種類はご存知ですか？</div>
+      <div class="q-body">
+        <div class="opt">（　）知らない　（　）原発閉塞緑内障　（　）原発開放隅角緑内障</div>
+        <div class="opt">（　）正常緑内障　（　）続発緑内障　（　）その他</div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q13. インプラントの治療は様々な設計が可能です。</div>
+      <div class="q-body">
+        <div class="note">ご予算に応じてより満足いただける治療法のご提案も可能ですので、あらかじめご予算を教えていただけたら幸いです。</div>
+        <div class="opt">（　）50万円以下　　（　）50万円〜100万円　　（　）100万円〜150万円</div>
+        <div class="opt">（　）150万円〜200万円　（　）200万円以上　（　）300万円〜500万円</div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-title">Q14. 治療するにあたって何かご希望がございましたら、お聞かせください。</div>
+      <div class="q-body">
+        <div class="wline tall"></div>
+        <div class="wline tall"></div>
+        <div class="wline tall"></div>
+      </div>
+    </div>
+
+    <div class="consent">
+      <div class="lead">初診カウンセリング受診の患者様へ　個人情報取り扱いについて</div>
+      <div>□ 私は、【あんしんインプラント最長10年保証】のサービスを受けるため、私の初診カウンセリング結果および今後の治療情報について、医院と【あんしんインプラント】の間で共有することに同意します。</div>
+    </div>
+  </div>
+
+  <div class="thanks">＊ ＊ ＊ ご記入ありがとうございました ＊ ＊ ＊</div>
+</section>
+
+</body>
+</html>
