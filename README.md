@@ -46,6 +46,8 @@ Claude との作業で作った成果物をまとめて置いてあるリポジ�
 | 内容 | ファイル |
 |---|---|
 | 「知ったかぶり講座」収支報告書（2026-07-18） | [`accounting/2026-07-18_知ったかぶり講座_収支報告書.md`](accounting/) ／ [.docx](accounting/) |
+| boseigata.com ランディングページ（母性型思考・無料タイプ診断つき） | [`boseigata/index.html`](boseigata/index.html) ／ [説明・公開前TODO](boseigata/README.md) |
+| 同上：プライバシーポリシー・特定商取引法に基づく表記 | [`boseigata/privacy.html`](boseigata/privacy.html) ／ [`boseigata/tokushoho.html`](boseigata/tokushoho.html) |
 
 ---
 
