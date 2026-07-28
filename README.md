@@ -50,7 +50,7 @@ Claude との作業で作った成果物をまとめて置いてあるリポジ�
 | boseigata.com ランディングページ（母性型思考・無料タイプ診断つき） | [`boseigata/index.html`](boseigata/index.html) ／ [説明・公開前TODO](boseigata/README.md) |
 | **母性型 365日メールマガジン**（毎朝配信・全回「これが母性型です」に着地） | [`boseigata/mailmagazine/`](boseigata/mailmagazine/) ／ [設計書](boseigata/mailmagazine/README.md) |
 | 同上：プライバシーポリシー・特定商取引法に基づく表記 | [`boseigata/privacy.html`](boseigata/privacy.html) ／ [`boseigata/tokushoho.html`](boseigata/tokushoho.html) |
-| **眠り魔女のことば 項目べつアーカイブ**（@nemurimajo 全234投稿の閲覧アプリ・全文検索／しおり付き） | [`nemurimajo/index.html`](nemurimajo/index.html) ／ [説明](nemurimajo/README.md) |
+| **月・女性・ことば 項目べつアーカイブ**（@nemurimajo 全234投稿の閲覧アプリ・全文検索／しおり付き） | [`nemurimajo/index.html`](nemurimajo/index.html) ／ [説明](nemurimajo/README.md) |
 | 同上：文字起こしの元データ（4分割） | [`nemurimajo/source/`](nemurimajo/source/) |
 
 ---
@@ -73,7 +73,7 @@ Claude との作業で作った成果物をまとめて置いてあるリポジ�
 `docs/` フォルダを公開設定にすると、以下がブラウザから閲覧できます。
 
 - `docs/index.html` — 公共・倫理 学習アプリ
-- `docs/nemurimajo.html` — 眠り魔女のことば 項目べつアーカイブ
+- `docs/nemurimajo.html` — 月・女性・ことば 項目べつアーカイブ
 - `docs/counseling-form.html` — カウンセリング申込書
 - `docs/vsl.html` — VSL型ランディングページ
 
