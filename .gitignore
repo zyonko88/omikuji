@@ -1,0 +1,6 @@
+# Instagram 文字起こしツールの作業ディレクトリ（取得した投稿内容は公開しない）
+ig-work-*/
+tools/instagram-transcribe/ig-work-*/
+*.wav
+*.mp4
+ALL_TRANSCRIPTS.md
