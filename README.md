@@ -53,6 +53,12 @@ Claude との作業で作った成果物をまとめて置いてあるリポジ�
 | **月・女性・ことば 項目べつアーカイブ**（@nemurimajo 全234投稿の閲覧アプリ・全文検索／しおり付き） | [`nemurimajo/index.html`](nemurimajo/index.html) ／ [説明](nemurimajo/README.md) |
 | 同上：文字起こしの元データ（4分割） | [`nemurimajo/source/`](nemurimajo/source/) |
 
+### 健康・栄養（調査メモ）
+
+| 内容 | ファイル |
+|---|---|
+| グルタチオン点滴の効果 ― 藤川徳美医師の見解と公表エビデンスの突き合わせ | [`health/グルタチオン点滴の効果_藤川徳美.md`](health/グルタチオン点滴の効果_藤川徳美.md) |
+
 ---
 
 ## 別のパソコンで作業を続けるには
