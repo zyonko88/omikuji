@@ -8,6 +8,13 @@ Claude との作業で作った成果物をまとめて置いてあるリポジ�
 
 ## 目次
 
+### スケジュール・カレンダー
+
+| 内容 | ファイル |
+|---|---|
+| **2026年8月 カレンダー**（Googleカレンダーの実際の予定・A4縦1枚） | [`schedule/2026-08-calendar.pdf`](schedule/2026-08-calendar.pdf) ／ [HTML・説明](schedule/README.md) |
+| やることスケジュール表（2026年8〜10月・A4縦1枚・ガント形式／医院＋家関連） | [`schedule/yoshimoto-todo-schedule.pdf`](schedule/yoshimoto-todo-schedule.pdf) ／ [HTML・説明](schedule/README.md) |
+
 ### 歯科医院（吉本歯科医院）
 
 | 内容 | ファイル |
@@ -21,7 +28,6 @@ Claude との作業で作った成果物をまとめて置いてあるリポジ�
 | カウンセリング申込書（A4×3ページ） | [`docs/counseling-form.html`](docs/counseling-form.html) ／ [PDF](docs/) |
 | 水曜日朝の院内清掃・器具消毒についてのスタッフ回覧 | [`documents/staff-memo-wednesday-cleaning.md`](documents/staff-memo-wednesday-cleaning.md) ／ [.docx](documents/staff-memo-wednesday-cleaning.docx) |
 | 熱中症予防ポスター（緊急連絡先入り） | [`posters/heatstroke-prevention-poster.html`](posters/heatstroke-prevention-poster.html) ／ [PDF](posters/heatstroke-prevention-poster.pdf) |
-| **やることスケジュール表**（2026年8〜10月・A4縦1枚・ガント形式／医院＋家関連） | [`schedule/yoshimoto-todo-schedule.pdf`](schedule/yoshimoto-todo-schedule.pdf) ／ [HTML・説明](schedule/README.md) |
 
 ### 情報発信・集客
 
