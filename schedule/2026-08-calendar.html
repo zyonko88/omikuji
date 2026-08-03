@@ -2,137 +2,200 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>2026年8月 スケジュール</title>
+<title>2026年8月 スケジュール表</title>
 <style>
-  @page { size: A4 portrait; margin: 8mm; }
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0; padding: 0;
-    font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
-    color: #1e293b;
+  @page { size: A4 portrait; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { width: 210mm; }
+  body {
+    font-family: "IPAPGothic", "Noto Sans CJK JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    padding: 8mm 8mm 5mm;
+    -webkit-font-smoothing: antialiased;
   }
-  .sheet {
-    width: 194mm;
-    height: 281mm;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
+
+  .head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    border-bottom: 1.3mm solid #14495e; padding-bottom: 1.8mm;
   }
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    border-bottom: 2px solid #1e293b;
-    padding-bottom: 2mm;
-    margin-bottom: 2mm;
-  }
-  .header h1 {
-    font-size: 18pt;
-    margin: 0;
-    letter-spacing: 0.5px;
-  }
+  .head h1 { font-size: 19pt; letter-spacing: 1px; color: #14495e; line-height: 1.15; }
+  .head .sub { font-size: 8.4pt; color: #52707d; margin-top: 0.8mm; letter-spacing: .5px; }
+  .head .period { text-align: right; font-size: 8.4pt; color: #52707d; line-height: 1.5; }
+  .head .period strong { display: block; font-size: 12.5pt; color: #14495e; letter-spacing: .5px; }
+
   .legend {
-    display: flex;
-    gap: 3mm;
-    font-size: 6.3pt;
+    display: flex; gap: 3.8mm; align-items: center; flex-wrap: wrap;
+    font-size: 7.8pt; color: #444; margin: 2mm 0 2.2mm;
   }
-  .legend span { display: inline-flex; align-items: center; gap: 1mm; }
-  .legend .dot { width: 2.4mm; height: 2.4mm; border-radius: 50%; display: inline-block; }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    flex: 1;
-    table-layout: fixed;
+  .legend .item { display: flex; align-items: center; gap: 1.2mm; }
+  .legend .swatch { width: 6.6mm; height: 2.6mm; border-radius: 1mm; }
+  .legend .dl { color: #c62828; font-size: 9pt; line-height: 1; }
+
+  table.gantt { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  table.gantt th, table.gantt td { border: 0.18mm solid #d3dfe3; }
+
+  col.c-chk  { width: 6mm; }
+  col.c-task { width: 40mm; }
+  col.c-day  { width: 4.77mm; }
+
+  thead th {
+    background: #14495e; color: #fff; font-size: 6.8pt; font-weight: bold;
+    text-align: center; padding: 0.7mm 0;
   }
-  th {
-    font-size: 7.5pt;
-    font-weight: 600;
-    padding: 0.8mm 0;
-    border: 0.3mm solid #cbd5e1;
-    background: #f1f5f9;
-    color: #334155;
+  thead th.dnum { background: #2c6478; font-size: 6.1pt; font-weight: normal; padding: 0.5mm 0; }
+  thead th.dnum.off { background: #7a3b46; }
+  thead th.sun { color: #ffb3ad; }
+  thead th.sat { color: #a9d4ff; }
+  thead th.mstart { border-left: 0.35mm solid #9fb9c1; }
+  thead th.taskhead { text-align: left; padding-left: 1.6mm; }
+
+  tr.cat td {
+    font-size: 7.8pt; font-weight: bold; color: #fff;
+    padding: 1mm 1.8mm; letter-spacing: .3px;
   }
-  th.sun { color: #dc2626; }
-  th.sat { color: #2563eb; }
-  td.day {
-    border: 0.3mm solid #cbd5e1;
-    vertical-align: top;
-    padding: 0.8mm 1mm;
-    width: 14.28%;
+  tr.cat .cnum {
+    display: inline-block; background: rgba(255,255,255,.9); border-radius: 50%;
+    width: 4.3mm; height: 4.3mm; line-height: 4.3mm; text-align: center;
+    font-size: 7.2pt; margin-right: 1.5mm;
   }
-  td.empty { background: #f8fafc; }
-  td.closed { background: #fef2f2; }
-  td.holiday { background: #fef2f2; }
-  .datenum {
-    font-size: 8.5pt;
-    font-weight: 700;
-    margin-bottom: 0.5mm;
+  tr.cat.c1 td { background: #1f6f8b; } tr.cat.c1 .cnum { color: #1f6f8b; }
+  tr.cat.c2 td { background: #c96a1b; } tr.cat.c2 .cnum { color: #c96a1b; }
+  tr.cat.c3 td { background: #2e7d4f; } tr.cat.c3 .cnum { color: #2e7d4f; }
+  tr.cat.c4 td { background: #6a4c93; } tr.cat.c4 .cnum { color: #6a4c93; }
+  tr.cat.c5 td { background: #a8447e; } tr.cat.c5 .cnum { color: #a8447e; }
+  tr.cat td .note { font-weight: normal; font-size: 6.4pt; opacity: .9; margin-left: 1.8mm; }
+
+  tbody td { padding: 0; height: 5.0mm; }
+  td.chk { text-align: center; }
+  td.chk .box {
+    display: inline-block; width: 2.9mm; height: 2.9mm;
+    border: 0.35mm solid #7b8f97; border-radius: 0.5mm;
   }
-  td.day:first-child .datenum { color: #dc2626; }
-  td.day:last-child .datenum { color: #2563eb; }
-  td.holiday .datenum { color: #dc2626; }
-  .evlist { display: flex; flex-direction: column; gap: 0.3mm; }
-  .ev {
-    font-size: 6.1pt;
-    line-height: 1.25;
-    word-break: break-all;
+  td.task { padding: 0 1mm 0 1.8mm; font-size: 7.2pt; line-height: 1.2; white-space: nowrap; overflow: hidden; }
+  td.wk { position: relative; text-align: center; }
+  td.wk.mstart { border-left: 0.35mm solid #9fb9c1; }
+  td.wk.closed { background: #fce9ec; }
+  .closedtxt { font-size: 6.2pt; color: #b3261e; font-weight: bold; }
+
+  .bar {
+    position: absolute; left: 0; right: 0; top: 1.7mm; height: 1.8mm;
+    background: #b9d7e2;
   }
-  .ev .time { font-weight: 700; margin-right: 0.6mm; }
-  .ev .tag {
-    font-size: 5.3pt;
-    font-weight: 700;
-    border: 0.25mm solid currentColor;
-    border-radius: 1mm;
-    padding: 0 0.6mm;
-    margin-right: 0.8mm;
+  .bar.s { left: 0.7mm; border-radius: 1mm 0 0 1mm; }
+  .bar.e { right: 0.7mm; border-radius: 0 1mm 1mm 0; }
+  .c1bar .bar { background: #9ccbdd; }
+  .c2bar .bar { background: #f2c391; }
+  .c3bar .bar { background: #a6d6b8; }
+  .c4bar .bar { background: #cbb8e0; }
+  .c5bar .bar { background: #e3a9c6; }
+  .flag {
+    position: absolute; top: 0.6mm; left: 50%; transform: translateX(-50%);
+    color: #c62828; font-size: 7.2pt; line-height: 1; font-weight: bold;
   }
-  .cat-clinic { color: #0d9488; }
-  .cat-family { color: #b45309; }
-  .cat-study { color: #1d4ed8; }
-  .cat-rotary { color: #15803d; }
-  .cat-personal { color: #7c3aed; }
-  .holiday-txt { color: #dc2626; font-weight: 700; }
-  .footer {
-    margin-top: 1.5mm;
-    font-size: 6pt;
-    color: #64748b;
-    display: flex;
-    justify-content: space-between;
+  .c1bar .flag { color: #14495e; }
+  .c2bar .flag { color: #a4530f; }
+  .c3bar .flag { color: #1f5c37; }
+  .c4bar .flag { color: #4f3873; }
+  .c5bar .flag { color: #7d2f5c; }
+
+  tbody tr.alt td.task, tbody tr.alt td.chk { background: #f6fafb; }
+
+  .foot {
+    margin-top: 2.4mm; font-size: 7.8pt; color: #6b7c83; line-height: 1.6;
+    background: #f2f7f9; border-left: 1.2mm solid #14495e; padding: 1.8mm 2.6mm;
   }
+  .foot b { color: #14495e; }
 </style>
 </head>
 <body>
-<div class="sheet">
-  <div class="header">
-    <h1>2026年8月</h1>
-    <div class="legend">
-      <span><span class="dot" style="background:#0d9488"></span>医院</span>
-      <span><span class="dot" style="background:#b45309"></span>家族・行事</span>
-      <span><span class="dot" style="background:#1d4ed8"></span>学習・塾</span>
-      <span><span class="dot" style="background:#15803d"></span>ロータリー</span>
-      <span><span class="dot" style="background:#7c3aed"></span>個人</span>
-      <span><span class="dot" style="background:#fef2f2;border:0.3mm solid #dc2626"></span>休診・祝日</span>
-    </div>
+
+<div class="head">
+  <div>
+    <h1>2026年8月 スケジュール表</h1>
+    <div class="sub">Googleカレンダー（tomosan21188@gmail.com・日本の祝日）の実際の予定を分類</div>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th class="sun">日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th class="sat">土</th>
-      </tr>
-    </thead>
-    <tbody>
-<tr><td class="day empty"></td><td class="day empty"></td><td class="day empty"></td><td class="day empty"></td><td class="day empty"></td><td class="day empty"></td><td class="day"><div class="datenum">1</div><div class="evlist"><div class="ev cat-clinic"><span class="tag">終日</span>高石DR 終日手術</div><div class="ev cat-clinic"><span class="tag">終日</span>トモコ 左上インプラント手術</div><div class="ev cat-personal"><span class="time">08:45</span>昼食弁当5人分🌸</div><div class="ev cat-study"><span class="time">19:30</span>エース面談</div></div></td></tr>
-<tr><td class="day closed"><div class="datenum">2</div><div class="evlist"><div class="ev cat-clinic"><span class="tag">終日</span>休診</div><div class="ev cat-clinic"><span class="time">19:00</span>再来</div></div></td><td class="day"><div class="datenum">3</div><div class="evlist"><div class="ev cat-study"><span class="time">22:00</span>武田塾 生物化学</div></div></td><td class="day"><div class="datenum">4</div><div class="evlist"><div class="ev cat-rotary"><span class="tag">終日</span>【期限】8/7例会 出欠回答（午前中まで）</div><div class="ev cat-clinic"><span class="time">11:00</span>スタッフ昼食🍚</div><div class="ev cat-study"><span class="time">20:30</span>エース面談</div></div></td><td class="day"><div class="datenum">5</div><div class="evlist"><div class="ev cat-personal"><span class="time">13:00-18:00</span>もっちランチ🍝</div></div></td><td class="day"><div class="datenum">6</div><div class="evlist"><div class="ev cat-study"><span class="time">18:00</span>橋野 家庭教師</div><div class="ev cat-rotary"><span class="time">18:30</span>RC会食（遠藤・田中）番屋</div></div></td><td class="day"><div class="datenum">7</div><div class="evlist"><div class="ev cat-rotary"><span class="time">12:30</span>例会（ガバナー補佐 公式訪問）@クレメント高松</div></div></td><td class="day"><div class="datenum">8</div><div class="evlist"><div class="ev cat-family"><span class="tag">終日</span>🎂 健人・友紀ちゃん 誕生日</div><div class="ev cat-personal"><span class="time">08:45</span>昼食弁当5人分🌸</div><div class="ev cat-study"><span class="time">19:30</span>エース面談</div></div></td></tr>
-<tr><td class="day closed"><div class="datenum">9</div><div class="evlist"><div class="ev cat-clinic"><span class="tag">終日</span>休診</div><div class="ev cat-family"><span class="tag">終日</span>松山 お墓詣り</div><div class="ev cat-study"><span class="tag">終日</span>岡山白陵 学校閉鎖日（〜8/16）</div></div></td><td class="day"><div class="datenum">10</div><div class="evlist"><div class="ev cat-family"><span class="time">10:00</span>弘憲寺 お墓参り</div><div class="ev cat-study"><span class="time">22:00</span>武田塾 生物化学</div></div></td><td class="day holiday"><div class="datenum">11</div><div class="evlist"><div class="ev holiday-txt"><span class="tag">終日</span>★山の日</div><div class="ev cat-clinic"><span class="tag">終日</span>夏季休診期間（〜8/16）</div><div class="ev cat-study"><span class="time">20:30</span>エース面談</div></div></td><td class="day"><div class="datenum">12</div><div class="evlist"><div class="ev cat-personal"><span class="tag">終日</span>マリオット奈良 3泊4日（〜8/15）</div></div></td><td class="day"><div class="datenum">13</div><div class="evlist"><div class="ev cat-study"><span class="time">18:00</span>橋野 家庭教師</div></div></td><td class="day"><div class="datenum">14</div><div class="evlist"><div class="ev cat-rotary"><span class="tag">終日</span>例会 休会</div><div class="ev cat-study"><span class="tag">終日</span>エース 月謝振込 66,000円（20日まで）</div></div></td><td class="day"><div class="datenum">15</div><div class="evlist"><div class="ev cat-study"><span class="tag">終日</span>高3 駿台共テ模試①②（〜8/16）</div><div class="ev cat-study"><span class="time">14:00</span>夏子 迎え（ステップアップ頃）</div><div class="ev cat-study"><span class="time">19:30</span>エース面談</div></div></td></tr>
-<tr><td class="day closed"><div class="datenum">16</div><div class="evlist"><div class="ev cat-clinic"><span class="tag">終日</span>休診</div><div class="ev cat-family"><span class="tag">終日</span>🎂 中島 誕生日</div><div class="ev cat-personal"><span class="time">15:00</span>来高</div></div></td><td class="day"><div class="datenum">17</div><div class="evlist"><div class="ev cat-study"><span class="time">22:00</span>武田塾 生物化学</div></div></td><td class="day"><div class="datenum">18</div><div class="evlist"><div class="ev cat-rotary"><span class="tag">終日</span>【期限】8/21例会 出欠回答（午前中まで）</div><div class="ev cat-clinic"><span class="time">10:15</span>勝丸千晶先生 初診パック</div><div class="ev cat-clinic"><span class="time">11:00</span>スタッフ昼食🍚</div><div class="ev cat-study"><span class="time">20:30</span>エース面談</div></div></td><td class="day"><div class="datenum">19</div><div class="evlist"><div class="ev cat-clinic"><span class="tag">終日</span>作業時間 DHのみ枠</div></div></td><td class="day"><div class="datenum">20</div><div class="evlist"><div class="ev cat-family"><span class="tag">終日</span>🎂 石田大也（ひろや）誕生日（ケーキ準備）</div><div class="ev cat-study"><span class="time">18:00</span>橋野 家庭教師</div></div></td><td class="day"><div class="datenum">21</div><div class="evlist"><div class="ev cat-family"><span class="tag">終日</span>夏子 2学期スタート</div><div class="ev cat-clinic"><span class="tag">終日</span>クレジット印刷</div><div class="ev cat-study"><span class="tag">終日</span>岡山白陵 高3全統記述模試②＋夏季特別授業考査①</div><div class="ev cat-study"><span class="tag">終日</span>河合 第3回記述模試（学校）</div><div class="ev cat-rotary"><span class="time">12:30</span>例会（ガバナー 公式訪問）@クレメント高松</div><div class="ev cat-personal"><span class="time">18:00</span>梅のみ会（院長）@ピカデリ亭</div></div></td><td class="day"><div class="datenum">22</div><div class="evlist"><div class="ev cat-clinic"><span class="tag">終日</span>高石DR 終日手術日</div><div class="ev cat-study"><span class="tag">終日</span>岡山白陵 夏季特別授業考査②</div><div class="ev cat-personal"><span class="time">08:45</span>昼食弁当5人分🌸</div><div class="ev cat-study"><span class="time">19:30</span>エース面談</div></div></td></tr>
-<tr><td class="day closed"><div class="datenum">23</div><div class="evlist"><div class="ev cat-clinic"><span class="tag">終日</span>休診</div><div class="ev cat-clinic"><span class="tag">終日</span>院長 東京ネオデント</div><div class="ev cat-study"><span class="tag">終日</span>夏子 中四国医学部チャレンジ模試</div><div class="ev cat-personal"><span class="time">14:00</span>知ったかぶり講座</div></div></td><td class="day"><div class="datenum">24</div><div class="evlist"><div class="ev cat-study"><span class="time">22:00</span>武田塾 生物化学</div></div></td><td class="day"><div class="datenum">25</div><div class="evlist"><div class="ev cat-study"><span class="tag">終日</span>河合模試 高3全統記述模試（学校）</div><div class="ev cat-family"><span class="time">10:00</span>橋野 月謝用意</div><div class="ev cat-clinic"><span class="time">11:00</span>スタッフ昼食🍚</div><div class="ev cat-study"><span class="time">20:30</span>エース面談</div></div></td><td class="day closed"><div class="datenum">26</div><div class="evlist"><div class="ev cat-clinic"><span class="tag">終日</span>休診</div><div class="ev cat-personal"><span class="time">18:00</span>会食（小竹・村上・遠藤・田中）@茶寮 藍</div></div></td><td class="day"><div class="datenum">27</div><div class="evlist"><div class="ev cat-study"><span class="time">18:00</span>橋野 家庭教師</div></div></td><td class="day"><div class="datenum">28</div><div class="evlist"><div class="ev cat-rotary"><span class="time">12:30</span>例会（卓話：田浦結城様）@クレメント高松</div></div></td><td class="day"><div class="datenum">29</div><div class="evlist"><div class="ev cat-personal"><span class="time">08:45</span>昼食弁当5人分🌸</div><div class="ev cat-study"><span class="time">19:30</span>エース面談</div></div></td></tr>
-<tr><td class="day closed"><div class="datenum">30</div><div class="evlist"><div class="ev cat-clinic"><span class="tag">終日</span>休診</div><div class="ev cat-personal"><span class="time">15:00</span>ノーコードキャンプの会@セトウチアイベース</div></div></td><td class="day"><div class="datenum">31</div><div class="evlist"><div class="ev cat-family"><span class="tag">終日</span>中国銀行 岡山白陵 学費振込 70,000円</div><div class="ev cat-study"><span class="time">22:00</span>武田塾 生物化学</div></div></td><td class="day empty"></td><td class="day empty"></td><td class="day empty"></td><td class="day empty"></td><td class="day empty"></td></tr>
-    </tbody>
-  </table>
-  <div class="footer">
-    <span>Googleカレンダー（tomosan21188@gmail.com・日本の祝日）より作成</span>
-    <span>作成日：2026-08-03</span>
+  <div class="period">
+    <strong>2026年 8月　1日 ▶ 31日</strong>
+    作成日：2026年8月3日（月）
   </div>
 </div>
+
+<div class="legend">
+  <div class="item"><span class="swatch" style="background:#1f6f8b"></span>1 医院</div><div class="item"><span class="swatch" style="background:#c96a1b"></span>2 家族・行事</div><div class="item"><span class="swatch" style="background:#2e7d4f"></span>3 学習・塾</div><div class="item"><span class="swatch" style="background:#6a4c93"></span>4 ロータリークラブ</div><div class="item"><span class="swatch" style="background:#a8447e"></span>5 個人</div>
+  <div class="item"><span class="dl">◆</span>＝ その日に予定がある</div>
+  <div class="item"><span style="display:inline-block;width:2.6mm;height:2.6mm;border:0.3mm solid #7b8f97;border-radius:.4mm;vertical-align:-0.3mm"></span>＝ 終わったらチェック</div>
+  <div class="item"><span class="swatch" style="background:#fce9ec;border:0.2mm solid #b3261e"></span>休診・祝日</div>
+</div>
+
+<table class="gantt">
+  <colgroup>
+    <col class="c-chk"><col class="c-task">
+    <col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'><col class='c-day'>
+  </colgroup>
+  <thead>
+    <tr>
+      <th rowspan="2"></th>
+      <th rowspan="2" class="taskhead">やること</th>
+      <th class="dnum wk">1</th><th class="dnum off wk mstart">2</th><th class="dnum wk">3</th><th class="dnum wk">4</th><th class="dnum wk">5</th><th class="dnum wk">6</th><th class="dnum wk">7</th><th class="dnum wk">8</th><th class="dnum off wk mstart">9</th><th class="dnum wk">10</th><th class="dnum off wk">11</th><th class="dnum wk">12</th><th class="dnum wk">13</th><th class="dnum wk">14</th><th class="dnum wk">15</th><th class="dnum off wk mstart">16</th><th class="dnum wk">17</th><th class="dnum wk">18</th><th class="dnum wk">19</th><th class="dnum wk">20</th><th class="dnum wk">21</th><th class="dnum wk">22</th><th class="dnum off wk mstart">23</th><th class="dnum wk">24</th><th class="dnum wk">25</th><th class="dnum off wk">26</th><th class="dnum wk">27</th><th class="dnum wk">28</th><th class="dnum wk">29</th><th class="dnum off wk mstart">30</th><th class="dnum wk">31</th>
+    </tr>
+    <tr>
+      <th class="sat wk">土</th><th class="sun wk mstart">日</th><th class=" wk">月</th><th class=" wk">火</th><th class=" wk">水</th><th class=" wk">木</th><th class=" wk">金</th><th class="sat wk">土</th><th class="sun wk mstart">日</th><th class=" wk">月</th><th class="sun wk">火</th><th class=" wk">水</th><th class=" wk">木</th><th class=" wk">金</th><th class="sat wk">土</th><th class="sun wk mstart">日</th><th class=" wk">月</th><th class=" wk">火</th><th class=" wk">水</th><th class=" wk">木</th><th class=" wk">金</th><th class="sat wk">土</th><th class="sun wk mstart">日</th><th class=" wk">月</th><th class=" wk">火</th><th class=" wk">水</th><th class=" wk">木</th><th class=" wk">金</th><th class="sat wk">土</th><th class="sun wk mstart">日</th><th class=" wk">月</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr class="cat c1"><td colspan="33"><span class="cnum">1</span>医院<span class="note">手術・休診・院内の予定</span></td></tr>
+<tr class="c1bar"><td class="chk"><span class="box"></span></td><td class="task">休診（休診日）</td><td class="wk"></td><td class="wk mstart closed"><span class="closedtxt">休</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart closed"><span class="closedtxt">休</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart closed"><span class="closedtxt">休</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart closed"><span class="closedtxt">休</span></td><td class="wk"></td><td class="wk"></td><td class="wk closed"><span class="closedtxt">休</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart closed"><span class="closedtxt">休</span></td><td class="wk"></td></tr>
+<tr class="c1bar alt"><td class="chk"><span class="box"></span></td><td class="task">夏季休診期間</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="bar s"></span></td><td class="wk"><span class="bar "></span></td><td class="wk"><span class="bar "></span></td><td class="wk"><span class="bar "></span></td><td class="wk"><span class="bar "></span></td><td class="wk mstart"><span class="bar e"></span><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c1bar"><td class="chk"><span class="box"></span></td><td class="task">高石DR 終日手術（日）</td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c1bar alt"><td class="chk"><span class="box"></span></td><td class="task">トモコ 左上インプラント手術</td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c1bar"><td class="chk"><span class="box"></span></td><td class="task">勝丸千晶先生 初診パック</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c1bar alt"><td class="chk"><span class="box"></span></td><td class="task">スタッフ昼食🍚（11時）</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c1bar"><td class="chk"><span class="box"></span></td><td class="task">昼食弁当5人分🌸（8:45）</td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c1bar alt"><td class="chk"><span class="box"></span></td><td class="task">再来</td><td class="wk"></td><td class="wk mstart"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c1bar"><td class="chk"><span class="box"></span></td><td class="task">作業時間 DHのみ枠</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c1bar alt"><td class="chk"><span class="box"></span></td><td class="task">クレジット印刷</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c1bar"><td class="chk"><span class="box"></span></td><td class="task">院長 東京ネオデント</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="cat c2"><td colspan="33"><span class="cnum">2</span>家族・行事<span class="note">誕生日・お墓参り・旅行・学費など</span></td></tr>
+<tr class="c2bar"><td class="chk"><span class="box"></span></td><td class="task">🎂 健人・友紀ちゃん 誕生日</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c2bar alt"><td class="chk"><span class="box"></span></td><td class="task">🎂 中島 誕生日</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c2bar"><td class="chk"><span class="box"></span></td><td class="task">🎂 石田大也（ひろや） 誕生日</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c2bar alt"><td class="chk"><span class="box"></span></td><td class="task">お墓参り（松山／弘憲寺）</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"><span class="flag">◆</span></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c2bar"><td class="chk"><span class="box"></span></td><td class="task">橋野 家庭教師（18時）</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c2bar alt"><td class="chk"><span class="box"></span></td><td class="task">橋野 月謝用意</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c2bar"><td class="chk"><span class="box"></span></td><td class="task">マリオット奈良 3泊4日</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="bar s"></span></td><td class="wk"><span class="bar "></span></td><td class="wk"><span class="bar "></span></td><td class="wk"><span class="bar e"></span><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c2bar alt"><td class="chk"><span class="box"></span></td><td class="task">夏子 2学期スタート</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c2bar"><td class="chk"><span class="box"></span></td><td class="task">エース 月謝振込 66,000円</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c2bar alt"><td class="chk"><span class="box"></span></td><td class="task">岡山白陵 学費振込 70,000円</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"><span class="flag">◆</span></td></tr>
+<tr class="cat c3"><td colspan="33"><span class="cnum">3</span>学習・塾<span class="note">武田塾・エース・岡山白陵・河合・駿台</span></td></tr>
+<tr class="c3bar"><td class="chk"><span class="box"></span></td><td class="task">武田塾 生物化学（22時）</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"><span class="flag">◆</span></td></tr>
+<tr class="c3bar alt"><td class="chk"><span class="box"></span></td><td class="task">エース面談</td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c3bar"><td class="chk"><span class="box"></span></td><td class="task">岡山白陵 学校閉鎖日</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"><span class="bar s"></span></td><td class="wk"><span class="bar "></span></td><td class="wk"><span class="bar "></span></td><td class="wk"><span class="bar "></span></td><td class="wk"><span class="bar "></span></td><td class="wk"><span class="bar "></span></td><td class="wk"><span class="bar "></span></td><td class="wk mstart"><span class="bar e"></span><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c3bar alt"><td class="chk"><span class="box"></span></td><td class="task">岡山白陵 模試②+考査①②</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="bar s"></span></td><td class="wk"><span class="bar e"></span><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c3bar"><td class="chk"><span class="box"></span></td><td class="task">河合 記述模試（学校）</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c3bar alt"><td class="chk"><span class="box"></span></td><td class="task">高3 駿台共テ模試①②</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="bar s"></span></td><td class="wk mstart"><span class="bar e"></span><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c3bar"><td class="chk"><span class="box"></span></td><td class="task">夏子 中四国医学部チャレンジ模試</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c3bar alt"><td class="chk"><span class="box"></span></td><td class="task">夏子 迎え（ステップアップ頃）</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="cat c4"><td colspan="33"><span class="cnum">4</span>ロータリークラブ<span class="note">例会・出欠回答・会食</span></td></tr>
+<tr class="c4bar"><td class="chk"><span class="box"></span></td><td class="task">例会 出欠回答 期限（午前中まで）</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c4bar alt"><td class="chk"><span class="box"></span></td><td class="task">例会（ガバナー訪問・卓話・休会）</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c4bar"><td class="chk"><span class="box"></span></td><td class="task">RC会食（遠藤・田中）番屋</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="cat c5"><td colspan="33"><span class="cnum">5</span>個人<span class="note">会食・イベントなど</span></td></tr>
+<tr class="c5bar"><td class="chk"><span class="box"></span></td><td class="task">もっちランチ🍝</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c5bar alt"><td class="chk"><span class="box"></span></td><td class="task">来高</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c5bar"><td class="chk"><span class="box"></span></td><td class="task">梅のみ会（院長）@ピカデリ亭</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c5bar alt"><td class="chk"><span class="box"></span></td><td class="task">知ったかぶり講座</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c5bar"><td class="chk"><span class="box"></span></td><td class="task">会食（小竹・村上・遠藤・田中）</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"><span class="flag">◆</span></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td></tr>
+<tr class="c5bar alt"><td class="chk"><span class="box"></span></td><td class="task">ノーコードキャンプの会</td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk mstart"><span class="flag">◆</span></td><td class="wk"></td></tr>
+  </tbody>
+</table>
+
+<div class="foot">
+  <b>使い方</b>　◆＝その日に予定がある日／棒＝期間（右端の◆が終了日）／左の□＝終わったらチェック
+  <b>色</b>　①医院＝青緑　②家族・行事＝橙　③学習・塾＝緑　④ロータリー＝紫　⑤個人＝ローズ
+  ピンクのマス＝休診・祝日<br>
+  内容を直したいときは「8月のスケジュール表を作り直して」と頼めば、Googleカレンダーを見直して再生成します。
+</div>
+
 </body>
 </html>

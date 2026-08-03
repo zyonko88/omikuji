@@ -12,7 +12,7 @@ Claude との作業で作った成果物をまとめて置いてあるリポジ�
 
 | 内容 | ファイル |
 |---|---|
-| **2026年8月 カレンダー**（Googleカレンダーの実際の予定・A4縦1枚） | [`schedule/2026-08-calendar.pdf`](schedule/2026-08-calendar.pdf) ／ [HTML・説明](schedule/README.md) |
+| **2026年8月 スケジュール表**（Googleカレンダーの実際の予定・医学部受験スケジュール風のガント形式・A4縦1枚） | [`schedule/2026-08-calendar.pdf`](schedule/2026-08-calendar.pdf) ／ [HTML・説明](schedule/README.md) |
 | やることスケジュール表（2026年8〜10月・A4縦1枚・ガント形式／医院＋家関連） | [`schedule/yoshimoto-todo-schedule.pdf`](schedule/yoshimoto-todo-schedule.pdf) ／ [HTML・説明](schedule/README.md) |
 
 ### 歯科医院（吉本歯科医院）
