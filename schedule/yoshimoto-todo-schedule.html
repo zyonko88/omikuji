@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>吉本歯科医院 やることスケジュール表（2026年8月〜10月）</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { width: 210mm; }
+  body {
+    font-family: "IPAPGothic", "Noto Sans CJK JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    padding: 8mm 8mm 6mm;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== ヘッダー ========== */
+  .head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    border-bottom: 1.1mm solid #14495e; padding-bottom: 1.8mm;
+  }
+  .head h1 { font-size: 17pt; letter-spacing: 1px; color: #14495e; line-height: 1.2; }
+  .head .sub { font-size: 8pt; color: #52707d; margin-top: 0.8mm; letter-spacing: .5px; }
+  .head .period { text-align: right; font-size: 8pt; color: #52707d; line-height: 1.6; }
+  .head .period strong { display: block; font-size: 11pt; color: #14495e; letter-spacing: .5px; }
+
+  /* ========== 凡例 ========== */
+  .legend {
+    display: flex; gap: 4mm; align-items: center; flex-wrap: wrap;
+    font-size: 7.4pt; color: #444; margin: 2mm 0 2.4mm;
+  }
+  .legend .item { display: flex; align-items: center; gap: 1.2mm; }
+  .legend .swatch { width: 7mm; height: 2.4mm; border-radius: 1.2mm; }
+  .legend .dl { color: #c62828; font-size: 8.5pt; line-height: 1; }
+
+  /* ========== ガント表 ========== */
+  table.gantt { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  table.gantt th, table.gantt td { border: 0.22mm solid #c9d6db; }
+
+  col.c-chk   { width: 6mm; }
+  col.c-task  { width: 55mm; }
+  col.c-due   { width: 17mm; }
+  col.c-week  { width: 8.2mm; }
+
+  thead th {
+    background: #14495e; color: #fff; font-size: 7.4pt; font-weight: bold;
+    padding: 1.1mm 0; text-align: center; letter-spacing: .5px;
+  }
+  thead th.month { border-left: 0.4mm solid #fff; }
+  thead tr.w th { background: #2c6478; font-size: 6.6pt; padding: 0.9mm 0; font-weight: normal; }
+  thead th.taskhead { text-align: left; padding-left: 2mm; }
+
+  /* カテゴリー見出し行 */
+  tr.cat td {
+    font-size: 8.6pt; font-weight: bold; color: #fff;
+    padding: 1.2mm 2mm; letter-spacing: .5px;
+  }
+  tr.cat .cnum {
+    display: inline-block; background: rgba(255,255,255,.9); border-radius: 50%;
+    width: 4.4mm; height: 4.4mm; line-height: 4.4mm; text-align: center;
+    font-size: 7.6pt; margin-right: 1.6mm;
+  }
+  tr.cat.c1 td { background: #1f6f8b; } tr.cat.c1 .cnum { color: #1f6f8b; }
+  tr.cat.c2 td { background: #c96a1b; } tr.cat.c2 .cnum { color: #c96a1b; }
+  tr.cat.c3 td { background: #2e7d4f; } tr.cat.c3 .cnum { color: #2e7d4f; }
+  tr.cat.c4 td { background: #6a4c93; } tr.cat.c4 .cnum { color: #6a4c93; }
+  tr.cat td .note { font-weight: normal; font-size: 7pt; opacity: .9; margin-left: 2mm; }
+
+  /* タスク行 */
+  tbody td { padding: 0; height: 6.4mm; }
+  td.chk { text-align: center; }
+  td.chk .box {
+    display: inline-block; width: 3.2mm; height: 3.2mm;
+    border: 0.35mm solid #7b8f97; border-radius: 0.5mm;
+  }
+  td.task { padding: 0 1mm 0 2.4mm; font-size: 8pt; line-height: 1.25; }
+  td.task .memo {
+    display: block; font-size: 6.4pt; color: #667c85; margin-top: 0.3mm;
+    white-space: nowrap; overflow: hidden;
+  }
+  td.due {
+    text-align: center; font-size: 7.8pt; font-weight: bold; color: #b3261e;
+    letter-spacing: -.2px;
+  }
+  td.due .wd { font-weight: normal; font-size: 6.4pt; color: #8a6a68; }
+  td.wk { position: relative; }
+  td.wk.mstart { border-left: 0.4mm solid #7b9aa5; }
+
+  /* ガントバー */
+  .bar {
+    position: absolute; left: 0; right: 0; top: 2.1mm; height: 2.2mm;
+    background: #b9d7e2;
+  }
+  .bar.s { left: 1mm; border-radius: 1.1mm 0 0 1.1mm; }
+  .bar.e { right: 1mm; border-radius: 0 1.1mm 1.1mm 0; }
+  .c1bar .bar { background: #9ccbdd; }
+  .c2bar .bar { background: #f2c391; }
+  .c3bar .bar { background: #a6d6b8; }
+  .flag {
+    position: absolute; top: 1.1mm; left: 50%; transform: translateX(-50%);
+    color: #c62828; font-size: 8pt; line-height: 1; font-weight: bold;
+  }
+
+  tbody tr.alt td.task, tbody tr.alt td.chk, tbody tr.alt td.due { background: #f6fafb; }
+
+  /* ========== 毎月の定例 ========== */
+  .routine { margin-top: 3.2mm; }
+  .rt-head {
+    background: #6a4c93; color: #fff; font-size: 8.6pt; font-weight: bold;
+    padding: 1.2mm 2mm; letter-spacing: .5px; border-radius: 1mm 1mm 0 0;
+  }
+  .rt-head .cnum {
+    display: inline-block; background: #fff; color: #6a4c93; border-radius: 50%;
+    width: 4.4mm; height: 4.4mm; line-height: 4.4mm; text-align: center;
+    font-size: 7.6pt; margin-right: 1.6mm;
+  }
+  .rt-head .note { font-weight: normal; font-size: 7pt; opacity: .9; margin-left: 2mm; }
+  table.rt { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  table.rt th, table.rt td { border: 0.22mm solid #cfc6dd; font-size: 7.6pt; padding: 1.1mm 2mm; }
+  table.rt th {
+    background: #efeaf6; color: #4b356b; font-weight: bold; text-align: left; font-size: 7.2pt;
+  }
+  table.rt th.cn { text-align: center; }
+  table.rt td.when { text-align: center; font-weight: bold; color: #4b356b; }
+  table.rt td.mon { text-align: center; }
+  table.rt td.mon .box {
+    display: inline-block; width: 3.2mm; height: 3.2mm;
+    border: 0.35mm solid #9b8db3; border-radius: 0.5mm;
+  }
+  table.rt td .memo { color: #6f6480; font-size: 6.8pt; }
+  table.rt tr.alt td { background: #faf8fd; }
+
+  /* ========== フッター ========== */
+  .foot {
+    margin-top: 3mm; display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 4mm; font-size: 6.8pt; color: #6b7c83; line-height: 1.55;
+  }
+  .foot .tips { flex: 1; background: #f2f7f9; border-left: 1mm solid #14495e; padding: 1.6mm 2.4mm; }
+  .foot .tips b { color: #14495e; }
+  .foot .sign {
+    width: 34mm; flex: none; text-align: center; white-space: nowrap;
+    border: 0.3mm solid #b7c6cc; border-radius: 1mm; padding: 1.2mm 1mm 1.6mm;
+  }
+  .foot .sign .lbl { font-size: 6.6pt; color: #14495e; letter-spacing: .5px; }
+  .foot .sign .stamps { display: flex; gap: 1.6mm; justify-content: center; margin-top: 1mm; }
+  .foot .sign .stamp {
+    flex: 1; border: 0.25mm dashed #b7c6cc; border-radius: 0.8mm;
+    height: 11mm; font-size: 6pt; color: #9aabb2; padding-top: 0.6mm;
+  }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <h1>やることスケジュール表</h1>
+    <div class="sub">吉本歯科医院 マネージャー業務 ／ 医院・家庭 タスク一覧</div>
+  </div>
+  <div class="period">
+    <strong>2026年 8月 ▶ 10月</strong>
+    作成日：2026年8月3日（月）
+  </div>
+</div>
+
+<div class="legend">
+  <div class="item"><span class="swatch" style="background:#9ccbdd"></span>① 患者説明書関連</div>
+  <div class="item"><span class="swatch" style="background:#f2c391"></span>② サイト作成</div>
+  <div class="item"><span class="swatch" style="background:#a6d6b8"></span>③ 総務・労務</div>
+  <div class="item"><span class="dl">◆</span>＝ 仕上げ期限</div>
+  <div class="item"><span style="display:inline-block;width:3.2mm;height:3.2mm;border:0.35mm solid #7b8f97;border-radius:.5mm;vertical-align:-0.4mm"></span>＝ 終わったらチェック</div>
+</div>
+
+<table class="gantt">
+  <colgroup>
+    <col class="c-chk"><col class="c-task"><col class="c-due">
+    <col class="c-week"><col class="c-week"><col class="c-week"><col class="c-week"><col class="c-week">
+    <col class="c-week"><col class="c-week"><col class="c-week"><col class="c-week">
+    <col class="c-week"><col class="c-week"><col class="c-week"><col class="c-week">
+  </colgroup>
+  <thead>
+    <tr>
+      <th rowspan="2"></th>
+      <th rowspan="2" class="taskhead">やること</th>
+      <th rowspan="2">期&nbsp;限</th>
+      <th colspan="5" class="month">8 月</th>
+      <th colspan="4" class="month">9 月</th>
+      <th colspan="4" class="month">10 月</th>
+    </tr>
+    <tr class="w">
+      <th>3<br>週</th><th>10<br>週</th><th>17<br>週</th><th>24<br>週</th><th>31<br>週</th>
+      <th>7<br>週</th><th>14<br>週</th><th>21<br>週</th><th>28<br>週</th>
+      <th>5<br>週</th><th>12<br>週</th><th>19<br>週</th><th>26<br>週</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- ===== カテゴリー① ===== -->
+    <tr class="cat c1">
+      <td colspan="16"><span class="cnum">1</span>患者治療説明書 関連<span class="note">インプラントの書類・動画・価格まわりを整える</span></td>
+    </tr>
+    <tr class="c1bar">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">インプラント承諾書・同意書 の確定<span class="memo">既存PDFを見直し → 院長確認 → 院内で運用開始</span></td>
+      <td class="due">8/14<span class="wd">（金）</span></td>
+      <td class="wk mstart"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c1bar alt">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">インプラント チェックリスト 作成<span class="memo">術前・術後に必ず確認する項目を1枚に</span></td>
+      <td class="due">8/21<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c1bar">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">請求書フォーマット 作成<span class="memo">現在は見積書のみ。同じ体裁で請求書を用意</span></td>
+      <td class="due">8/28<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c1bar alt">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">価格表の作り直し<span class="memo">自費メニューを整理 → 患者説明用と院内用の2種</span></td>
+      <td class="due">9/11<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar"></span></td>
+      <td class="wk mstart"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c1bar">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">説明動画 ①台本づくり<span class="memo">歯のすき間／清掃方法／たばこ　など注意点を整理</span></td>
+      <td class="due">9/11<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk mstart"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c1bar alt">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">説明動画 ②撮影<span class="memo">院長・スタッフのスケジュール押さえ／撮影日決定</span></td>
+      <td class="due">9/25<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c1bar">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">説明動画 ③編集・院内公開<span class="memo">待合／説明用タブレットで見られる状態にする</span></td>
+      <td class="due">10/9<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk mstart"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+
+    <!-- ===== カテゴリー② ===== -->
+    <tr class="cat c2">
+      <td colspan="16"><span class="cnum">2</span>サイト作成<span class="note">伊藤みゆき様へ依頼／原稿はこちらで用意する</span></td>
+    </tr>
+    <tr class="c2bar">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">インプラント特設サイト ①原稿確定<span class="memo">既存 yoshimoto-implant のLP内容をベースに</span></td>
+      <td class="due">8/21<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c2bar alt">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">インプラント特設サイト ②伊藤さんへ入稿<span class="memo">原稿・写真・参考サイトをまとめて送付</span></td>
+      <td class="due">8/28<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c2bar">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">インプラント特設サイト ③制作・公開<span class="memo">校正 → 公開 → 医院サイトからリンク</span></td>
+      <td class="due">9/18<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk mstart"><span class="bar"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c2bar alt">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">かみ合わせ専門サイト ①原稿整理<span class="memo">大前歯科の入れ歯原稿を、かみ合わせ視点で書き直す</span></td>
+      <td class="due">9/4<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c2bar">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">かみ合わせ専門サイト ②入稿・制作<span class="memo">構成案 → 伊藤さんへ依頼</span></td>
+      <td class="due">9/25<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c2bar alt">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">かみ合わせ専門サイト ③公開<span class="memo">校正 → 公開 → 院内・MEOで案内</span></td>
+      <td class="due">10/16<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk mstart"><span class="bar"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c2bar">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">WordPress 自動投稿の設定<span class="memo">予約投稿の仕組みづくり／ストック記事の準備</span></td>
+      <td class="due">8/31<span class="wd">（月）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c2bar alt">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">MEO投稿の自動設定<span class="memo">既存の週3回スケジュールを予約登録で回す</span></td>
+      <td class="due">9/11<span class="wd">（金）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk mstart"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+
+    <!-- ===== カテゴリー③ ===== -->
+    <tr class="cat c3">
+      <td colspan="16"><span class="cnum">3</span>総務・労務 関係<span class="note">後まわしにすると年末に効いてくるもの</span></td>
+    </tr>
+    <tr class="c3bar">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">有給休暇表の整理<span class="memo">付与日・残日数・取得実績を一覧化（年5日取得の確認）</span></td>
+      <td class="due">8/20<span class="wd">（木）</span></td>
+      <td class="wk mstart"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c3bar alt">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">休診日の設定<span class="memo">年末年始まで決定 → 掲示・HP・Googleに反映</span></td>
+      <td class="due">8/14<span class="wd">（金）</span></td>
+      <td class="wk mstart"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+    <tr class="c3bar">
+      <td class="chk"><span class="box"></span></td>
+      <td class="task">支払法人データをクラウドへ移行<span class="memo">対象の洗い出し → 移行 → 運用ルールを共有</span></td>
+      <td class="due">9/30<span class="wd">（水）</span></td>
+      <td class="wk mstart"></td><td class="wk"></td>
+      <td class="wk"><span class="bar s"></span></td>
+      <td class="wk"><span class="bar"></span></td>
+      <td class="wk"><span class="bar"></span></td>
+      <td class="wk mstart"><span class="bar"></span></td>
+      <td class="wk"><span class="bar"></span></td>
+      <td class="wk"><span class="bar"></span></td>
+      <td class="wk"><span class="bar e"></span><span class="flag">◆</span></td>
+      <td class="wk mstart"></td><td class="wk"></td><td class="wk"></td><td class="wk"></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== 毎月くり返すもの ===== -->
+<div class="routine">
+  <div class="rt-head">
+    <span class="cnum">4</span>毎月くり返すもの（総務③の一部＋家関連④）
+    <span class="note">その月にすませたらチェック</span>
+  </div>
+  <table class="rt">
+    <colgroup>
+      <col style="width:11mm"><col><col style="width:26mm">
+      <col style="width:14mm"><col style="width:14mm"><col style="width:14mm">
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="cn">区分</th>
+        <th>やること</th>
+        <th class="cn">いつまで</th>
+        <th class="cn">8月</th><th class="cn">9月</th><th class="cn">10月</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mon">③総務</td>
+        <td>クレジット明細の印刷<span class="memo">　／　毎月20日に実施</span></td>
+        <td class="when">毎月 20日</td>
+        <td class="mon"><span class="box"></span></td><td class="mon"><span class="box"></span></td><td class="mon"><span class="box"></span></td>
+      </tr>
+      <tr class="alt">
+        <td class="mon">④家</td>
+        <td>エースアカデミー 振込<span class="memo">　／　20日までに完了させる</span></td>
+        <td class="when">毎月 20日まで</td>
+        <td class="mon"><span class="box"></span></td><td class="mon"><span class="box"></span></td><td class="mon"><span class="box"></span></td>
+      </tr>
+      <tr>
+        <td class="mon">④家</td>
+        <td>学費（岡山白陵）<span class="memo">　／　中国銀行から引き落とし・入金確認</span></td>
+        <td class="when">毎月 月末</td>
+        <td class="mon"><span class="box"></span></td><td class="mon"><span class="box"></span></td><td class="mon"><span class="box"></span></td>
+      </tr>
+      <tr class="alt">
+        <td class="mon">④家</td>
+        <td>橋野家庭教師 お支払い<span class="memo">　／　現金で用意しておく</span></td>
+        <td class="when">毎月 月末</td>
+        <td class="mon"><span class="box"></span></td><td class="mon"><span class="box"></span></td><td class="mon"><span class="box"></span></td>
+      </tr>
+      <tr>
+        <td class="mon">④家</td>
+        <td>スタッフ・子どもの誕生日祝い<span class="memo">　／　月初に「来月が誕生日の人」を確認して準備</span></td>
+        <td class="when">毎月 1日に確認</td>
+        <td class="mon"><span class="box"></span></td><td class="mon"><span class="box"></span></td><td class="mon"><span class="box"></span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="foot">
+  <div class="tips">
+    <b>使い方</b>　① 終わったら左の□にチェック　② 期限（◆）は「この日までに手を離れている」日
+    ③ 週の列は着手〜完了の目安期間　④ 期限を動かすときは、この表の日付を書きかえて刷り直す<br>
+    <b>ポイント</b>　8月は「書類（①）」、9月は「サイト（②）と動画」、10月は「公開して仕上げる」月。
+    毎月くり返すもの（④）は<b>20日</b>と<b>月末</b>の2つだけ覚えておけば取りこぼしません。
+  </div>
+  <div class="sign">
+    <div class="lbl">吉本歯科医院　確認欄</div>
+    <div class="stamps">
+      <div class="stamp">院長</div>
+      <div class="stamp">マネージャー</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
