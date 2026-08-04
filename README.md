@@ -28,6 +28,7 @@ Claude との作業で作った成果物をまとめて置いてあるリポジ�
 | カウンセリング申込書（A4×3ページ） | [`docs/counseling-form.html`](docs/counseling-form.html) ／ [PDF](docs/) |
 | 水曜日朝の院内清掃・器具消毒についてのスタッフ回覧 | [`documents/staff-memo-wednesday-cleaning.md`](documents/staff-memo-wednesday-cleaning.md) ／ [.docx](documents/staff-memo-wednesday-cleaning.docx) |
 | 熱中症予防ポスター（緊急連絡先入り） | [`posters/heatstroke-prevention-poster.html`](posters/heatstroke-prevention-poster.html) ／ [PDF](posters/heatstroke-prevention-poster.pdf) |
+| 労働条件通知書（パート・有期雇用労働者用）ひな形　※2026年10月施行の待遇差説明義務化に対応 | [`documents/労働条件通知書_パート有期雇用労働者用_2026年10月改正対応ひな形.docx`](documents/) ／ [説明](documents/労働条件通知書_パート有期雇用労働者用_2026年10月改正対応ひな形.md) |
 
 ### 情報発信・集客
 
