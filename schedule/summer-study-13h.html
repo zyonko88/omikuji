@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>夏休み 受験勉強スケジュール（1日13時間）</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 210mm; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    color: #223; font-size: 9.2pt; line-height: 1.45;
+    padding: 8mm 9mm;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  h1 { font-size: 15pt; letter-spacing: .04em; }
+  .subtitle { font-size: 8.5pt; color: #556; margin-top: 1mm; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end;
+          border-bottom: 2.5px solid #1a6b5a; padding-bottom: 2mm; margin-bottom: 3mm; }
+  .head .total { text-align: right; font-size: 8.5pt; color: #1a6b5a; font-weight: bold; }
+  .head .total .big { font-size: 14pt; }
+
+  .cols { display: flex; gap: 4mm; }
+  .col { flex: 1; }
+  .col h2 {
+    font-size: 10.5pt; color: #fff; padding: 1.2mm 2.5mm; border-radius: 1.2mm 1.2mm 0 0;
+  }
+  .col h2 small { font-weight: normal; font-size: 8pt; margin-left: 1.5mm; }
+  .col.weekday h2 { background: #1a6b5a; }
+  .col.sunday  h2 { background: #b3541e; }
+
+  table.tl { width: 100%; border-collapse: collapse; }
+  table.tl td { border-bottom: 1px solid #dde3e0; padding: 1mm 1.5mm; vertical-align: top; }
+  table.tl td.t { width: 21mm; font-weight: bold; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  tr.train td { background: #eaf3ff; }
+  tr.train td.t { color: #1450a3; }
+  tr.study td { background: #eaf6ee; }
+  tr.study td.t { color: #1a6b5a; }
+  .sunday tr.study td { background: #fdf1e5; }
+  .sunday tr.study td.t { color: #b3541e; }
+  tr.meal td { background: #fffbe6; }
+  .dur { float: right; font-weight: bold; font-size: 8.5pt; }
+  .weekday .dur { color: #1a6b5a; }
+  .sunday .dur { color: #b3541e; }
+  .note { color: #667; font-size: 7.8pt; }
+
+  .sum { border: 2px solid #1a6b5a; border-radius: 1.2mm; margin-top: 1.5mm;
+         padding: 1.2mm 2.5mm; font-weight: bold; color: #1a6b5a; background: #f2faf6; }
+  .sunday .sum { border-color: #b3541e; color: #b3541e; background: #fff7ef; }
+  .sum .r { float: right; }
+
+  .box { margin-top: 3.5mm; border: 1.5px solid #8aa; border-radius: 1.5mm; padding: 2mm 3mm; }
+  .box h3 { font-size: 9.5pt; color: #1450a3; margin-bottom: 1mm; }
+  table.tt { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  table.tt th, table.tt td { border: 1px solid #cbd5df; padding: .8mm 1.5mm; font-size: 8.5pt; }
+  table.tt th { background: #eaf3ff; white-space: nowrap; text-align: left; font-size: 8pt; }
+  .em { font-weight: bold; color: #1450a3; }
+
+  .notes { margin-top: 2.5mm; font-size: 7.8pt; color: #556; }
+  .notes li { margin-left: 4mm; margin-bottom: .5mm; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <h1>夏休み 受験勉強スケジュール</h1>
+    <div class="subtitle">自習室：武田塾高松校（高松市天神前10-5／瓦町駅から徒歩約7分）　電車：ことでん志度線（琴電屋島 ⇔ 瓦町・乗車16〜17分）</div>
+  </div>
+  <div class="total">1日の勉強時間<br><span class="big">13時間00分</span><br>（週 91時間）</div>
+</div>
+
+<div class="cols">
+
+  <!-- 月〜土 -->
+  <div class="col weekday">
+    <h2>月曜〜土曜<small>武田塾 8:30〜22:00</small></h2>
+    <table class="tl">
+      <tr><td class="t">6:50</td><td>起床・朝食・準備</td></tr>
+      <tr><td class="t">7:45</td><td>家を出発 → 琴電屋島駅へ</td></tr>
+      <tr class="train"><td class="t">7:57 発</td><td>🚃 琴電屋島 →（車内で英単語）</td></tr>
+      <tr class="train"><td class="t">8:13 着</td><td>瓦町 → 武田塾まで徒歩約7分</td></tr>
+      <tr class="study"><td class="t">8:30〜12:30</td><td>午前の部<span class="dur">4時間00分</span></td></tr>
+      <tr class="meal"><td class="t">12:30〜12:45</td><td>昼食（おにぎり等を持参して手早く）</td></tr>
+      <tr class="study"><td class="t">12:45〜17:15</td><td>午後の部<span class="dur">4時間30分</span></td></tr>
+      <tr class="meal"><td class="t">17:15〜17:30</td><td>夕方の軽食・休憩</td></tr>
+      <tr class="study"><td class="t">17:30〜22:00</td><td>夜の部<span class="dur">4時間30分</span></td></tr>
+      <tr><td class="t">22:00</td><td>退室 → 瓦町駅へ（徒歩約7分）</td></tr>
+      <tr class="train"><td class="t">22:35 発</td><td>🚃 瓦町（琴電志度ゆき）→ 待ち時間は暗記もの</td></tr>
+      <tr class="train"><td class="t">22:52 着</td><td>琴電屋島</td></tr>
+      <tr><td class="t">23:00</td><td>帰宅・入浴</td></tr>
+      <tr><td class="t">24:00</td><td>就寝（睡眠 約7時間）</td></tr>
+    </table>
+    <div class="sum">勉強合計 <span class="r">13時間00分</span></div>
+  </div>
+
+  <!-- 日曜 -->
+  <div class="col sunday">
+    <h2>日曜<small>武田塾 12:00〜19:00＋スタバ2軒</small></h2>
+    <table class="tl">
+      <tr><td class="t">6:50</td><td>起床・朝食・準備</td></tr>
+      <tr><td class="t">7:20</td><td>家を出発 → 琴電屋島駅へ</td></tr>
+      <tr class="train"><td class="t">7:33 発</td><td>🚃 琴電屋島 →（車内で英単語）</td></tr>
+      <tr class="train"><td class="t">7:49 着</td><td>瓦町（スタバは瓦町FLAG 1階・8時開店）</td></tr>
+      <tr class="study"><td class="t">8:00〜11:30</td><td>スタバ 高松瓦町駅店<span class="dur">3時間30分</span></td></tr>
+      <tr class="meal"><td class="t">11:30〜11:45</td><td>昼食（スタバで軽食）</td></tr>
+      <tr><td class="t">11:45</td><td>移動（武田塾まで徒歩約7分）</td></tr>
+      <tr class="study"><td class="t">12:00〜19:00</td><td>武田塾 自習室<span class="dur">7時間00分</span></td></tr>
+      <tr class="meal"><td class="t">19:00〜19:30</td><td>スタバ高松上福岡店へ移動＋軽食<br><span class="note">約2km：自転車約10分／徒歩約25分</span></td></tr>
+      <tr class="study"><td class="t">19:30〜22:00</td><td>スタバ 高松上福岡店（22時閉店）<span class="dur">2時間30分</span></td></tr>
+      <tr><td class="t">22:00</td><td>退店 → 松島二丁目駅へ（徒歩約15分）</td></tr>
+      <tr class="train"><td class="t">22:39 ごろ発</td><td>🚃 松島二丁目（瓦町22:35発の電車）</td></tr>
+      <tr class="train"><td class="t">22:52 ごろ着</td><td>琴電屋島</td></tr>
+      <tr><td class="t">23:00</td><td>帰宅・入浴 → 24:00 就寝</td></tr>
+    </table>
+    <div class="sum">勉強合計 <span class="r">13時間00分</span></div>
+  </div>
+</div>
+
+<div class="box">
+  <h3>🚃 ことでん志度線 時刻表（抜粋）</h3>
+  <table class="tt">
+    <tr>
+      <th>朝｜琴電屋島 → 瓦町<br>（乗車約16分）</th>
+      <td><b>平日：</b>7:09／7:21／7:33／7:45／<span class="em">7:57</span>／8:09／8:21／8:45<br>
+          <b>土日祝：</b>7:09／<span class="em">7:33</span>／<span class="em">7:57</span>／8:21／8:45</td>
+    </tr>
+    <tr>
+      <th>夜｜瓦町 → 琴電屋島<br>（琴電志度ゆき・乗車約17分）</th>
+      <td>21:20／21:56／<span class="em">22:35</span>（このあとは23時台の終電のみ）</td>
+    </tr>
+  </table>
+</div>
+
+<ul class="notes">
+  <li>時刻は2026年8月時点にWebで確認したものです。<b>お盆期間は土日祝ダイヤになる場合があります。</b>出発前に「ことでん時刻表（公式サイト・アプリ）」か駅の掲示で最終確認してください。</li>
+  <li>電車・待ち時間（1日およそ30〜60分）を単語帳・リスニングにあてると、実質13時間半以上になります。</li>
+  <li>食事は月〜土は計30分に収める設計です（お弁当・おにぎりの持参がおすすめ）。長引くとその分13時間を割り込みます。</li>
+  <li>スタバの営業時間：高松瓦町駅店 8:00〜21:00／高松上福岡店 8:00〜22:00（いずれも不定休・変更の可能性あり）。</li>
+  <li>日曜の夜、家の人に上福岡のスタバまで迎えを頼める日は、22:00にそのまま直帰でOK（夜道の徒歩15分を省けます）。</li>
+</ul>
+
+</body>
+</html>
