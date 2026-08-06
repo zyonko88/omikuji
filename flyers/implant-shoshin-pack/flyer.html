@@ -109,6 +109,14 @@
   }
   .steps-note{font-size:7.3pt;color:var(--sub);margin-top:1.8mm;line-height:1.5;}
   .step h3{font-size:10pt;color:var(--brand-darkest);letter-spacing:0.03em;}
+  .step h3 .req{
+    display:inline-block;margin-left:2mm;padding:0.2mm 2mm;border-radius:1mm;
+    background:var(--brand);color:#fff;font-size:7pt;font-weight:bold;vertical-align:0.4mm;
+  }
+  .step h3 .opt{
+    display:inline-block;margin-left:2mm;padding:0.2mm 2mm;border-radius:1mm;
+    background:#EFE8E0;color:var(--sub);font-size:7pt;font-weight:normal;vertical-align:0.4mm;
+  }
   .step p{font-size:8.2pt;color:var(--sub);margin-top:0.5mm;}
 
   /* 価格パネル */
@@ -267,15 +275,15 @@
         <div class="step">
           <div class="num">2</div>
           <div>
-            <h3>パノラマレントゲン撮影</h3>
-            <p>お口全体を1枚で写し、肉眼では見えない歯の根や骨の状態を確認します。</p>
+            <h3>パノラマレントゲン撮影<span class="opt">※必要と判断した場合</span></h3>
+            <p>お口全体を1枚で写し、肉眼では見えない歯の根や骨の状態を確認します。歯科医師が必要と判断した場合に撮影します。</p>
           </div>
         </div>
         <div class="step">
           <div class="num">3</div>
           <div>
-            <h3>歯科用CTスキャン撮影</h3>
-            <p>顎の骨の厚み・高さ・神経の位置まで、立体画像で詳しく確認できます。</p>
+            <h3>歯科用CTスキャン撮影<span class="req">必ず実施</span></h3>
+            <p>顎の骨の厚み・高さ・神経の位置まで、立体画像で詳しく確認できます。初診パックでは必ず撮影します。</p>
           </div>
         </div>
         <div class="step">
@@ -293,7 +301,7 @@
           </div>
         </div>
       </div>
-      <p class="steps-note">※検査内容（パノラマレントゲン・CT・口腔内検査等）は、患者様の状態に応じて必要な範囲で実施いたします。</p>
+      <p class="steps-note">※CT撮影は必ず実施いたします。パノラマレントゲン等その他の検査は、歯科医師が必要と判断した場合に実施いたします。</p>
     </div>
 
     <div class="col-r">
