@@ -29,6 +29,8 @@ Claude との作業で作った成果物をまとめて置いてあるリポジ�
 | カウンセリング申込書（A4×3ページ） | [`docs/counseling-form.html`](docs/counseling-form.html) ／ [PDF](docs/) |
 | 水曜日朝の院内清掃・器具消毒についてのスタッフ回覧 | [`documents/staff-memo-wednesday-cleaning.md`](documents/staff-memo-wednesday-cleaning.md) ／ [.docx](documents/staff-memo-wednesday-cleaning.docx) |
 | 熱中症予防ポスター（緊急連絡先入り） | [`posters/heatstroke-prevention-poster.html`](posters/heatstroke-prevention-poster.html) ／ [PDF](posters/heatstroke-prevention-poster.pdf) |
+| **インプラント初診パック 院内案内チラシ**（A4・カウンセラー説明用・医院テーマカラー） | [`flyers/implant-shoshin-pack/`](flyers/implant-shoshin-pack/)（[PDF](flyers/implant-shoshin-pack/インプラント初診パック_案内チラシ.pdf)） |
+| 初診パックWebページの点検メモ（広告ガイドライン・誤字の指摘） | [`blog/implant-shoshin-pack/推敲メモ_2026-08-06.md`](blog/implant-shoshin-pack/推敲メモ_2026-08-06.md) |
 | 労働条件通知書（パート・有期雇用労働者用）ひな形　※2026年10月施行の待遇差説明義務化に対応 | [`documents/労働条件通知書_パート有期雇用労働者用_2026年10月改正対応ひな形.docx`](documents/) ／ [説明](documents/労働条件通知書_パート有期雇用労働者用_2026年10月改正対応ひな形.md) |
 | 顧問社労士宛メール下書き：短時間正社員から正社員（フルタイム）への復帰について（土曜勤務の扱い・給与の決め方／土曜も他の正社員と同じ所定にし休みは有給で対応する方針） | [`documents/2026-08-04_社労士宛メール_短時間正社員から正社員への復帰.md`](documents/2026-08-04_社労士宛メール_短時間正社員から正社員への復帰.md) |
 

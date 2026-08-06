@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>インプラント初診パックのご案内｜吉本歯科医院</title>
+<style>
+  :root{
+    --brand:#B5432E;        /* テラコッタ（メイン） */
+    --brand-deep:#8A3120;   /* 濃テラコッタ */
+    --brand-darkest:#2C1A13;/* こげ茶（フッター等） */
+    --brand-soft:#F7ECE7;   /* 淡ピンクベージュ */
+    --gold:#C2A264;         /* ゴールド（アクセント） */
+    --gold-deep:#9C7A38;
+    --bg:#FBF7F3;           /* 生成りの背景 */
+    --card:#FFFFFF;
+    --ink:#2B2320;          /* 本文 */
+    --sub:#6E635E;          /* 補足文 */
+    --line:#E9E1D9;         /* 罫線 */
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  @page{size:A4;margin:0;}
+  html,body{width:210mm;height:297mm;}
+  body{
+    font-family:"IPAPGothic","IPAGothic","Noto Sans CJK JP",sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+    font-size:9.2pt;
+    line-height:1.55;
+    display:flex;flex-direction:column;
+    overflow:hidden;
+  }
+
+  /* ───── ヘッダー ───── */
+  .topbar{height:4mm;background:linear-gradient(90deg,var(--brand-deep),var(--brand) 55%,var(--gold));}
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:5mm 12mm 4mm;
+    background:var(--card);
+    border-bottom:0.4mm solid var(--line);
+  }
+  header .logo svg{height:13mm;width:auto;display:block;}
+  header .clinic-tag{text-align:right;color:var(--sub);font-size:7.5pt;line-height:1.5;}
+  header .clinic-tag b{color:var(--brand-deep);font-size:8pt;}
+
+  /* ───── タイトル ───── */
+  .hero{background:var(--card);padding:4mm 12mm 5mm;text-align:center;}
+  .hero .eyebrow{
+    display:inline-block;
+    color:var(--brand-deep);
+    border:0.35mm solid var(--brand);
+    border-radius:99px;
+    padding:1mm 6mm;
+    font-size:9.5pt;font-weight:bold;letter-spacing:0.05em;
+    background:var(--brand-soft);
+  }
+  .hero h1{
+    margin-top:3mm;
+    font-size:25pt;font-weight:bold;letter-spacing:0.06em;color:var(--brand-darkest);
+  }
+  .hero h1 .accent{color:var(--brand);}
+  .hero .lead{margin-top:2.5mm;font-size:9.8pt;color:var(--ink);}
+  .hero .lead b{color:var(--brand-deep);}
+
+  /* ───── 本文2カラム ───── */
+  main{flex:1;padding:5mm 12mm 0;display:flex;gap:5mm;}
+  .col-l{flex:1.15;}
+  .col-r{flex:1;display:flex;flex-direction:column;gap:4mm;}
+
+  h2.sec{
+    font-size:11.5pt;font-weight:bold;color:var(--brand-darkest);
+    letter-spacing:0.08em;
+    display:flex;align-items:center;gap:2.5mm;
+    margin-bottom:3mm;
+  }
+  h2.sec::before{
+    content:"";width:2mm;height:5.5mm;border-radius:1mm;
+    background:linear-gradient(180deg,var(--brand),var(--gold));
+  }
+
+  /* セット内容 */
+  .steps{display:flex;flex-direction:column;gap:2.2mm;}
+  .step{
+    display:flex;gap:3mm;align-items:flex-start;
+    background:var(--card);
+    border:0.3mm solid var(--line);
+    border-radius:2.5mm;
+    padding:2.4mm 3.5mm;
+  }
+  .step .num{
+    flex:none;width:7mm;height:7mm;border-radius:50%;
+    background:var(--brand);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:10.5pt;font-weight:bold;
+    margin-top:0.5mm;
+  }
+  .step h3{font-size:10pt;color:var(--brand-darkest);letter-spacing:0.03em;}
+  .step p{font-size:8.2pt;color:var(--sub);margin-top:0.5mm;}
+
+  /* 価格パネル */
+  .price{
+    background:var(--brand-darkest);
+    color:#fff;border-radius:3mm;
+    padding:4.5mm 5mm 4mm;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .price::after{
+    content:"";position:absolute;right:-8mm;top:-8mm;width:24mm;height:24mm;border-radius:50%;
+    background:rgba(194,162,100,0.25);
+  }
+  .price .label{font-size:9.5pt;letter-spacing:0.1em;color:#E9D9B8;}
+  .price .amount{font-size:26pt;font-weight:bold;letter-spacing:0.02em;margin-top:1mm;}
+  .price .amount small{font-size:11pt;font-weight:bold;}
+  .price .tax{font-size:8pt;color:#D9CBB0;}
+  .price .note{
+    margin-top:2.5mm;padding-top:2mm;border-top:0.3mm solid rgba(255,255,255,0.25);
+    font-size:8pt;color:#EFE6D8;line-height:1.6;
+  }
+
+  /* おすすめチェックリスト */
+  .check-box{
+    background:var(--card);border:0.3mm solid var(--line);border-radius:3mm;
+    padding:3.5mm 4mm;
+  }
+  .check-box ul{list-style:none;}
+  .check-box li{
+    position:relative;padding-left:6.5mm;
+    font-size:9.2pt;margin-bottom:1.8mm;
+  }
+  .check-box li:last-child{margin-bottom:0;}
+  .check-box li::before{
+    content:"✓";
+    position:absolute;left:0;top:0;
+    width:4.5mm;height:4.5mm;border-radius:1.2mm;
+    background:var(--brand-soft);color:var(--brand-deep);
+    font-weight:bold;font-size:8.5pt;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* 安心ポイント */
+  .assure{padding:4.5mm 12mm 0;}
+  .assure-band{
+    background:var(--brand-soft);
+    border-radius:3mm;
+    padding:3.5mm 5mm 4mm;
+  }
+  .assure-band h2{
+    font-size:10.5pt;color:var(--brand-deep);letter-spacing:0.08em;
+    text-align:center;margin-bottom:2.5mm;
+  }
+  .assure-items{display:flex;gap:4mm;}
+  .assure-item{
+    flex:1;background:var(--card);border-radius:2.5mm;
+    padding:2.8mm 3.5mm;
+    border-top:0.8mm solid var(--gold);
+  }
+  .assure-item h3{font-size:9.3pt;color:var(--brand-darkest);margin-bottom:1mm;}
+  .assure-item p{font-size:8pt;color:var(--sub);line-height:1.55;}
+
+  /* 予約・フッター */
+  .booking{padding:4.5mm 12mm;display:flex;gap:5mm;align-items:stretch;}
+  .booking .voice{
+    flex:1.15;
+    background:var(--card);
+    border:0.45mm solid var(--brand);
+    border-radius:3mm;
+    padding:3.5mm 5mm;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .booking .voice h2{font-size:11pt;color:var(--brand-deep);margin-bottom:1.5mm;letter-spacing:0.05em;}
+  .booking .voice p{font-size:8.8pt;color:var(--ink);}
+  .booking .contact{
+    flex:1;background:var(--card);border:0.3mm solid var(--line);border-radius:3mm;
+    padding:3mm 5mm;display:flex;flex-direction:column;justify-content:center;gap:1mm;
+  }
+  .booking .contact .tel{
+    display:flex;align-items:baseline;gap:2.5mm;
+  }
+  .booking .contact .tel .t-label{
+    background:var(--brand);color:#fff;border-radius:1.2mm;
+    font-size:7.5pt;font-weight:bold;padding:0.6mm 2.2mm;
+  }
+  .booking .contact .tel .t-num{font-size:17pt;font-weight:bold;color:var(--brand-darkest);letter-spacing:0.03em;}
+  .booking .contact .web{font-size:8pt;color:var(--sub);line-height:1.6;}
+  .booking .contact .web b{color:var(--brand-deep);}
+
+  footer{
+    margin-top:auto;
+    background:var(--brand-darkest);color:#EFE6D8;
+    padding:3.5mm 12mm 4mm;
+    display:flex;justify-content:space-between;align-items:center;gap:6mm;
+    font-size:7.8pt;line-height:1.65;
+  }
+  footer .name{font-size:10pt;font-weight:bold;color:#fff;letter-spacing:0.08em;}
+  footer .qual{text-align:right;color:#D9CBB0;}
+</style>
+</head>
+<body>
+
+  <div class="topbar"></div>
+
+  <header>
+    <div class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 486 118" role="img" aria-label="吉本歯科医院 インプラントクリニック">
+        <g>
+          <path d="M92 50 H40 A26 26 0 1 0 56 74" fill="none" stroke="#B5432E" stroke-width="9.5" stroke-linecap="round"/>
+          <circle cx="80" cy="28" r="7" fill="#B5432E"/>
+        </g>
+        <text x="4" y="108" font-family="serif" font-size="11" letter-spacing="1.4" fill="#B5432E">YOSHIMOTO DENTAL CLINIC</text>
+        <text x="150" y="52" font-family="'IPAPGothic',sans-serif" font-size="37" font-weight="700" letter-spacing="4" fill="#3A322E">吉本歯科医院</text>
+        <text x="152" y="98" font-family="'IPAPGothic',sans-serif" font-size="30" font-weight="500" letter-spacing="3" fill="#3A322E">インプラントクリニック</text>
+      </svg>
+    </div>
+    <div class="clinic-tag">
+      <b>咬み合わせ・補綴（ほてつ）専門</b><br>
+      香川県高松市屋島西町1968-9
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow">インプラントをご検討の方へ</span>
+    <h1>インプラント<span class="accent">初診パック</span>のご案内</h1>
+    <p class="lead">
+      治療を始めるかどうかを決める前に――。<br>
+      まず<b>「今のお口と顎の骨の状態」を正確に知る</b>ための、検査・診断のセットです。
+    </p>
+  </section>
+
+  <main>
+    <div class="col-l">
+      <h2 class="sec">セットで受けられる内容</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <h3>初診カウンセリング</h3>
+            <p>問診表をもとに、これまでの経緯・既往歴・服用中のお薬、気になっていることを伺います。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <h3>口腔内レントゲン撮影</h3>
+            <p>肉眼では見えない歯の根や骨の状態を画像で確認します。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <h3>歯科用CTスキャン撮影</h3>
+            <p>顎の骨の厚み・高さ・神経の位置まで、立体画像で詳しく確認できます。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <div>
+            <h3>口腔内診察・口腔内写真撮影</h3>
+            <p>咬み合わせの状態、虫歯や歯周病の有無をあわせて確認します。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">5</div>
+          <div>
+            <h3>院長による総合診断・ご説明</h3>
+            <p>CT画像と咬み合わせの状態をもとに、院長が診断結果をご説明。専任カウンセラーが同席し、費用や期間のご質問にもお答えします。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-r">
+      <div class="price">
+        <div class="label">5つの検査・診断がすべてセットで</div>
+        <div class="amount">5,500<small>円</small></div>
+        <div class="tax">（税込）</div>
+        <div class="note">
+          通常40,000円の診断初診メニューです。<br>
+          お支払いは各種クレジットカード・PayPay等もご利用いただけます。
+        </div>
+      </div>
+
+      <div>
+        <h2 class="sec">こんな方におすすめです</h2>
+        <div class="check-box">
+          <ul>
+            <li>インプラントにするかどうか、<br>まだ迷っている</li>
+            <li>ご自身の顎の骨の状態を詳しく知りたい</li>
+            <li>他院で「骨が少ない」と言われたことがある</li>
+            <li>歯を抜いたあと、そのままにしている</li>
+            <li>入れ歯やブリッジと比べて考えたい</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="assure">
+    <div class="assure-band">
+      <h2>― 安心して受けていただくために ―</h2>
+      <div class="assure-items">
+        <div class="assure-item">
+          <h3>当日に治療は始めません</h3>
+          <p>初診パックで行うのは検査と診断のご説明までです。</p>
+        </div>
+        <div class="assure-item">
+          <h3>お持ち帰りでご検討</h3>
+          <p>診断結果とお見積りは、ご自宅でゆっくりご検討ください。</p>
+        </div>
+        <div class="assure-item">
+          <h3>治療を前提としません</h3>
+          <p>診断の結果、ほかの選択肢が考えられる場合は、あわせてご説明します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking">
+    <div class="voice">
+      <h2>ご希望の方は、スタッフへお声かけください</h2>
+      <p>受付・カウンセラーが検査のご予約を承ります。内容についてのご質問も、どうぞお気軽にお尋ねください。</p>
+    </div>
+    <div class="contact">
+      <div class="tel">
+        <span class="t-label">お電話</span>
+        <span class="t-num">087-818-1118</span>
+      </div>
+      <div class="web">
+        WEB予約：ネット予約画面のメニュー<b>一番最後の「インプラント初診パック」</b>をお選びください。
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="name">医療法人社団吉翔会　吉本歯科医院</div>
+      〒761-0113 香川県高松市屋島西町1968-9　｜　www.8181118.com
+    </div>
+    <div class="qual">
+      院長　吉本彰夫<br>
+      （一社）日本歯科専門医機構認定　補綴歯科専門医<br>
+      （公社）日本補綴歯科学会認定　補綴歯科指導医
+    </div>
+  </footer>
+
+</body>
+</html>
