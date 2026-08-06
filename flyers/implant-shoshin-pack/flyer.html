@@ -45,7 +45,19 @@
   header .clinic-tag b{color:var(--brand-deep);font-size:8pt;}
 
   /* ───── タイトル ───── */
-  .hero{background:var(--card);padding:4mm 12mm 5mm;text-align:center;}
+  .hero{
+    background:var(--card);padding:3mm 12mm 3.5mm;
+    display:flex;align-items:center;gap:6mm;
+  }
+  .hero .hero-text{flex:1;text-align:left;}
+  .hero .hero-img{flex:none;width:45mm;}
+  .hero .hero-img img{
+    width:100%;display:block;border-radius:2mm;
+    border:0.3mm solid var(--line);
+  }
+  .hero .hero-img figcaption{
+    font-size:6.8pt;color:var(--sub);text-align:center;margin-top:1.2mm;line-height:1.4;
+  }
   .hero .eyebrow{
     display:inline-block;
     color:var(--brand-deep);
@@ -64,7 +76,7 @@
   .hero .lead b{color:var(--brand-deep);}
 
   /* ───── 本文2カラム ───── */
-  main{flex:1;padding:5mm 12mm 0;display:flex;gap:5mm;}
+  main{flex:1;padding:4mm 12mm 0;display:flex;gap:5mm;}
   .col-l{flex:1.15;}
   .col-r{flex:1;display:flex;flex-direction:column;gap:4mm;}
 
@@ -86,7 +98,7 @@
     background:var(--card);
     border:0.3mm solid var(--line);
     border-radius:2.5mm;
-    padding:2.4mm 3.5mm;
+    padding:2mm 3.5mm;
   }
   .step .num{
     flex:none;width:7mm;height:7mm;border-radius:50%;
@@ -139,7 +151,7 @@
   }
 
   /* 安心ポイント */
-  .assure{padding:4.5mm 12mm 0;}
+  .assure{padding:3.5mm 12mm 0;}
   .assure-band{
     background:var(--brand-soft);
     border-radius:3mm;
@@ -159,7 +171,7 @@
   .assure-item p{font-size:8pt;color:var(--sub);line-height:1.55;}
 
   /* 予約・フッター */
-  .booking{padding:4.5mm 12mm;display:flex;gap:5mm;align-items:stretch;}
+  .booking{padding:3.5mm 12mm;display:flex;gap:5mm;align-items:stretch;}
   .booking .voice{
     flex:1.15;
     background:var(--card);
@@ -219,12 +231,18 @@
   </header>
 
   <section class="hero">
-    <span class="eyebrow">インプラントをご検討の方へ</span>
-    <h1>インプラント<span class="accent">初診パック</span>のご案内</h1>
-    <p class="lead">
-      治療を始めるかどうかを決める前に――。<br>
-      まず<b>「今のお口と顎の骨の状態」を正確に知る</b>ための、検査・診断のセットです。
-    </p>
+    <div class="hero-text">
+      <span class="eyebrow">インプラントをご検討の方へ</span>
+      <h1>インプラント<span class="accent">初診パック</span>のご案内</h1>
+      <p class="lead">
+        治療を始めるかどうかを決める前に――。<br>
+        まず<b>「今のお口と顎の骨の状態」を正確に知る</b>ための、検査・診断のセットです。
+      </p>
+    </div>
+    <figure class="hero-img">
+      <img src="ct-analysis.png" alt="歯科用CTによる顎の骨の立体解析画面">
+      <figcaption>歯科用CTの解析画面。顎の骨の厚みや質を、立体画像と色分けで確認できます。</figcaption>
+    </figure>
   </section>
 
   <main>
