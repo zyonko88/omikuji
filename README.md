@@ -45,7 +45,7 @@ Claude との作業で作った成果物をまとめて置いてあるリポジ�
 | MEO週3回投稿スケジュール（7月末〜9月末） | [`meo/2026-meo-posting-schedule.md`](meo/2026-meo-posting-schedule.md) |
 | MEO投稿 全28回の投稿文＋画像（予約登録済み） | [`meo/2026-meo-posts-all-28.md`](meo/2026-meo-posts-all-28.md) ／ [`meo/images/`](meo/images/) |
 | VSL型ランディングページのテンプレート | [`docs/vsl.html`](docs/vsl.html) |
-| **ceramic-implant.jp お問い合わせフォーム 迷惑メール対策 手順書**（Contact Form 7・Turnstile導入手順／フォーム不具合2件の指摘つき） | [`docs/ceramic-implant-spam/README.md`](docs/ceramic-implant-spam/README.md) ／ [スパムフィルタ](docs/ceramic-implant-spam/japanese-required-filter.php) |
+| **ceramic-implant.jp お問い合わせフォーム 迷惑メール対策 手順書**（Contact Form 7・Turnstile導入手順／フォーム不具合2件の指摘つき） | [`docs/ceramic-implant-spam/README.md`](docs/ceramic-implant-spam/README.md) ／ [貼り付け用テキスト](docs/ceramic-implant-spam/貼り付け用テキスト.md) ／ [スパムフィルタ](docs/ceramic-implant-spam/japanese-required-filter.php) |
 | グリストバニッシュPRO 飲食店様向けチラシ（A4・2ページ・シアン基調ブラッシュアップ版） | [`flyers/grist-vanish-pro/`](flyers/grist-vanish-pro/)（[PDF](flyers/grist-vanish-pro/グリストバニッシュPRO_飲食店様向けチラシ_ブラッシュアップ版.pdf)） |
 
 ### 学習教材（共通テスト「公共、倫理」）
